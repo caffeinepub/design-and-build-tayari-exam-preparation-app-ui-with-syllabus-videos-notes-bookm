@@ -1,42 +1,60 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update app logo PNG and slightly enlarge the selected video container",
+  "title": "Profile/header branding update to 'Tayari' with PSC-preparation avatar",
   "requirements": [
     {
-      "id": "REQ-33",
-      "summary": "Replace the rendered app logo with the new 3D education globe + graduation cap PNG wherever the current logo <img> is shown.",
+      "id": "REQ-35",
+      "summary": "Replace any occurrence of the phrase \"design by build tayari\" with the exact header/title text \"Tayari\" in the profile/header area.",
       "acceptanceCriteria": [
-        "A PNG logo asset is added to the frontend static assets and is used as the rendered logo for the selected logo <img> element.",
-        "The logo displayed in the UI is visually updated to the new 3D education globe + graduation cap style (not the previous logo).",
-        "The logo renders correctly without broken-image errors in the browser console."
+        "The UI no longer displays the text \"design by build tayari\" anywhere in the app UI.",
+        "The affected header/title renders exactly \"Tayari\" (case-sensitive) with no additional prefix/suffix text."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/app-logo.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated PNG logo asset exactly as required (source provided in workspace assets as generated/app-logo.dim_512x512.png) so it is available as a static frontend asset."
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Update the profile/header title copy so it renders exactly \"Tayari\" and ensure any legacy phrase \"design by build tayari\" is not present in this header area."
         },
         {
-          "path": "frontend/src/components/AppLogo.tsx",
+          "path": "frontend/src/pages/SplashScreen.tsx",
           "operation": "modify",
-          "description": "Update the AppLogo component so the selected logo <img> renders the new PNG from frontend/public/assets/generated/app-logo.dim_512x512.png as its primary source, while keeping an error fallback to the existing Thah Study logo to prevent broken-image issues."
+          "description": "Audit and remove/replace any legacy branding text matching \"design by build tayari\" to ensure the phrase is not displayed anywhere in the UI (keep changes limited to the requested profile/header branding scope)."
         }
       ]
     },
     {
-      "id": "REQ-34",
-      "summary": "Adjust styling of the user-selected container so it appears slightly larger than the YouTube player while keeping the layout stable and avoiding overflow.",
+      "id": "REQ-36",
+      "summary": "Add a PSC-preparation themed static profile avatar image to the profile/header area with sensible circular/rounded cropping and responsive layout.",
       "acceptanceCriteria": [
-        "Only the selected div (XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1]) is resized/retuned; unrelated page elements remain unchanged.",
-        "After the change, the selected div is visually slightly larger than the embedded YouTube player area when viewed at typical mobile and desktop widths.",
-        "No layout overflow or horizontal scrolling is introduced by the size adjustment."
+        "A new static image asset representing a PSC-preparation scene is added under frontend/public/assets/generated and is used as the profile image in the profile/header area.",
+        "The profile image renders consistently without layout overflow on common mobile widths."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/SubjectContent.tsx",
+          "path": "frontend/public/assets/generated/psc-profile.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated static PSC-preparation illustration asset at frontend/public/assets/generated/psc-profile.dim_512x512.png."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "Adjust Tailwind classes only on the specific wrapper <div> that contains the YouTube player (the user-selected container) to increase its effective size/visual prominence (e.g., add modest padding and/or min-height), ensuring no horizontal overflow and keeping surrounding layout unchanged."
+          "description": "Render the new PSC-preparation profile avatar in the header/profile area (use a circular or rounded avatar crop and ensure it does not overflow on common mobile widths), using the static asset at frontend/public/assets/generated/psc-profile.dim_512x512.png."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Reference the PSC-preparation profile image strictly as a static frontend asset via a stable /assets/generated/... path (no backend fetching).",
+      "acceptanceCriteria": [
+        "The profile UI references the image via a /assets/generated/... URL.",
+        "No backend APIs or canister calls are introduced for serving the profile image."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Ensure the profile/header avatar <img> references the asset via the stable static URL path /assets/generated/psc-profile.dim_512x512.png and does not introduce any backend/canister calls for image loading."
         }
       ]
     }

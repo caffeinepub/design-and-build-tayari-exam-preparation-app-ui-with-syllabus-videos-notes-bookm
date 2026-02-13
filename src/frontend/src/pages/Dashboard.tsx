@@ -3,6 +3,7 @@ import { Bell, Search, BookOpen, GraduationCap, Brain, Building2, Scale, Calcula
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import BottomNav from '@/components/BottomNav';
 import AppLogo from '@/components/AppLogo';
 import CourseImageCarousel from '@/components/CourseImageCarousel';
@@ -43,6 +44,12 @@ export default function Dashboard() {
       <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
+            <Avatar className="w-10 h-10 border-2 border-emerald-500">
+              <AvatarImage src="/assets/generated/psc-profile.dim_512x512.png" alt="PSC तयारी" />
+              <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-semibold">
+                T
+              </AvatarFallback>
+            </Avatar>
             <AppLogo />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               Tayari

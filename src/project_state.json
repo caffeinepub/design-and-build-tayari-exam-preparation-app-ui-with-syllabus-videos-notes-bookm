@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 11,
+  "projectStateVersion": 13,
   "summary": "Build a colorful, attractive Nepali exam-preparation mobile app with a 3-second intro splash screen, a main dashboard showing courses/subjects across three papers, and multiple content subpages (syllabus by province, topic-wise videos + notes). The app should embed YouTube videos and Google Drive PDFs, support bookmarks/favorites for videos and notes, show old question papers by year, and include timed mock exams with timer + sound alerts, plus offline saving for notes/questions.",
   "architectural_notes": [
     "Embed/stream YouTube videos inside the app (topic-wise lists).",
@@ -15,7 +15,7 @@
     "Build/network deployment hit a configuration error (Caffeine platform) preventing successful build; needs investigation or rerun once config is fixed."
   ],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- 3D illustration of a globe with a graduation cap, education-themed, clean PNG with transparent background (app-logo.dim_512x512.png)",
+  "imageRequirements": "## Required Images\n- A studying person preparing for a public service exam scene, clean modern illustration style, bright background, no text (psc-profile.dim_512x512.png)",
   "existing_features": [
     {
       "id": "feature-implement-a-3-second-intro-splash-screen-that-shows-the-app-logo-png-a-loading-label-reading-sa-centered-slightly-below-the-logo-and-the-developer-name-janak-prasad-pande-positioned-at-the-bottom-right-corner-after-3-seconds-automatically-navigate-to-the-main-dashboard",
@@ -272,6 +272,30 @@
         "REQ-34"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-top-profile-header-screen-text-so-that-anywhere-the-app-currently-shows-the-phrase-design-by-build-tayari-it-instead-shows-exactly-tayari-and-does-not-include-any-other-words-around-it",
+      "title": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-profile-image-on-the-profile-header-area-that-visually-looks-like-someone-preparing-for-psc-and-ensure-it-is-displayed-as-the-profile-avatar-image-in-that-profile-area-with-sensible-cropping-such-as-a-circle-or-rounded-avatar",
+      "title": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-newly-generated-psc-preparation-profile-image-asset-as-a-static-frontend-asset-do-not-fetch-it-from-the-backend-and-reference-it-via-a-stable-assets-generated-path-from-the-profile-ui",
+      "title": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -408,6 +432,18 @@
     {
       "id": "AR-39",
       "summary": "Adjust UI element 'div 1ogtiq1' size to be slightly larger than the YouTube element size.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Change the top/profile screen header text from \"design by build tayari\" to only \"Tayari\" (exact text).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-41",
+      "summary": "Update/replace the profile image with one that looks like someone preparing for PSC (PSC तयारी गरिरहेको जस्तो).",
       "reqIds": [],
       "status": "pending"
     }

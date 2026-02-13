@@ -1,37 +1,49 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T20:32:58.751Z",
+  "generatedAt": "2026-02-13T20:43:35.643Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-33",
-        "summary": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
+        "id": "REQ-35",
+        "summary": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/app-logo.dim_512x512.png",
-          "frontend/src/components/AppLogo.tsx"
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/SplashScreen.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/app-logo.dim_512x512.png",
-          "frontend/src/components/AppLogo.tsx"
+          "frontend/src/pages/Dashboard.tsx"
         ]
       },
       {
-        "id": "REQ-34",
-        "summary": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
+        "id": "REQ-36",
+        "summary": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/SubjectContent.tsx"
+          "frontend/public/assets/generated/psc-profile.dim_512x512.png",
+          "frontend/src/pages/Dashboard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/SubjectContent.tsx"
+          "frontend/public/assets/generated/psc-profile.dim_512x512.png",
+          "frontend/src/pages/Dashboard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Dashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Dashboard.tsx"
         ]
       }
     ]
@@ -41,9 +53,8 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/app-logo.dim_512x512.png",
-    "frontend/src/components/AppLogo.tsx",
-    "frontend/src/pages/SubjectContent.tsx",
+    "frontend/public/assets/generated/psc-profile.dim_512x512.png",
+    "frontend/src/pages/Dashboard.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

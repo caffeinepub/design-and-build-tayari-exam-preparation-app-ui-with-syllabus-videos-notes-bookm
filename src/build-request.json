@@ -1,70 +1,73 @@
 {
   "kind": "build_request",
-  "title": "Replace app logo image with a 3D education globe PNG and adjust the selected div sizing",
+  "title": "Update profile header title to 'Tayari' and add PSC-preparation profile image",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-33",
-      "text": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
+      "id": "REQ-35",
+      "text": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "image लाई change गर्नु परो https://www.freepik.com/premium-psd/3d-illustration-globe-with-graduation-cap_418297606.htm#fromView=keyword&page=1&position=10&uuid=635d3f2d-51b5-4d22-8ecd-5433ad02c9e1&query=Education+logo+3d\n rekhnus png ma ra"
+          "Yasko screen name  mathi profile ma design by build tayari lekhako thau ma Matri \"Tayari\" लेख्नुहोस"
         ]
       },
       "acceptanceCriteria": [
-        "A PNG logo asset is added to the frontend static assets and is used as the rendered logo for the selected logo <img> element.",
-        "The logo displayed in the UI is visually updated to the new 3D education globe + graduation cap style (not the previous logo).",
-        "The logo renders correctly without broken-image errors in the browser console."
+        "The UI no longer displays the text \"design by build tayari\" anywhere in the app UI.",
+        "The affected header/title renders exactly \"Tayari\" (case-sensitive) with no additional prefix/suffix text."
       ]
     },
     {
-      "id": "REQ-34",
-      "text": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
+      "id": "REQ-36",
+      "text": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "div 1ogtiq1 ko size youtube ko भन्दा हल्का ठूलो  size जस्तो होस्"
+          "profile image psc तयारी garirayako जस्तो haldinus"
         ]
       },
       "acceptanceCriteria": [
-        "Only the selected div (XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1]) is resized/retuned; unrelated page elements remain unchanged.",
-        "After the change, the selected div is visually slightly larger than the embedded YouTube player area when viewed at typical mobile and desktop widths.",
-        "No layout overflow or horizontal scrolling is introduced by the size adjustment."
+        "A new static image asset representing a PSC-preparation scene is added under frontend/public/assets/generated and is used as the profile image in the profile/header area.",
+        "The profile image renders consistently without layout overflow on common mobile widths."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "profile image psc तयारी garirayako जस्तो haldinus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The profile UI references the image via a /assets/generated/... URL.",
+        "No backend APIs or canister calls are introduced for serving the profile image."
       ]
     }
   ],
   "constraints": [
-    "Apply changes ONLY to the two user-selected elements identified by the provided XPaths.",
-    "Do not edit any files under frontend/src/components/ui (read-only).",
-    "Keep the existing React + TypeScript + Tailwind stack; do not introduce new backend services or databases."
+    "Do not modify files under frontend/src/components/ui (read-only UI components).",
+    "Do not modify files listed as immutable in SYSTEM_CONTEXT (compose them instead).",
+    "Keep backend architecture as single-actor; no backend changes are required for this request."
   ],
   "nonGoals": [
-    "Do not redesign other parts of the app theme, layout, routing, or content beyond the two selected elements.",
-    "Do not add new features beyond updating the selected image and resizing the selected div."
+    "Do not change dashboard header branding (AppLogo + 'Tayari') beyond what is necessary for the profile/header area mentioned by the user.",
+    "Do not implement user-uploaded profile photos or backend-stored avatars as part of this change."
   ],
   "imageRequirements": {
     "required": [
-      "3D illustration of a globe with a graduation cap, education-themed, clean PNG with transparent background (app-logo.dim_512x512.png)"
+      "A studying person preparing for a public service exam scene, clean modern illustration style, bright background, no text (psc-profile.dim_512x512.png)"
     ],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [
-      "Use the new education-themed 3D globe + graduation cap PNG as the app logo image."
-    ],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -1,41 +1,50 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T20:32:58.747Z",
-  "summary": "REQ-33 is partially addressed by pointing the AppLogo component to a new PNG path, but the actual PNG asset was not added in the diff and extra fallback behavior was introduced. REQ-34 does not show a clear, targeted resize of the specified container div; instead, the diff shows styling on a YouTube player wrapper, which may not correspond to the requested XPath-scoped container resize.",
+  "generatedAt": "2026-02-13T20:43:35.639Z",
+  "summary": "Diff updates Dashboard header UI to show a \"Tayari\" title and uses an AvatarImage pointing to /assets/generated/psc-profile.dim_512x512.png, but no new static image asset was added and there’s no clear evidence that the exact phrase \"design by build tayari\" was removed everywhere it appears.",
   "missing_requirements": [
     {
-      "id": "REQ-33",
-      "requirement": "Add a new PNG logo asset (3D education globe with graduation cap, transparent background) to frontend static assets and ensure it is rendered for the selected logo <img> element without broken-image errors.",
-      "reason": "The code references `/assets/generated/app-logo.dim_512x512.png`, but the diff shows no added files; therefore the required PNG asset itself is not evidenced as added, and the app may still render a broken image if the file doesn’t exist.",
+      "id": "REQ-35",
+      "requirement": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
+      "reason": "Only Dashboard.tsx is shown changing/using \"Tayari\"; the diff summary provides no evidence that the literal string \"design by build tayari\" was located and removed/replaced across the app UI.",
       "evidence": [
-        "File diff summary: \"Added: 0\"",
-        "frontend/src/components/AppLogo.tsx (references `/assets/generated/app-logo.dim_512x512.png`)"
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend-file-summaries.txt (no mention of replacing \"design by build tayari\" globally)"
       ]
     },
     {
-      "id": "REQ-34",
-      "requirement": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so it is slightly larger than the embedded YouTube player while keeping layout stable and without horizontal scrolling.",
-      "reason": "The diff shows styling applied to a wrapper around `YouTubePlayer` (`div` with `mb-6 p-4 ... rounded-xl`), but does not clearly show resizing/retuning of the specific container div described by the XPath (main/section/div[1]).",
+      "id": "REQ-36",
+      "requirement": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
+      "reason": "No new image asset was added under frontend/public/assets/generated (ADDED FILES: none). Although the Dashboard references /assets/generated/psc-profile.dim_512x512.png, the asset itself is not present in the diff summary.",
       "evidence": [
-        "frontend/src/pages/SubjectContent.tsx (shows `YouTubePlayer` wrapped in `div className=\"mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl\"` but does not explicitly show changes to the XPath-referenced container div)"
+        "File diff summary: ADDED FILES: none",
+        "frontend/src/pages/Dashboard.tsx (references /assets/generated/psc-profile.dim_512x512.png)"
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "requirement": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "reason": "The stable /assets/generated/... reference is present, but the required newly generated static asset itself was not added in the diff (no file under frontend/public/assets/generated shown as added).",
+      "evidence": [
+        "File diff summary: ADDED FILES: none",
+        "frontend/src/pages/Dashboard.tsx (AvatarImage src=\"/assets/generated/psc-profile.dim_512x512.png\")"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added fallback logo-switching logic with React state and an `onError` handler to swap to `/assets/generated/thah-study-logo.dim_512x512.png` if the primary logo fails.",
-      "reason": "REQ-33 only asked to replace the displayed logo with the new PNG and ensure it renders; it did not request adding a fallback mechanism or a secondary logo behavior.",
+      "description": "Dashboard header was modified to include a profile avatar next to AppLogo and a gradient-styled \"Tayari\" title.",
+      "reason": "The BuildRequest focuses on the profile/header area text and adding a PSC-preparation profile image; it also states a non-goal to avoid changing dashboard header branding beyond what’s necessary. The diff shows changes specifically in the dashboard header (Dashboard.tsx), which may be outside the requested profile/header area.",
       "evidence": [
-        "frontend/src/components/AppLogo.tsx (useState/usePrimary, `onError`, fallback to `thah-study-logo.dim_512x512.png`)"
+        "frontend/src/pages/Dashboard.tsx"
       ]
     }
   ],
-  "confidence": 0.68,
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/AppLogo.tsx",
-    "frontend/src/pages/SubjectContent.tsx",
+    "frontend/src/pages/Dashboard.tsx",
     "project_state.json"
   ]
 }

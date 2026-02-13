@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-currently-displayed-logo-image-the-selected-element-at-xpath-html-1-body-1-div-1-div-1-div-1-div-1-img-1-with-a-new-png-logo-based-on-the-referenced-freepik-design-and-ensure-the-new-png-is-the-one-rendered-by-the-app-wherever-that-selected-logo-image-is-shown",
-      "featureTitle": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
+      "featureId": "feature-update-the-top-profile-header-screen-text-so-that-anywhere-the-app-currently-shows-the-phrase-design-by-build-tayari-it-instead-shows-exactly-tayari-and-does-not-include-any-other-words-around-it",
+      "featureTitle": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
       "files": [
-        "frontend/src/components/AppLogo.tsx"
+        "frontend/src/pages/Dashboard.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -16,15 +16,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-33"
+        "REQ-35"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-adjust-styling-of-the-selected-container-element-at-xpath-html-1-body-1-div-1-div-1-main-1-section-1-div-1-so-that-its-rendered-size-appears-slightly-larger-than-the-youtube-player-element-on-the-same-screen-i-e-increase-the-container-s-visual-prominence-by-increasing-its-effective-width-height-and-or-padding-margins-while-keeping-layout-stable",
-      "featureTitle": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
+      "featureId": "feature-add-a-profile-image-on-the-profile-header-area-that-visually-looks-like-someone-preparing-for-psc-and-ensure-it-is-displayed-as-the-profile-avatar-image-in-that-profile-area-with-sensible-cropping-such-as-a-circle-or-rounded-avatar",
+      "featureTitle": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
       "files": [
-        "frontend/src/pages/SubjectContent.tsx"
+        "frontend/src/pages/Dashboard.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -35,7 +35,26 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-34"
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-the-newly-generated-psc-preparation-profile-image-asset-as-a-static-frontend-asset-do-not-fetch-it-from-the-backend-and-reference-it-via-a-stable-assets-generated-path-from-the-profile-ui",
+      "featureTitle": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "files": [
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
       ],
       "confidence": "high"
     }
