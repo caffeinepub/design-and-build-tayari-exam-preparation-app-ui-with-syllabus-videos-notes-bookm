@@ -1,219 +1,42 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Branding refresh, cohesive backgrounds, video search, dashboard thumbnails, Nepali UI text, and Exam First Paper fix",
+  "title": "Update app logo PNG and slightly enlarge the selected video container",
   "requirements": [
     {
-      "id": "REQ-21",
-      "summary": "Support a user-provided custom app logo with safe fallback and use it on SplashScreen and Dashboard header",
+      "id": "REQ-33",
+      "summary": "Replace the rendered app logo with the new 3D education globe + graduation cap PNG wherever the current logo <img> is shown.",
       "acceptanceCriteria": [
-        "If a custom logo image exists at a documented static path (e.g., in frontend/public/assets/), the app renders it on SplashScreen and the Dashboard header.",
-        "If the custom logo asset is missing, the app continues to render the existing logo without runtime errors.",
-        "Logo sizing remains visually balanced on both mobile and desktop layouts."
+        "A PNG logo asset is added to the frontend static assets and is used as the rendered logo for the selected logo <img> element.",
+        "The logo displayed in the UI is visually updated to the new 3D education globe + graduation cap style (not the previous logo).",
+        "The logo renders correctly without broken-image errors in the browser console."
       ],
       "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/app-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated PNG logo asset exactly as required (source provided in workspace assets as generated/app-logo.dim_512x512.png) so it is available as a static frontend asset."
+        },
         {
           "path": "frontend/src/components/AppLogo.tsx",
-          "operation": "create",
-          "description": "Create a reusable AppLogo component that attempts to load a custom static logo first (document the expected static path inside the component), and falls back to the existing generated logo asset when the custom logo fails to load (e.g., via image error handling)."
-        },
-        {
-          "path": "frontend/src/pages/SplashScreen.tsx",
           "operation": "modify",
-          "description": "Replace the hard-coded logo <img> with the new AppLogo component so the splash screen uses the custom logo when present and gracefully falls back otherwise."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Update the Dashboard header logo rendering to use the AppLogo component, keeping sizing balanced and consistent with the existing header layout."
+          "description": "Update the AppLogo component so the selected logo <img> renders the new PNG from frontend/public/assets/generated/app-logo.dim_512x512.png as its primary source, while keeping an error fallback to the existing Thah Study logo to prevent broken-image issues."
         }
       ]
     },
     {
-      "id": "REQ-22",
-      "summary": "Update dominant page background gradients to a cohesive, less blue-heavy palette across key pages",
+      "id": "REQ-34",
+      "summary": "Adjust styling of the user-selected container so it appears slightly larger than the YouTube player while keeping the layout stable and avoiding overflow.",
       "acceptanceCriteria": [
-        "The primary page backgrounds no longer use the current blue/indigo-dominant gradients (e.g., from-slate-50 via-blue-50 to-indigo-50) on the specified pages.",
-        "Backgrounds look consistent across pages (same design language), while preserving readability/contrast in light and dark modes.",
-        "No layout regressions or unreadable text due to color changes."
+        "Only the selected div (XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1]) is resized/retuned; unrelated page elements remain unchanged.",
+        "After the change, the selected div is visually slightly larger than the embedded YouTube player area when viewed at typical mobile and desktop widths.",
+        "No layout overflow or horizontal scrolling is introduced by the size adjustment."
       ],
       "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add a shared utility class (e.g., a single app page background class) to standardize the new cohesive gradient/background styling in both light and dark modes."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes with the new shared background styling for consistent branding."
-        },
         {
           "path": "frontend/src/pages/SubjectContent.tsx",
           "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes with the new shared background styling for consistent branding."
-        },
-        {
-          "path": "frontend/src/pages/Exam.tsx",
-          "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes in all Exam states (selection, in-exam, finished) with the new shared background styling."
-        },
-        {
-          "path": "frontend/src/pages/OldQuestions.tsx",
-          "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes with the new shared background styling."
-        },
-        {
-          "path": "frontend/src/pages/VideoBookmarks.tsx",
-          "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes with the new shared background styling."
-        },
-        {
-          "path": "frontend/src/pages/NotesBookmarks.tsx",
-          "operation": "modify",
-          "description": "Replace the current blue/indigo-dominant page background gradient classes with the new shared background styling."
-        }
-      ]
-    },
-    {
-      "id": "REQ-23",
-      "summary": "Add keyword search for subject videos (topic + video titles) and for bookmarked videos with real-time filtering and empty states",
-      "acceptanceCriteria": [
-        "Each SubjectContent page provides a search input for the Videos section; typing filters the rendered topics/video items in real time (case-insensitive).",
-        "Search matches against video titles and topic titles; when filtering, only matching videos/topics are shown.",
-        "VideoBookmarks page provides a search input that filters bookmarked videos by title.",
-        "When search yields no results, the UI shows a clear empty state message (translated per REQ-25)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/utils/videoSearch.ts",
-          "operation": "create",
-          "description": "Add a small utility for case-insensitive filtering of topics/videos by keyword, supporting matches against topic titles and video titles, and returning a filtered topic list suitable for rendering."
-        },
-        {
-          "path": "frontend/src/pages/SubjectContent.tsx",
-          "operation": "modify",
-          "description": "Add a Videos search input (stateful, real-time) and use the shared filtering utility to filter the Topics/Video list; render a Nepali empty-state message when no videos/topics match."
-        },
-        {
-          "path": "frontend/src/components/TopicVideoList.tsx",
-          "operation": "modify",
-          "description": "Adjust rendering expectations to work cleanly with filtered topic lists (e.g., ensure no assumptions about always-nonempty lists), while keeping selection/bookmark behavior intact."
-        },
-        {
-          "path": "frontend/src/pages/VideoBookmarks.tsx",
-          "operation": "modify",
-          "description": "Add a search input that filters bookmarked videos by title in real time (case-insensitive) and show a Nepali empty-state message when the filter yields zero results."
-        }
-      ]
-    },
-    {
-      "id": "REQ-24",
-      "summary": "Enhance Dashboard Kharidar Courses section with 3–4 static course thumbnails in a compact, responsive layout",
-      "acceptanceCriteria": [
-        "Dashboard displays 3–4 distinct course thumbnails within the Kharidar Courses section.",
-        "Thumbnails are responsive, do not overflow the card, and look good on small screens.",
-        "Thumbnails are served as static frontend assets (no backend involvement)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/kharidar-course-1.dim_600x400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Dashboard course thumbnails: frontend/public/assets/generated/kharidar-course-1.dim_600x400.png."
-        },
-        {
-          "path": "frontend/public/assets/generated/kharidar-course-2.dim_600x400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Dashboard course thumbnails: frontend/public/assets/generated/kharidar-course-2.dim_600x400.png."
-        },
-        {
-          "path": "frontend/public/assets/generated/kharidar-course-3.dim_600x400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Dashboard course thumbnails: frontend/public/assets/generated/kharidar-course-3.dim_600x400.png."
-        },
-        {
-          "path": "frontend/public/assets/generated/kharidar-course-4.dim_600x400.png",
-          "operation": "create",
-          "description": "Add generated static asset for Dashboard course thumbnails: frontend/public/assets/generated/kharidar-course-4.dim_600x400.png."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Update the “Kharidar Courses” section UI to include a compact, mobile-friendly thumbnail layout that displays 3–4 images using the generated assets at frontend/public/assets/generated/kharidar-course-1.dim_600x400.png through frontend/public/assets/generated/kharidar-course-4.dim_600x400.png."
-        }
-      ]
-    },
-    {
-      "id": "REQ-25",
-      "summary": "Translate remaining English UI labels (papers, old questions, bookmarks, exam, actions, empty states) to Nepali (or bilingual where needed)",
-      "acceptanceCriteria": [
-        "Core navigation and page headers no longer show English-only labels in the areas listed in this requirement (e.g., BottomNav labels, OldQuestions tabs, bookmark page titles, exam selection labels).",
-        "Common action buttons and empty states are translated consistently across pages.",
-        "No broken layouts due to longer/shorter translated strings."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/BottomNav.tsx",
-          "operation": "modify",
-          "description": "Translate BottomNav labels (Home/Video/Notes/Exam) into Nepali (or bilingual where necessary) while preserving layout and active-state styling."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Translate remaining English labels in Dashboard sections and cards (e.g., Kharidar Courses, paper headers, Old Questions card text, subject labels like Syllabus/GK/Maths where appropriate) to Nepali/bilingual, ensuring no layout regressions."
-        },
-        {
-          "path": "frontend/src/pages/SubjectContent.tsx",
-          "operation": "modify",
-          "description": "Translate UI text on the SubjectContent page (e.g., Videos/Notes tabs, section headers, and empty-state for missing notes) to Nepali/bilingual, keeping readability."
-        },
-        {
-          "path": "frontend/src/pages/OldQuestions.tsx",
-          "operation": "modify",
-          "description": "Translate Old Questions page title, paper tab labels (First/Second/Third Paper), Back to List, and Coming Soon/Link not configured labels to Nepali/bilingual."
-        },
-        {
-          "path": "frontend/src/pages/VideoBookmarks.tsx",
-          "operation": "modify",
-          "description": "Translate VideoBookmarks page title and empty-state messaging to Nepali/bilingual."
-        },
-        {
-          "path": "frontend/src/pages/NotesBookmarks.tsx",
-          "operation": "modify",
-          "description": "Translate NotesBookmarks page title and empty-state messaging to Nepali/bilingual."
-        },
-        {
-          "path": "frontend/src/pages/Exam.tsx",
-          "operation": "modify",
-          "description": "Translate Exam selection labels and in-exam UI strings (e.g., Mock Exam, Start Exam, minutes, Exam Finished, Back to Exam Selection) to Nepali/bilingual."
-        },
-        {
-          "path": "frontend/src/components/DriveViewer.tsx",
-          "operation": "modify",
-          "description": "Translate common actions and messages in the document viewer (e.g., Save Offline, Open, Open in Google Drive, and the embed error message) to Nepali/bilingual."
-        }
-      ]
-    },
-    {
-      "id": "REQ-26",
-      "summary": "Fix Exam module to include First Paper option and prevent incorrect mapping to Second Paper content; show Coming soon when URLs are unavailable",
-      "acceptanceCriteria": [
-        "Exam selection screen includes First Paper, Second Paper, and Third Paper options.",
-        "Selecting Second Paper still opens the existing Second Paper Drive URLs and uses a 45-minute timer.",
-        "Selecting Third Paper still opens the existing Third Paper Drive URLs and uses a 150-minute (2h 30m) timer.",
-        "First Paper does not display Second Paper title/URLs; if First Paper URLs are not configured, the UI shows a clear “Coming soon” state and prevents starting the timer for it.",
-        "No duplicate/misleading exam IDs or titles in the exam set configuration."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/content/exams.ts",
-          "operation": "modify",
-          "description": "Update the exam set configuration to include distinct First/Second/Third Paper entries with correct durations for Second (45) and Third (150), and represent First Paper as unavailable when URLs are not configured (without mapping it to another paper)."
-        },
-        {
-          "path": "frontend/src/pages/Exam.tsx",
-          "operation": "modify",
-          "description": "Update Exam selection UI to render First/Second/Third Paper options; disable or prevent starting the First Paper when URLs are missing and show a clear Coming soon state, while preserving existing Second/Third behavior (DriveViewer URLs + timer durations)."
+          "description": "Adjust Tailwind classes only on the specific wrapper <div> that contains the YouTube player (the user-selected container) to increase its effective size/visual prominence (e.g., add modest padding and/or min-height), ensuring no horizontal overflow and keeping surrounding layout unchanged."
         }
       ]
     }

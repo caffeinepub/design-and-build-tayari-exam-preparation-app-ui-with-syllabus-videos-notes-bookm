@@ -11,15 +11,18 @@ export default function SplashScreen() {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500">
-      <div className="flex flex-col items-center justify-center space-y-8 animate-in fade-in duration-700">
+      <div className="flex flex-col items-center justify-center space-y-12 animate-in fade-in duration-700">
         <div className="relative">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl animate-pulse" />
           <AppLogo className="relative w-40 h-40 drop-shadow-2xl" />
         </div>
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-8">
           <h1 className="text-3xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700 delay-150">
-            सफलता को साथी
+            Kharidar Tayari
           </h1>
+          <h2 className="text-2xl font-semibold text-white/95 drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700 delay-300">
+            सफलताको साथि
+          </h2>
           <div className="flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
             <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />

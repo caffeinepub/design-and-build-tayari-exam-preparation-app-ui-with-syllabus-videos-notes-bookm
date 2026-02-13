@@ -59,7 +59,7 @@ export default function SubjectContent({ config }: SubjectContentProps) {
                 </div>
                 <div className="space-y-6">
                   {selectedVideo && (
-                    <div className="mb-6">
+                    <div className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                       <YouTubePlayer url={selectedVideo} />
                     </div>
                   )}
@@ -128,7 +128,7 @@ export default function SubjectContent({ config }: SubjectContentProps) {
                 />
               </div>
               {selectedVideo && (
-                <div className="mb-6">
+                <div className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <YouTubePlayer url={selectedVideo} />
                 </div>
               )}

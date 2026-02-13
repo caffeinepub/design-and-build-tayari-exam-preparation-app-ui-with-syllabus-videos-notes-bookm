@@ -21,7 +21,7 @@ export const examSets: ExamSet[] = [
       'https://drive.google.com/file/d/1SBsaBSjf0DlCBja7yiN_I1rtp6Oirm-b/view?usp=drivesdk',
       'https://drive.google.com/file/d/1vx2KMInBjqEOO17Axm54Rr7_5B2jCgyB/view?u',
     ],
-    duration: 45,
+    duration: 150,
   },
   {
     id: 'third-paper',

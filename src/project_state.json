@@ -1,19 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 11,
   "summary": "Build a colorful, attractive Nepali exam-preparation mobile app with a 3-second intro splash screen, a main dashboard showing courses/subjects across three papers, and multiple content subpages (syllabus by province, topic-wise videos + notes). The app should embed YouTube videos and Google Drive PDFs, support bookmarks/favorites for videos and notes, show old question papers by year, and include timed mock exams with timer + sound alerts, plus offline saving for notes/questions.",
   "architectural_notes": [
     "Embed/stream YouTube videos inside the app (topic-wise lists).",
     "Embed Google Drive PDFs/folders for notes, syllabus, old questions, and exam sets.",
     "Implement local storage for bookmarks and offline-downloaded notes/questions.",
-    "Mock exam engine requires countdown timers and end-of-time sound/alert."
+    "Mock exam engine requires countdown timers and end-of-time sound/alert.",
+    "Update exam timer rules: Second Paper duration should be 150 minutes (2h 30m) per latest requirement."
   ],
   "known_issues": [
     "User reports the app 'kam gardaina' (not working); functionality/build may be failing and needs investigation.",
-    "Exam module bug: First paper option is missing, and the First paper entry is incorrectly showing Second paper content/labeling; needs correction."
+    "Exam module bug: First paper option is missing, and the First paper entry is incorrectly showing Second paper content/labeling; needs correction.",
+    "Build/network deployment hit a configuration error (Caffeine platform) preventing successful build; needs investigation or rerun once config is fixed."
   ],
-  "isFixRequest": true,
-  "imageRequirements": "## Required Images\n- Course thumbnail image 1, exam-prep themed (kharidar-course-1.dim_600x400.png)\n- Course thumbnail image 2, exam-prep themed (kharidar-course-2.dim_600x400.png)\n- Course thumbnail image 3, exam-prep themed (kharidar-course-3.dim_600x400.png)\n- Course thumbnail image 4, exam-prep themed (kharidar-course-4.dim_600x400.png)",
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- 3D illustration of a globe with a graduation cap, education-themed, clean PNG with transparent background (app-logo.dim_512x512.png)",
   "existing_features": [
     {
       "id": "feature-implement-a-3-second-intro-splash-screen-that-shows-the-app-logo-png-a-loading-label-reading-sa-centered-slightly-below-the-logo-and-the-developer-name-janak-prasad-pande-positioned-at-the-bottom-right-corner-after-3-seconds-automatically-navigate-to-the-main-dashboard",
@@ -206,6 +208,70 @@
         "REQ-26"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-splash-screen-branding-layout-to-1-use-the-new-thah-study-logo-remove-the-old-raya-logo-2-render-the-title-text-kharidar-tayari-slightly-below-the-logo-and-3-increase-vertical-spacing-so-the-tagline-safalata-ko-saathi-is-clearly-separated-below-the-title-not-too-close",
+      "title": "Update the Splash Screen branding layout to: (1) use the new Thah Study logo (remove the old Raya logo); (2) render the title text \"Kharidar Tayari\" slightly below the logo; and (3) increase vertical spacing so the tagline \"Safalata ko saathi\" is clearly separated below the title (not too close).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-dashboard-courses-section-change-the-section-heading-text-from-nepali-to-english-use-exactly-kharidar-courses",
+      "title": "On the Dashboard courses section, change the section heading text from Nepali to English: use exactly \"Kharidar Courses\".",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-dashboard-kharidar-tayari-course-card-replace-the-course-thumbnails-grid-with-a-compact-horizontal-slider-carousel-where-the-course-images-slide-one-after-another-automatically-and-reduce-the-thumbnail-display-size-compared-to-the-current-grid",
+      "title": "In the Dashboard \"Kharidar Tayari\" course card, replace the course thumbnails grid with a compact horizontal slider/carousel where the course images slide one after another automatically, and reduce the thumbnail display size compared to the current grid.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-exam-module-so-the-second-paper-exam-duration-is-2-hours-30-minutes-150-minutes",
+      "title": "Update the Exam module so the Second Paper exam duration is 2 hours 30 minutes (150 minutes).",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-dashboard-change-the-paper-section-headings-to-english-exactly-as-first-paper-second-paper-and-third-paper",
+      "title": "On the Dashboard, change the paper section headings to English exactly as: \"First paper\", \"Second paper\", and \"Third paper\".",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-main-generated-fallback-app-logo-asset-so-that-when-a-custom-logo-file-is-not-present-the-app-still-shows-the-new-thah-study-logo-instead-of-the-old-raya-logo-via-the-existing-applogo-fallback-behavior",
+      "title": "Update the main generated fallback app logo asset so that when a custom logo file is not present, the app still shows the new Thah Study logo (instead of the old Raya logo) via the existing AppLogo fallback behavior.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-currently-displayed-logo-image-the-selected-element-at-xpath-html-1-body-1-div-1-div-1-div-1-div-1-img-1-with-a-new-png-logo-based-on-the-referenced-freepik-design-and-ensure-the-new-png-is-the-one-rendered-by-the-app-wherever-that-selected-logo-image-is-shown",
+      "title": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-adjust-styling-of-the-selected-container-element-at-xpath-html-1-body-1-div-1-div-1-main-1-section-1-div-1-so-that-its-rendered-size-appears-slightly-larger-than-the-youtube-player-element-on-the-same-screen-i-e-increase-the-container-s-visual-prominence-by-increasing-its-effective-width-height-and-or-padding-margins-while-keeping-layout-stable",
+      "title": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -306,6 +372,42 @@
     {
       "id": "AR-33",
       "summary": "Localization/content cleanup: replace remaining English UI text with Nepali (or the requested language) across the app screens.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "Update first/splash page branding: remove existing 'Raya' logo, add new 'Thah Study' logo, and adjust title/tagline layout (show 'Kharidar Tayari' below logo; move 'सफलताको साथी' further down if too close)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Dashboard 'Kharidar Courses' section: make course images slide one-after-another (carousel/slider) and reduce thumbnail size",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Exam module: set Second Paper timer to 2 hours 30 minutes (150 minutes)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Courses/Papers labels: display paper names in English as 'First paper', 'Second paper', 'Third paper' on the courses screen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Replace current app image/logo with the provided Freepik 3D education globe+graduation-cap image, using a PNG asset.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-39",
+      "summary": "Adjust UI element 'div 1ogtiq1' size to be slightly larger than the YouTube element size.",
       "reqIds": [],
       "status": "pending"
     }

@@ -1,144 +1,66 @@
 {
   "kind": "build_request",
-  "title": "Improve branding, colors, video search, dashboard course images, and fix First Paper exam option",
+  "title": "Replace app logo image with a 3D education globe PNG and adjust the selected div sizing",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-21",
-      "text": "Add support for the user’s own app logo and use it consistently wherever the logo is shown (at minimum: Splash screen and Dashboard header), with a safe fallback to the current logo if the custom logo file is not present.",
+      "id": "REQ-33",
+      "text": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "mero logo add garnus"
+          "image लाई change गर्नु परो https://www.freepik.com/premium-psd/3d-illustration-globe-with-graduation-cap_418297606.htm#fromView=keyword&page=1&position=10&uuid=635d3f2d-51b5-4d22-8ecd-5433ad02c9e1&query=Education+logo+3d\n rekhnus png ma ra"
         ]
       },
       "acceptanceCriteria": [
-        "If a custom logo image exists at a documented static path (e.g., in frontend/public/assets/), the app renders it on SplashScreen and the Dashboard header.",
-        "If the custom logo asset is missing, the app continues to render the existing logo without runtime errors.",
-        "Logo sizing remains visually balanced on both mobile and desktop layouts."
+        "A PNG logo asset is added to the frontend static assets and is used as the rendered logo for the selected logo <img> element.",
+        "The logo displayed in the UI is visually updated to the new 3D education globe + graduation cap style (not the previous logo).",
+        "The logo renders correctly without broken-image errors in the browser console."
       ]
     },
     {
-      "id": "REQ-22",
-      "text": "Improve the overall background color “mixing” by updating the dominant page background gradients to be more attractive and cohesive across the app (Dashboard, SubjectContent, Exam, OldQuestions, VideoBookmarks, NotesBookmarks), avoiding harsh/undesired blue-heavy backgrounds.",
+      "id": "REQ-34",
+      "text": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "bg colour halka naramro voko cha mixing ramro , attractive colour halnus"
+          "div 1ogtiq1 ko size youtube ko भन्दा हल्का ठूलो  size जस्तो होस्"
         ]
       },
       "acceptanceCriteria": [
-        "The primary page backgrounds no longer use the current blue/indigo-dominant gradients (e.g., from-slate-50 via-blue-50 to-indigo-50) on the specified pages.",
-        "Backgrounds look consistent across pages (same design language), while preserving readability/contrast in light and dark modes.",
-        "No layout regressions or unreadable text due to color changes."
-      ]
-    },
-    {
-      "id": "REQ-23",
-      "text": "Implement video search so users can quickly find videos by keyword within subject video lists (filter across topic titles and video titles) and within the bookmarked videos screen.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "video search huna banaunus"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Each SubjectContent page provides a search input for the Videos section; typing filters the rendered topics/video items in real time (case-insensitive).",
-        "Search matches against video titles and topic titles; when filtering, only matching videos/topics are shown.",
-        "VideoBookmarks page provides a search input that filters bookmarked videos by title.",
-        "When search yields no results, the UI shows a clear empty state message (translated per REQ-25)."
-      ]
-    },
-    {
-      "id": "REQ-24",
-      "text": "Enhance the Dashboard “Kharidar Courses” section to include 3–4 course photos/thumbnails in a visually rich layout (e.g., row/grid/carousel) while keeping the section compact and mobile-friendly.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "kharidar tarari courses ma 3-4 ota photo add garnus"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Dashboard displays 3–4 distinct course thumbnails within the Kharidar Courses section.",
-        "Thumbnails are responsive, do not overflow the card, and look good on small screens.",
-        "Thumbnails are served as static frontend assets (no backend involvement)."
-      ]
-    },
-    {
-      "id": "REQ-25",
-      "text": "Replace remaining English UI text across the app with Nepali text (or bilingual where necessary), including: paper labels/tabs (First/Second/Third Paper), Old Questions labels, Bookmarks labels, Exam labels, common actions (Start, Back, Open, Save Offline), and empty-state messages.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "tyo english dekhi lekhmus"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Core navigation and page headers no longer show English-only labels in the areas listed in this requirement (e.g., BottomNav labels, OldQuestions tabs, bookmark page titles, exam selection labels).",
-        "Common action buttons and empty states are translated consistently across pages.",
-        "No broken layouts due to longer/shorter translated strings."
-      ]
-    },
-    {
-      "id": "REQ-26",
-      "text": "Fix the Exam module so it includes a First Paper option and does not incorrectly show Second Paper content under First Paper. If First Paper exam URLs are not available, show the First Paper option as “Coming soon” rather than mapping it to another paper’s content.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "exam ma first paper ko option nai chaina ra first ki ma second paper ko vako cha teslai bini dinus"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Exam selection screen includes First Paper, Second Paper, and Third Paper options.",
-        "Selecting Second Paper still opens the existing Second Paper Drive URLs and uses a 45-minute timer.",
-        "Selecting Third Paper still opens the existing Third Paper Drive URLs and uses a 150-minute (2h 30m) timer.",
-        "First Paper does not display Second Paper title/URLs; if First Paper URLs are not configured, the UI shows a clear “Coming soon” state and prevents starting the timer for it.",
-        "No duplicate/misleading exam IDs or titles in the exam set configuration."
+        "Only the selected div (XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1]) is resized/retuned; unrelated page elements remain unchanged.",
+        "After the change, the selected div is visually slightly larger than the embedded YouTube player area when viewed at typical mobile and desktop widths.",
+        "No layout overflow or horizontal scrolling is introduced by the size adjustment."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only Shadcn components).",
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx (immutable paths).",
-    "Keep the backend as a single Motoko actor in backend/main.mo; no new backend services."
+    "Apply changes ONLY to the two user-selected elements identified by the provided XPaths.",
+    "Do not edit any files under frontend/src/components/ui (read-only).",
+    "Keep the existing React + TypeScript + Tailwind stack; do not introduce new backend services or databases."
   ],
   "nonGoals": [
-    "Adding new third-party authentication methods (only Internet Identity is supported).",
-    "Adding real-time features (WebSockets/chat/push notifications).",
-    "Introducing external databases or non-Motoko backend implementations.",
-    "Creating new exam PDF links for First Paper (unless the user provides URLs)."
+    "Do not redesign other parts of the app theme, layout, routing, or content beyond the two selected elements.",
+    "Do not add new features beyond updating the selected image and resizing the selected div."
   ],
   "imageRequirements": {
     "required": [
-      "Course thumbnail image 1, exam-prep themed (kharidar-course-1.dim_600x400.png)",
-      "Course thumbnail image 2, exam-prep themed (kharidar-course-2.dim_600x400.png)",
-      "Course thumbnail image 3, exam-prep themed (kharidar-course-3.dim_600x400.png)",
-      "Course thumbnail image 4, exam-prep themed (kharidar-course-4.dim_600x400.png)"
+      "3D illustration of a globe with a graduation cap, education-themed, clean PNG with transparent background (app-logo.dim_512x512.png)"
     ],
     "edits": []
   },
   "userProfileUpdate": {
     "goalsToAdd": [],
     "goalsToRemove": [],
-    "preferencesToAdd": [],
+    "preferencesToAdd": [
+      "Use the new education-themed 3D globe + graduation cap PNG as the app logo image."
+    ],
     "preferencesToRemove": [],
     "miscToAdd": [],
     "miscToRemove": [],

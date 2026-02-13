@@ -1,125 +1,37 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T19:38:32.322Z",
+  "generatedAt": "2026-02-13T20:32:58.751Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 6,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-21",
-        "summary": "Add support for the user’s own app logo and use it consistently wherever the logo is shown (at minimum: Splash screen and Dashboard header), with a safe fallback to the current logo if the custom logo file is not present.",
+        "id": "REQ-33",
+        "summary": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/AppLogo.tsx",
-          "frontend/src/pages/SplashScreen.tsx",
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/public/assets/generated/app-logo.dim_512x512.png",
+          "frontend/src/components/AppLogo.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/AppLogo.tsx",
-          "frontend/src/pages/SplashScreen.tsx",
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/public/assets/generated/app-logo.dim_512x512.png",
+          "frontend/src/components/AppLogo.tsx"
         ]
       },
       {
-        "id": "REQ-22",
-        "summary": "Improve the overall background color “mixing” by updating the dominant page background gradients to be more attractive and cohesive across the app (Dashboard, SubjectContent, Exam, OldQuestions, VideoBookmarks, NotesBookmarks), avoiding harsh/undesired blue-heavy backgrounds.",
+        "id": "REQ-34",
+        "summary": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/pages/Exam.tsx",
-          "frontend/src/pages/OldQuestions.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx",
-          "frontend/src/pages/NotesBookmarks.tsx"
+          "frontend/src/pages/SubjectContent.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/pages/Exam.tsx",
-          "frontend/src/pages/OldQuestions.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx",
-          "frontend/src/pages/NotesBookmarks.tsx"
-        ]
-      },
-      {
-        "id": "REQ-23",
-        "summary": "Implement video search so users can quickly find videos by keyword within subject video lists (filter across topic titles and video titles) and within the bookmarked videos screen.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/utils/videoSearch.ts",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/components/TopicVideoList.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/utils/videoSearch.ts",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/components/TopicVideoList.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx"
-        ]
-      },
-      {
-        "id": "REQ-24",
-        "summary": "Enhance the Dashboard “Kharidar Courses” section to include 3–4 course photos/thumbnails in a visually rich layout (e.g., row/grid/carousel) while keeping the section compact and mobile-friendly.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/public/assets/generated/kharidar-course-1.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-2.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-3.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-4.dim_600x400.png",
-          "frontend/src/pages/Dashboard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/kharidar-course-1.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-2.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-3.dim_600x400.png",
-          "frontend/public/assets/generated/kharidar-course-4.dim_600x400.png",
-          "frontend/src/pages/Dashboard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-25",
-        "summary": "Replace remaining English UI text across the app with Nepali text (or bilingual where necessary), including: paper labels/tabs (First/Second/Third Paper), Old Questions labels, Bookmarks labels, Exam labels, common actions (Start, Back, Open, Save Offline), and empty-state messages.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/BottomNav.tsx",
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/pages/OldQuestions.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx",
-          "frontend/src/pages/NotesBookmarks.tsx",
-          "frontend/src/pages/Exam.tsx",
-          "frontend/src/components/DriveViewer.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/BottomNav.tsx",
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/SubjectContent.tsx",
-          "frontend/src/pages/OldQuestions.tsx",
-          "frontend/src/pages/VideoBookmarks.tsx",
-          "frontend/src/pages/NotesBookmarks.tsx",
-          "frontend/src/pages/Exam.tsx",
-          "frontend/src/components/DriveViewer.tsx"
-        ]
-      },
-      {
-        "id": "REQ-26",
-        "summary": "Fix the Exam module so it includes a First Paper option and does not incorrectly show Second Paper content under First Paper. If First Paper exam URLs are not available, show the First Paper option as “Coming soon” rather than mapping it to another paper’s content.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/content/exams.ts",
-          "frontend/src/pages/Exam.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/content/exams.ts",
-          "frontend/src/pages/Exam.tsx"
+          "frontend/src/pages/SubjectContent.tsx"
         ]
       }
     ]
@@ -129,24 +41,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/kharidar-course-1.dim_600x400.png",
-    "frontend/public/assets/generated/kharidar-course-2.dim_600x400.png",
-    "frontend/public/assets/generated/kharidar-course-3.dim_600x400.png",
-    "frontend/public/assets/generated/kharidar-course-4.dim_600x400.png",
+    "frontend/public/assets/generated/app-logo.dim_512x512.png",
     "frontend/src/components/AppLogo.tsx",
-    "frontend/src/components/BottomNav.tsx",
-    "frontend/src/components/DriveViewer.tsx",
-    "frontend/src/components/TopicVideoList.tsx",
-    "frontend/src/content/exams.ts",
-    "frontend/src/index.css",
-    "frontend/src/pages/Dashboard.tsx",
-    "frontend/src/pages/Exam.tsx",
-    "frontend/src/pages/NotesBookmarks.tsx",
-    "frontend/src/pages/OldQuestions.tsx",
-    "frontend/src/pages/SplashScreen.tsx",
     "frontend/src/pages/SubjectContent.tsx",
-    "frontend/src/pages/VideoBookmarks.tsx",
-    "frontend/src/utils/videoSearch.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

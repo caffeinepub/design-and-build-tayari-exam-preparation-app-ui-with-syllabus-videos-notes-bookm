@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import BottomNav from '@/components/BottomNav';
 import AppLogo from '@/components/AppLogo';
+import CourseImageCarousel from '@/components/CourseImageCarousel';
 import { useNotifications } from '@/hooks/useNotifications';
 
 export default function Dashboard() {
@@ -72,7 +73,7 @@ export default function Dashboard() {
       <main className="container mx-auto px-4 py-6 space-y-8">
         {/* Courses Section */}
         <section>
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">खरिदार कोर्सहरू</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Kharidar Courses</h2>
           <Card className="p-6 bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-0 overflow-hidden">
             <div className="flex flex-col space-y-4">
               <div className="flex items-center justify-between">
@@ -82,17 +83,9 @@ export default function Dashboard() {
                 </div>
                 <GraduationCap className="w-16 h-16 opacity-80" />
               </div>
-              {/* Course Thumbnails */}
-              <div className="grid grid-cols-2 gap-3 mt-4">
-                {courseImages.map((src, index) => (
-                  <div key={index} className="rounded-lg overflow-hidden shadow-lg">
-                    <img
-                      src={src}
-                      alt={`खरिदार कोर्स ${index + 1}`}
-                      className="w-full h-24 object-cover"
-                    />
-                  </div>
-                ))}
+              {/* Course Image Carousel */}
+              <div className="mt-4">
+                <CourseImageCarousel images={courseImages} />
               </div>
             </div>
           </Card>
@@ -100,7 +93,7 @@ export default function Dashboard() {
 
         {/* First Paper */}
         <section>
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">पहिलो पेपर</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">First paper</h2>
           <div className="grid grid-cols-3 gap-4">
             {firstPaperSubjects.map((subject) => (
               <Card
@@ -119,7 +112,7 @@ export default function Dashboard() {
 
         {/* Second Paper */}
         <section>
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">दोस्रो पेपर</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Second paper</h2>
           <div className="grid grid-cols-3 gap-4">
             {secondPaperSubjects.map((subject) => (
               <Card
@@ -138,7 +131,7 @@ export default function Dashboard() {
 
         {/* Third Paper */}
         <section>
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">तेस्रो पेपर</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Third paper</h2>
           <div className="grid grid-cols-3 gap-4">
             {thirdPaperSubjects.map((subject) => (
               <Card
