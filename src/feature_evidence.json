@@ -1,0 +1,138 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-support-for-the-user-s-own-app-logo-and-use-it-consistently-wherever-the-logo-is-shown-at-minimum-splash-screen-and-dashboard-header-with-a-safe-fallback-to-the-current-logo-if-the-custom-logo-file-is-not-present",
+      "featureTitle": "Add support for the user’s own app logo and use it consistently wherever the logo is shown (at minimum: Splash screen and Dashboard header), with a safe fallback to the current logo if the custom logo file is not present.",
+      "files": [
+        "frontend/src/components/AppLogo.tsx",
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend/src/pages/SplashScreen.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-21"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-improve-the-overall-background-color-mixing-by-updating-the-dominant-page-background-gradients-to-be-more-attractive-and-cohesive-across-the-app-dashboard-subjectcontent-exam-oldquestions-videobookmarks-notesbookmarks-avoiding-harsh-undesired-blue-heavy-backgrounds",
+      "featureTitle": "Improve the overall background color “mixing” by updating the dominant page background gradients to be more attractive and cohesive across the app (Dashboard, SubjectContent, Exam, OldQuestions, VideoBookmarks, NotesBookmarks), avoiding harsh/undesired blue-heavy backgrounds.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend/src/pages/Exam.tsx",
+        "frontend/src/pages/NotesBookmarks.tsx",
+        "frontend/src/pages/OldQuestions.tsx",
+        "frontend/src/pages/SubjectContent.tsx",
+        "frontend/src/pages/VideoBookmarks.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-video-search-so-users-can-quickly-find-videos-by-keyword-within-subject-video-lists-filter-across-topic-titles-and-video-titles-and-within-the-bookmarked-videos-screen",
+      "featureTitle": "Implement video search so users can quickly find videos by keyword within subject video lists (filter across topic titles and video titles) and within the bookmarked videos screen.",
+      "files": [
+        "frontend/src/components/TopicVideoList.tsx",
+        "frontend/src/pages/SubjectContent.tsx",
+        "frontend/src/pages/VideoBookmarks.tsx",
+        "frontend/src/utils/videoSearch.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-23"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-enhance-the-dashboard-kharidar-courses-section-to-include-3-4-course-photos-thumbnails-in-a-visually-rich-layout-e-g-row-grid-carousel-while-keeping-the-section-compact-and-mobile-friendly",
+      "featureTitle": "Enhance the Dashboard “Kharidar Courses” section to include 3–4 course photos/thumbnails in a visually rich layout (e.g., row/grid/carousel) while keeping the section compact and mobile-friendly.",
+      "files": [
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-24"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-remaining-english-ui-text-across-the-app-with-nepali-text-or-bilingual-where-necessary-including-paper-labels-tabs-first-second-third-paper-old-questions-labels-bookmarks-labels-exam-labels-common-actions-start-back-open-save-offline-and-empty-state-messages",
+      "featureTitle": "Replace remaining English UI text across the app with Nepali text (or bilingual where necessary), including: paper labels/tabs (First/Second/Third Paper), Old Questions labels, Bookmarks labels, Exam labels, common actions (Start, Back, Open, Save Offline), and empty-state messages.",
+      "files": [
+        "frontend/src/components/BottomNav.tsx",
+        "frontend/src/components/DriveViewer.tsx",
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend/src/pages/Exam.tsx",
+        "frontend/src/pages/NotesBookmarks.tsx",
+        "frontend/src/pages/OldQuestions.tsx",
+        "frontend/src/pages/SubjectContent.tsx",
+        "frontend/src/pages/VideoBookmarks.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-25"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-exam-module-so-it-includes-a-first-paper-option-and-does-not-incorrectly-show-second-paper-content-under-first-paper-if-first-paper-exam-urls-are-not-available-show-the-first-paper-option-as-coming-soon-rather-than-mapping-it-to-another-paper-s-content",
+      "featureTitle": "Fix the Exam module so it includes a First Paper option and does not incorrectly show Second Paper content under First Paper. If First Paper exam URLs are not available, show the First Paper option as “Coming soon” rather than mapping it to another paper’s content.",
+      "files": [
+        "frontend/src/content/exams.ts",
+        "frontend/src/pages/Exam.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-26"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

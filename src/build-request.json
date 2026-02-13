@@ -1,0 +1,148 @@
+{
+  "kind": "build_request",
+  "title": "Improve branding, colors, video search, dashboard course images, and fix First Paper exam option",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-21",
+      "text": "Add support for the user’s own app logo and use it consistently wherever the logo is shown (at minimum: Splash screen and Dashboard header), with a safe fallback to the current logo if the custom logo file is not present.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "mero logo add garnus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If a custom logo image exists at a documented static path (e.g., in frontend/public/assets/), the app renders it on SplashScreen and the Dashboard header.",
+        "If the custom logo asset is missing, the app continues to render the existing logo without runtime errors.",
+        "Logo sizing remains visually balanced on both mobile and desktop layouts."
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Improve the overall background color “mixing” by updating the dominant page background gradients to be more attractive and cohesive across the app (Dashboard, SubjectContent, Exam, OldQuestions, VideoBookmarks, NotesBookmarks), avoiding harsh/undesired blue-heavy backgrounds.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "bg colour halka naramro voko cha mixing ramro , attractive colour halnus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The primary page backgrounds no longer use the current blue/indigo-dominant gradients (e.g., from-slate-50 via-blue-50 to-indigo-50) on the specified pages.",
+        "Backgrounds look consistent across pages (same design language), while preserving readability/contrast in light and dark modes.",
+        "No layout regressions or unreadable text due to color changes."
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Implement video search so users can quickly find videos by keyword within subject video lists (filter across topic titles and video titles) and within the bookmarked videos screen.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "video search huna banaunus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each SubjectContent page provides a search input for the Videos section; typing filters the rendered topics/video items in real time (case-insensitive).",
+        "Search matches against video titles and topic titles; when filtering, only matching videos/topics are shown.",
+        "VideoBookmarks page provides a search input that filters bookmarked videos by title.",
+        "When search yields no results, the UI shows a clear empty state message (translated per REQ-25)."
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "text": "Enhance the Dashboard “Kharidar Courses” section to include 3–4 course photos/thumbnails in a visually rich layout (e.g., row/grid/carousel) while keeping the section compact and mobile-friendly.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "kharidar tarari courses ma 3-4 ota photo add garnus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard displays 3–4 distinct course thumbnails within the Kharidar Courses section.",
+        "Thumbnails are responsive, do not overflow the card, and look good on small screens.",
+        "Thumbnails are served as static frontend assets (no backend involvement)."
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "text": "Replace remaining English UI text across the app with Nepali text (or bilingual where necessary), including: paper labels/tabs (First/Second/Third Paper), Old Questions labels, Bookmarks labels, Exam labels, common actions (Start, Back, Open, Save Offline), and empty-state messages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "tyo english dekhi lekhmus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Core navigation and page headers no longer show English-only labels in the areas listed in this requirement (e.g., BottomNav labels, OldQuestions tabs, bookmark page titles, exam selection labels).",
+        "Common action buttons and empty states are translated consistently across pages.",
+        "No broken layouts due to longer/shorter translated strings."
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Fix the Exam module so it includes a First Paper option and does not incorrectly show Second Paper content under First Paper. If First Paper exam URLs are not available, show the First Paper option as “Coming soon” rather than mapping it to another paper’s content.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "exam ma first paper ko option nai chaina ra first ki ma second paper ko vako cha teslai bini dinus"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Exam selection screen includes First Paper, Second Paper, and Third Paper options.",
+        "Selecting Second Paper still opens the existing Second Paper Drive URLs and uses a 45-minute timer.",
+        "Selecting Third Paper still opens the existing Third Paper Drive URLs and uses a 150-minute (2h 30m) timer.",
+        "First Paper does not display Second Paper title/URLs; if First Paper URLs are not configured, the UI shows a clear “Coming soon” state and prevents starting the timer for it.",
+        "No duplicate/misleading exam IDs or titles in the exam set configuration."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (read-only Shadcn components).",
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx (immutable paths).",
+    "Keep the backend as a single Motoko actor in backend/main.mo; no new backend services."
+  ],
+  "nonGoals": [
+    "Adding new third-party authentication methods (only Internet Identity is supported).",
+    "Adding real-time features (WebSockets/chat/push notifications).",
+    "Introducing external databases or non-Motoko backend implementations.",
+    "Creating new exam PDF links for First Paper (unless the user provides URLs)."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Course thumbnail image 1, exam-prep themed (kharidar-course-1.dim_600x400.png)",
+      "Course thumbnail image 2, exam-prep themed (kharidar-course-2.dim_600x400.png)",
+      "Course thumbnail image 3, exam-prep themed (kharidar-course-3.dim_600x400.png)",
+      "Course thumbnail image 4, exam-prep themed (kharidar-course-4.dim_600x400.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

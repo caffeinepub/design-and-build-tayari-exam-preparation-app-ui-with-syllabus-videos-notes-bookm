@@ -1,2 +1,3 @@
-# design-and-build-tayari-exam-preparation-app-ui-with-syllabus-videos-notes-bookm
-Exported from Caffeine project: Design and build Tayari exam-preparation app UI with syllabus, videos/notes, bookmarks, old questions, and timed mock exams
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

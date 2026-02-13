@@ -1,0 +1,58 @@
+import { useNavigate } from '@tanstack/react-router';
+import { ArrowLeft, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import BottomNav from '@/components/BottomNav';
+import { useBookmarks } from '@/hooks/useBookmarks';
+import AuthControls from '@/components/AuthControls';
+
+export default function NotesBookmarks() {
+  const navigate = useNavigate();
+  const { noteBookmarks, toggleNoteBookmark } = useBookmarks();
+
+  return (
+    <div className="min-h-screen app-page-bg pb-20">
+      <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="icon" onClick={() => navigate({ to: '/' })}>
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">नोट बुकमार्कहरू</h1>
+          </div>
+          <AuthControls />
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-6 space-y-4">
+        {noteBookmarks.length === 0 ? (
+          <Card className="p-12 text-center">
+            <p className="text-slate-600 dark:text-slate-400">अहिलेसम्म कुनै बुकमार्क गरिएको नोट छैन।</p>
+            <p className="text-sm text-slate-500 dark:text-slate-500 mt-2">
+              विषय पृष्ठहरूबाट नोटहरू बुकमार्क गर्नुहोस् यहाँ हेर्नको लागि।
+            </p>
+          </Card>
+        ) : (
+          noteBookmarks.map((bookmark) => (
+            <Card key={bookmark.id} className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <h3 className="font-medium text-slate-800 dark:text-slate-100">{bookmark.title}</h3>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleNoteBookmark(bookmark.id, bookmark.title)}
+                >
+                  <Trash2 className="w-4 h-4 text-red-500" />
+                </Button>
+              </div>
+            </Card>
+          ))
+        )}
+      </main>
+
+      <BottomNav />
+    </div>
+  );
+}
