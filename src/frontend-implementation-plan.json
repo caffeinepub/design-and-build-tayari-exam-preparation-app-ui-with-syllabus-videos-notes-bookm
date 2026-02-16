@@ -1,60 +1,57 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Profile/header branding update to 'Tayari' with PSC-preparation avatar",
+  "title": "Splash logo replacement, Dashboard header logo removal, and shorter course card",
   "requirements": [
     {
-      "id": "REQ-35",
-      "summary": "Replace any occurrence of the phrase \"design by build tayari\" with the exact header/title text \"Tayari\" in the profile/header area.",
+      "id": "REQ-38",
+      "summary": "Replace Splash Screen AppLogo with the new static PSC-preparation PNG and update tagline text to exactly \"सफलता को साथी\".",
       "acceptanceCriteria": [
-        "The UI no longer displays the text \"design by build tayari\" anywhere in the app UI.",
-        "The affected header/title renders exactly \"Tayari\" (case-sensitive) with no additional prefix/suffix text."
+        "On the splash screen, the logo shown is the new PSC-preparation PNG (not the current AppLogo globe/education logo).",
+        "The splash screen tagline text is exactly \"सफलता को साथी\" (same spelling and spacing).",
+        "No other splash screen content (e.g., title timing/navigation behavior) regresses."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Update the profile/header title copy so it renders exactly \"Tayari\" and ensure any legacy phrase \"design by build tayari\" is not present in this header area."
+          "path": "frontend/public/assets/generated/psc-study-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the required generated static PNG asset for the new splash logo (PSC exam preparation logo illustration). Keep it served directly from the frontend public assets per constraints."
         },
         {
           "path": "frontend/src/pages/SplashScreen.tsx",
           "operation": "modify",
-          "description": "Audit and remove/replace any legacy branding text matching \"design by build tayari\" to ensure the phrase is not displayed anywhere in the UI (keep changes limited to the requested profile/header branding scope)."
+          "description": "Remove AppLogo usage on the splash screen and render the static image from frontend/public/assets/generated/psc-study-logo.dim_512x512.png. Update the tagline text to exactly \"सफलता को साथी\" while preserving existing splash timing, animations, and scroll-lock behavior."
         }
       ]
     },
     {
-      "id": "REQ-36",
-      "summary": "Add a PSC-preparation themed static profile avatar image to the profile/header area with sensible circular/rounded cropping and responsive layout.",
+      "id": "REQ-39",
+      "summary": "Remove the AppLogo from the main Dashboard header row while keeping the header aligned and balanced.",
       "acceptanceCriteria": [
-        "A new static image asset representing a PSC-preparation scene is added under frontend/public/assets/generated and is used as the profile image in the profile/header area.",
-        "The profile image renders consistently without layout overflow on common mobile widths."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/psc-profile.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated static PSC-preparation illustration asset at frontend/public/assets/generated/psc-profile.dim_512x512.png."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Render the new PSC-preparation profile avatar in the header/profile area (use a circular or rounded avatar crop and ensure it does not overflow on common mobile widths), using the static asset at frontend/public/assets/generated/psc-profile.dim_512x512.png."
-        }
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "summary": "Reference the PSC-preparation profile image strictly as a static frontend asset via a stable /assets/generated/... path (no backend fetching).",
-      "acceptanceCriteria": [
-        "The profile UI references the image via a /assets/generated/... URL.",
-        "No backend APIs or canister calls are introduced for serving the profile image."
+        "The Dashboard header no longer renders the AppLogo image next to the avatar/title.",
+        "Header layout remains aligned and visually balanced after removing the logo."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "Ensure the profile/header avatar <img> references the asset via the stable static URL path /assets/generated/psc-profile.dim_512x512.png and does not introduce any backend/canister calls for image loading."
+          "description": "Remove the AppLogo import and the <AppLogo /> element from the header row. Adjust spacing/alignment classes in the header container if needed so the Avatar and title remain visually balanced."
+        }
+      ]
+    },
+    {
+      "id": "REQ-40",
+      "summary": "Reduce the vertical size of the \"खरिदार तयारी कोर्स\" course card on the Dashboard without changing its width or the left/right/top visual edges.",
+      "acceptanceCriteria": [
+        "The Dashboard course card is visibly shorter in height than before (less vertical padding/space), without changing its overall width.",
+        "The card’s left/right/top visual boundaries remain consistent with the current style; only the vertical size is reduced.",
+        "Course carousel and course text remain readable and not clipped on common mobile viewport sizes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Tune the course Card layout to be shorter by reducing vertical padding and/or internal vertical spacing (e.g., Card padding and space-y/margins around the carousel) while keeping the card’s gradient, width, and top/left/right boundaries consistent. Ensure carousel aspect ratio remains intact and text is not clipped on mobile."
         }
       ]
     }

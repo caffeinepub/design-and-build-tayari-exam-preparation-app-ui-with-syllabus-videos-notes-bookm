@@ -1,50 +1,24 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T20:43:35.639Z",
-  "summary": "Diff updates Dashboard header UI to show a \"Tayari\" title and uses an AvatarImage pointing to /assets/generated/psc-profile.dim_512x512.png, but no new static image asset was added and there’s no clear evidence that the exact phrase \"design by build tayari\" was removed everywhere it appears.",
+  "generatedAt": "2026-02-13T21:06:29.560Z",
+  "summary": "REQ-38 and REQ-39 appear implemented: SplashScreen now uses the new static PSC study PNG and shows the exact tagline \"सफलता को साथी\"; Dashboard header no longer shows the AppLogo next to the title/avatar. REQ-40 (shorter course card height) is claimed in the summary but cannot be verified from the truncated Dashboard.tsx diff snippet provided.",
   "missing_requirements": [
     {
-      "id": "REQ-35",
-      "requirement": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
-      "reason": "Only Dashboard.tsx is shown changing/using \"Tayari\"; the diff summary provides no evidence that the literal string \"design by build tayari\" was located and removed/replaced across the app UI.",
+      "id": "REQ-40",
+      "requirement": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
+      "reason": "The Dashboard.tsx diff is truncated before the Courses section/card styling; the provided snippet does not show any concrete change to the course card height/padding, so implementation cannot be confirmed from available diff evidence.",
       "evidence": [
-        "frontend/src/pages/Dashboard.tsx",
-        "frontend-file-summaries.txt (no mention of replacing \"design by build tayari\" globally)"
-      ]
-    },
-    {
-      "id": "REQ-36",
-      "requirement": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
-      "reason": "No new image asset was added under frontend/public/assets/generated (ADDED FILES: none). Although the Dashboard references /assets/generated/psc-profile.dim_512x512.png, the asset itself is not present in the diff summary.",
-      "evidence": [
-        "File diff summary: ADDED FILES: none",
-        "frontend/src/pages/Dashboard.tsx (references /assets/generated/psc-profile.dim_512x512.png)"
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "requirement": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
-      "reason": "The stable /assets/generated/... reference is present, but the required newly generated static asset itself was not added in the diff (no file under frontend/public/assets/generated shown as added).",
-      "evidence": [
-        "File diff summary: ADDED FILES: none",
-        "frontend/src/pages/Dashboard.tsx (AvatarImage src=\"/assets/generated/psc-profile.dim_512x512.png\")"
+        "frontend/src/pages/Dashboard.tsx (truncated: ends before Courses Section)"
       ]
     }
   ],
-  "hallucinated_features": [
-    {
-      "description": "Dashboard header was modified to include a profile avatar next to AppLogo and a gradient-styled \"Tayari\" title.",
-      "reason": "The BuildRequest focuses on the profile/header area text and adding a PSC-preparation profile image; it also states a non-goal to avoid changing dashboard header branding beyond what’s necessary. The diff shows changes specifically in the dashboard header (Dashboard.tsx), which may be outside the requested profile/header area.",
-      "evidence": [
-        "frontend/src/pages/Dashboard.tsx"
-      ]
-    }
-  ],
-  "confidence": 0.72,
+  "hallucinated_features": [],
+  "confidence": 0.63,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/pages/Dashboard.tsx",
+    "frontend/src/pages/SplashScreen.tsx",
     "project_state.json"
   ]
 }

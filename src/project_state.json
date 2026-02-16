@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 15,
   "summary": "Build a colorful, attractive Nepali exam-preparation mobile app with a 3-second intro splash screen, a main dashboard showing courses/subjects across three papers, and multiple content subpages (syllabus by province, topic-wise videos + notes). The app should embed YouTube videos and Google Drive PDFs, support bookmarks/favorites for videos and notes, show old question papers by year, and include timed mock exams with timer + sound alerts, plus offline saving for notes/questions.",
   "architectural_notes": [
     "Embed/stream YouTube videos inside the app (topic-wise lists).",
@@ -15,7 +15,7 @@
     "Build/network deployment hit a configuration error (Caffeine platform) preventing successful build; needs investigation or rerun once config is fixed."
   ],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- A studying person preparing for a public service exam scene, clean modern illustration style, bright background, no text (psc-profile.dim_512x512.png)",
+  "imageRequirements": "## Required Images\n- PSC exam preparation logo illustration: person studying for PSC with many books in front, PNG with transparent or clean background (psc-study-logo.dim_512x512.png)",
   "existing_features": [
     {
       "id": "feature-implement-a-3-second-intro-splash-screen-that-shows-the-app-logo-png-a-loading-label-reading-sa-centered-slightly-below-the-logo-and-the-developer-name-janak-prasad-pande-positioned-at-the-bottom-right-corner-after-3-seconds-automatically-navigate-to-the-main-dashboard",
@@ -296,6 +296,30 @@
         "REQ-37"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-splash-screen-to-remove-the-current-applogo-based-logo-and-instead-render-a-new-static-png-logo-showing-a-person-preparing-for-psc-with-many-books-in-front-display-the-tagline-text-exactly-under-the-logo-replacing-the-current-tagline-text",
+      "title": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-main-dashboard-header-remove-the-small-earth-globe-with-book-logo-the-applogo-component-so-it-is-no-longer-displayed-in-the-header-row",
+      "title": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-course-card-box-on-the-dashboard-smaller-in-vertical-size-by-reducing-its-effective-height-primarily-by-bringing-the-bottom-edge-spacing-upward-while-keeping-the-left-right-and-top-visual-edges-consistent-with-the-current-design",
+      "title": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -444,6 +468,24 @@
     {
       "id": "AR-41",
       "summary": "Update/replace the profile image with one that looks like someone preparing for PSC (PSC तयारी गरिरहेको जस्तो).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-42",
+      "summary": "Update first/splash page: remove current logo and replace with a new PNG logo showing PSC तयारी (person studying) with many books in front; show tagline text exactly \"सफलता को साथी\" below the logo",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-43",
+      "summary": "Main page: remove the small earth-with-book logo/icon currently shown (header/main page small logo)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-44",
+      "summary": "Dashboard: make the \"खरीदार तयारी कोर्स\" box smaller by keeping left/right/top borders the same but moving the bottom border line slightly upward (reduce vertical size)",
       "reqIds": [],
       "status": "pending"
     }

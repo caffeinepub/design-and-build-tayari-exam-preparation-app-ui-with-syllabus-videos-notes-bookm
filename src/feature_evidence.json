@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-top-profile-header-screen-text-so-that-anywhere-the-app-currently-shows-the-phrase-design-by-build-tayari-it-instead-shows-exactly-tayari-and-does-not-include-any-other-words-around-it",
-      "featureTitle": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
+      "featureId": "feature-update-the-splash-screen-to-remove-the-current-applogo-based-logo-and-instead-render-a-new-static-png-logo-showing-a-person-preparing-for-psc-with-many-books-in-front-display-the-tagline-text-exactly-under-the-logo-replacing-the-current-tagline-text",
+      "featureTitle": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
       "files": [
-        "frontend/src/pages/Dashboard.tsx"
+        "frontend/src/pages/SplashScreen.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -16,13 +16,13 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-35"
+        "REQ-38"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-profile-image-on-the-profile-header-area-that-visually-looks-like-someone-preparing-for-psc-and-ensure-it-is-displayed-as-the-profile-avatar-image-in-that-profile-area-with-sensible-cropping-such-as-a-circle-or-rounded-avatar",
-      "featureTitle": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
+      "featureId": "feature-on-the-main-dashboard-header-remove-the-small-earth-globe-with-book-logo-the-applogo-component-so-it-is-no-longer-displayed-in-the-header-row",
+      "featureTitle": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
       "files": [
         "frontend/src/pages/Dashboard.tsx"
       ],
@@ -35,13 +35,13 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-36"
+        "REQ-39"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-wire-the-newly-generated-psc-preparation-profile-image-asset-as-a-static-frontend-asset-do-not-fetch-it-from-the-backend-and-reference-it-via-a-stable-assets-generated-path-from-the-profile-ui",
-      "featureTitle": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "featureId": "feature-make-the-course-card-box-on-the-dashboard-smaller-in-vertical-size-by-reducing-its-effective-height-primarily-by-bringing-the-bottom-edge-spacing-upward-while-keeping-the-left-right-and-top-visual-edges-consistent-with-the-current-design",
+      "featureTitle": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
       "files": [
         "frontend/src/pages/Dashboard.tsx"
       ],
@@ -54,7 +54,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-37"
+        "REQ-40"
       ],
       "confidence": "high"
     }

@@ -5,7 +5,6 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import BottomNav from '@/components/BottomNav';
-import AppLogo from '@/components/AppLogo';
 import CourseImageCarousel from '@/components/CourseImageCarousel';
 import { useNotifications } from '@/hooks/useNotifications';
 
@@ -50,7 +49,6 @@ export default function Dashboard() {
                 T
               </AvatarFallback>
             </Avatar>
-            <AppLogo />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               Tayari
             </h1>
@@ -81,8 +79,8 @@ export default function Dashboard() {
         {/* Courses Section */}
         <section>
           <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Kharidar Courses</h2>
-          <Card className="p-6 bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-0 overflow-hidden">
-            <div className="flex flex-col space-y-4">
+          <Card className="p-4 bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-0 overflow-hidden">
+            <div className="flex flex-col space-y-3">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-2xl font-bold mb-2">खरिदार तयारी कोर्स</h3>
@@ -91,7 +89,7 @@ export default function Dashboard() {
                 <GraduationCap className="w-16 h-16 opacity-80" />
               </div>
               {/* Course Image Carousel */}
-              <div className="mt-4">
+              <div className="mt-2">
                 <CourseImageCarousel images={courseImages} />
               </div>
             </div>

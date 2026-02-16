@@ -1,73 +1,84 @@
 {
   "kind": "build_request",
-  "title": "Update profile header title to 'Tayari' and add PSC-preparation profile image",
+  "title": "Replace splash screen logo, remove dashboard header logo, and shrink course card height",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-35",
-      "text": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
+      "id": "REQ-38",
+      "text": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "Yasko screen name  mathi profile ma design by build tayari lekhako thau ma Matri \"Tayari\" लेख्नुहोस"
+          "पहिलो पेज को logo remove garnus tes thaunma psc ko tayari gare rayako ra aagadi dharai book rakhako png logo halnus tala सफलता को साथी लेख्नुहोस"
         ]
       },
       "acceptanceCriteria": [
-        "The UI no longer displays the text \"design by build tayari\" anywhere in the app UI.",
-        "The affected header/title renders exactly \"Tayari\" (case-sensitive) with no additional prefix/suffix text."
+        "On the splash screen, the logo shown is the new PSC-preparation PNG (not the current AppLogo globe/education logo).",
+        "The splash screen tagline text is exactly \"सफलता को साथी\" (same spelling and spacing).",
+        "No other splash screen content (e.g., title timing/navigation behavior) regresses."
       ]
     },
     {
-      "id": "REQ-36",
-      "text": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
+      "id": "REQ-39",
+      "text": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "profile image psc तयारी garirayako जस्तो haldinus"
+          "main page ko sano earth ko mathi book rakhako logo remove garnus"
         ]
       },
       "acceptanceCriteria": [
-        "A new static image asset representing a PSC-preparation scene is added under frontend/public/assets/generated and is used as the profile image in the profile/header area.",
-        "The profile image renders consistently without layout overflow on common mobile widths."
+        "The Dashboard header no longer renders the AppLogo image next to the avatar/title.",
+        "Header layout remains aligned and visually balanced after removing the logo."
       ]
     },
     {
-      "id": "REQ-37",
-      "text": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
+      "id": "REQ-40",
+      "text": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "profile image psc तयारी garirayako जस्तो haldinus"
+          "खरीदार तयारी कोर्स लेखको box ko size सानो गर्नुहोस left, right र mathi को line seme tara tala ko line halka माथि ल्याउनु paro size  सानो गर्नाको लागि"
         ]
       },
       "acceptanceCriteria": [
-        "The profile UI references the image via a /assets/generated/... URL.",
-        "No backend APIs or canister calls are introduced for serving the profile image."
+        "The Dashboard course card is visibly shorter in height than before (less vertical padding/space), without changing its overall width.",
+        "The card’s left/right/top visual boundaries remain consistent with the current style; only the vertical size is reduced.",
+        "Course carousel and course text remain readable and not clipped on common mobile viewport sizes."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (read-only UI components).",
-    "Do not modify files listed as immutable in SYSTEM_CONTEXT (compose them instead).",
-    "Keep backend architecture as single-actor; no backend changes are required for this request."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not route generated/static images through the backend; serve them from frontend/public/assets/generated."
   ],
   "nonGoals": [
-    "Do not change dashboard header branding (AppLogo + 'Tayari') beyond what is necessary for the profile/header area mentioned by the user.",
-    "Do not implement user-uploaded profile photos or backend-stored avatars as part of this change."
+    "Do not change bookmark sync, exams, old questions, or other learning content modules.",
+    "Do not redesign the overall app theme beyond the specific UI adjustments requested."
   ],
   "imageRequirements": {
     "required": [
-      "A studying person preparing for a public service exam scene, clean modern illustration style, bright background, no text (psc-profile.dim_512x512.png)"
+      "PSC exam preparation logo illustration: person studying for PSC with many books in front, PNG with transparent or clean background (psc-study-logo.dim_512x512.png)"
     ],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

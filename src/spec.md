@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Update the profile/header title to show exactly “Tayari” and add a PSC-preparation profile avatar image.
+**Goal:** Update the splash screen branding, simplify the dashboard header, and reduce the dashboard course card height.
 
 **Planned changes:**
-- Replace any occurrence of the phrase “design by build tayari” in the profile/header area with exactly “Tayari” (no extra words).
-- Add a new static PSC-preparation illustration image under `frontend/public/assets/generated` and display it as the profile/header avatar with sensible circular/rounded cropping.
-- Reference the avatar via a stable `/assets/generated/...` path from the profile UI without introducing any backend fetching.
+- Replace the splash screen logo with a new static PNG showing a person preparing for PSC with many books, and set the splash tagline text to exactly "सफलता को साथी".
+- Remove the small AppLogo (earth/globe-with-book) from the main Dashboard header row while keeping the header layout aligned.
+- Reduce the vertical height of the "खरिदार तयारी कोर्स" course card on the Dashboard by tightening bottom spacing while keeping left/right/top edges consistent and ensuring content remains readable.
 
-**User-visible outcome:** The profile/header area displays the title “Tayari” and shows a PSC-preparation themed profile image avatar that renders cleanly on common mobile screen sizes.
+**User-visible outcome:** The splash screen shows the new PSC-preparation logo with the tagline "सफलता को साथी", the dashboard header no longer shows the small globe logo, and the खरिदार course card appears shorter without clipping content.
