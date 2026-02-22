@@ -1,11 +1,20 @@
 # Specification
 
 ## Summary
-**Goal:** Update the splash screen branding, simplify the dashboard header, and reduce the dashboard course card height.
+**Goal:** Add comprehensive admin content management across all sections of the app.
 
 **Planned changes:**
-- Replace the splash screen logo with a new static PNG showing a person preparing for PSC with many books, and set the splash tagline text to exactly "सफलता को साथी".
-- Remove the small AppLogo (earth/globe-with-book) from the main Dashboard header row while keeping the header layout aligned.
-- Reduce the vertical height of the "खरिदार तयारी कोर्स" course card on the Dashboard by tightening bottom spacing while keeping left/right/top edges consistent and ensuring content remains readable.
+- Create an admin panel accessible from main navigation
+- Add content management forms for Syllabus section (title, description, Drive URL)
+- Add content management forms for GK section (topics, videos with YouTube URLs)
+- Add content management forms for IQ section (test categories, videos with YouTube URLs)
+- Add content management forms for Second Paper's three sections (topics, videos, notes)
+- Add content management forms for Third Paper's three sections (topics, videos, notes)
+- Add content management forms for Exam section (mock exams with duration, description, PDF URLs)
+- Enable adding standalone videos across all subject video sections
+- Enable adding notes across all subject notes sections
+- Implement backend storage and retrieval with persistence for all admin-added content
+- Support update and delete operations for previously added content
+- Ensure all published content appears immediately without app rebuild
 
-**User-visible outcome:** The splash screen shows the new PSC-preparation logo with the tagline "सफलता को साथी", the dashboard header no longer shows the small globe logo, and the खरिदार course card appears shorter without clipping content.
+**User-visible outcome:** Administrators can add, update, and manage educational content across all sections (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, Notes) through a unified admin panel, with changes immediately visible to all users.

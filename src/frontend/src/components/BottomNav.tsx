@@ -1,11 +1,15 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router';
-import { Home, Video, FileText, ClipboardCheck } from 'lucide-react';
+import { Home, Video, FileText, ClipboardCheck, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useInternetIdentity } from '@/hooks/useInternetIdentity';
+import { useIsAdmin } from '@/hooks/useQueries';
 
 export default function BottomNav() {
   const navigate = useNavigate();
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
+  const { identity } = useInternetIdentity();
+  const { data: isAdmin } = useIsAdmin();
 
   const navItems = [
     { id: 'home', label: 'होम', icon: Home, path: '/' },
@@ -14,10 +18,15 @@ export default function BottomNav() {
     { id: 'exam', label: 'परीक्षा', icon: ClipboardCheck, path: '/exam' },
   ];
 
+  // Add admin item if user is admin
+  if (identity && isAdmin) {
+    navItems.push({ id: 'admin', label: 'Admin', icon: Settings, path: '/admin' });
+  }
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-lg">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-4 gap-1">
+        <div className={cn('grid gap-1', navItems.length === 5 ? 'grid-cols-5' : 'grid-cols-4')}>
           {navItems.map((item) => {
             const isActive = currentPath === item.path;
             return (

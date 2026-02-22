@@ -1,323 +1,83 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
-  "summary": "Build a colorful, attractive Nepali exam-preparation mobile app with a 3-second intro splash screen, a main dashboard showing courses/subjects across three papers, and multiple content subpages (syllabus by province, topic-wise videos + notes). The app should embed YouTube videos and Google Drive PDFs, support bookmarks/favorites for videos and notes, show old question papers by year, and include timed mock exams with timer + sound alerts, plus offline saving for notes/questions.",
+  "projectStateVersion": 3,
+  "summary": "Nepali language exam preparation app (Kharidar Tayari) with admin panel for content management",
   "architectural_notes": [
-    "Embed/stream YouTube videos inside the app (topic-wise lists).",
-    "Embed Google Drive PDFs/folders for notes, syllabus, old questions, and exam sets.",
-    "Implement local storage for bookmarks and offline-downloaded notes/questions.",
-    "Mock exam engine requires countdown timers and end-of-time sound/alert.",
-    "Update exam timer rules: Second Paper duration should be 150 minutes (2h 30m) per latest requirement."
+    "Admin panel for content/link management with title, description, and URL fields",
+    "Content add functionality required across multiple sections: syllabus, GK, IQ, second/third paper sections, exams, videos, notes"
   ],
-  "known_issues": [
-    "User reports the app 'kam gardaina' (not working); functionality/build may be failing and needs investigation.",
-    "Exam module bug: First paper option is missing, and the First paper entry is incorrectly showing Second paper content/labeling; needs correction.",
-    "Build/network deployment hit a configuration error (Caffeine platform) preventing successful build; needs investigation or rerun once config is fixed."
-  ],
+  "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- PSC exam preparation logo illustration: person studying for PSC with many books in front, PNG with transparent or clean background (psc-study-logo.dim_512x512.png)",
   "existing_features": [
     {
-      "id": "feature-implement-a-3-second-intro-splash-screen-that-shows-the-app-logo-png-a-loading-label-reading-sa-centered-slightly-below-the-logo-and-the-developer-name-janak-prasad-pande-positioned-at-the-bottom-right-corner-after-3-seconds-automatically-navigate-to-the-main-dashboard",
-      "title": "Implement a 3-second intro/splash screen that shows the app logo (PNG), a loading label reading \"Saफलता को साथी\" centered slightly below the logo, and the developer name \"Janak prasad pande\" positioned at the bottom-right corner; after 3 seconds, automatically navigate to the main dashboard.",
+      "id": "feature-create-an-admin-panel-interface-accessible-from-the-main-navigation-that-allows-administrators-to-add-and-manage-content-across-all-sections-of-the-app",
+      "title": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-colorful-attractive-consistent-visual-theme-for-the-entire-app-colors-typography-card-styles-buttons-spacing-suitable-for-an-exam-preparation-app-apply-it-across-all-pages-and-components-avoid-using-a-blue-purple-dominant-palette",
-      "title": "Create a colorful, attractive, consistent visual theme for the entire app (colors, typography, card styles, buttons, spacing) suitable for an exam-preparation app; apply it across all pages and components (avoid using a blue/purple-dominant palette).",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-syllabus-section-that-allow-adding-new-syllabus-entries-with-title-description-and-google-drive-url-fields-with-a-publish-button-to-make-entries-immediately-visible-in-the-app",
+      "title": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-build-the-main-dashboard-page-with-1-a-top-app-bar-titled-tayari-2-a-search-button-and-a-notifications-button-3-a-kharidar-courses-section-4-three-sections-first-paper-second-paper-and-third-paper-each-containing-subject-tiles-5-a-left-aligned-old-questions-entry-accessible-from-the-dashboard-and-6-a-colorful-bottom-navigation-with-tabs-home-video-notes-exam",
-      "title": "Build the main dashboard page with: (1) a top app bar titled \"Tayari\"; (2) a search button and a notifications button; (3) a \"Kharidar courses\" section; (4) three sections \"First paper\", \"Second paper\", and \"Third paper\" each containing subject tiles; (5) a left-aligned \"Old Questions\" entry accessible from the dashboard; and (6) a colorful bottom navigation with tabs: Home, Video, Notes, Exam.",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-gk-general-knowledge-section-that-allow-adding-new-topics-and-videos-with-title-description-and-youtube-url-fields",
+      "title": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-the-subject-tiles-on-the-dashboard-with-icons-images-and-correct-grouping-first-paper-syllabus-gk-iq-second-paper-office-management-constitution-maths-third-paper-service-management-accounting-accounts-accounting-system-law-each-tile-must-navigate-to-its-respective-content-page",
-      "title": "Implement the subject tiles on the dashboard with icons/images and correct grouping:\n- First paper: Syllabus, GK, IQ\n- Second paper: Office Management, Constitution, Maths\n- Third paper: Service Management, Accounting (Accounts & Accounting System), Law\nEach tile must navigate to its respective content page.",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-iq-section-that-allow-adding-new-test-categories-and-videos-with-title-description-and-youtube-url-fields",
+      "title": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
       "reqIds": [
         "REQ-4"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-notifications-ui-accessible-from-the-dashboard-notifications-button-that-can-display-at-least-two-notification-categories-new-updates-and-exam-dates-show-unread-indicator-badge-on-the-notifications-button-when-there-are-unread-items",
-      "title": "Create a notifications UI accessible from the dashboard notifications button that can display at least two notification categories: \"New updates\" and \"Exam dates\"; show unread indicator/badge on the notifications button when there are unread items.",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-second-paper-office-management-and-constitution-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
+      "title": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
       "reqIds": [
         "REQ-5"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-the-syllabus-module-a-syllabus-page-with-a-back-button-and-title-syllabus-render-a-list-of-syllabus-buttons-entries-for-all-syllabus-koshi-madhesh-bagmati-gandaki-lumbini-karnali-and-sudurpashchim-on-selection-show-the-corresponding-google-drive-pdf-folder-content-in-an-embedded-viewer-when-possible-for-sudurpashchim-show-coming-soon-use-these-exact-links-all-syllabus-https-drive-google-com-file-d-12obut8uj2qlbvq9f3xhkbh4hdbzkkum7-view-usp-drivesdk-and-https-drive-google-com-file-d-1d3gpxbeyea8wein0raeetlpgvt3wbgxp-view-usp-drivesdk-koshi-https-drive-google-com-file-d-1-93-vftwqbdqn8j5n7vka9arqelc5oyq-view-usp-drivesdk-madhesh-https-drive-google-com-file-d-1apjoxbhoej9ops30tbldzhmnu-sdlx5e-view-usp-drivesdk-bagmati-https-drive-google-com-file-d-14rxwkit5lfar0ly0yglm3aidrug3qtaz-view-usp-drivesdk-gandaki-https-drive-google-com-drive-folders-1sbyrm50-vkwdr5ityhp-1mfqugzbgyw1-lumbini-https-drive-google-com-file-d-19cpx3ct2s5unye40dpg49zc-xvqdpqks-view-usp-drivesdk-karnali-https-drive-google-com-file-d-17mhpny2gr6dagjp-81uzr99vtsdihz5h-view-usp-drivesdk",
-      "title": "Implement the Syllabus module:\n- A Syllabus page with a back button and title \"Syllabus\".\n- Render a list of syllabus buttons/entries for: \"All syllabus\", \"Koshi\", \"Madhesh\", \"Bagmati\", \"Gandaki\", \"Lumbini\", \"Karnali\", and \"Sudurpashchim\".\n- On selection, show the corresponding Google Drive PDF/folder content in an embedded viewer when possible; for \"Sudurpashchim\" show \"Coming soon\".\nUse these exact links:\nAll syllabus: https://drive.google.com/file/d/12ObUt8uj2QlBvQ9f3XHkbH4hdbzkkum7/view?usp=drivesdk and https://drive.google.com/file/d/1D3GPXbEyea8wein0RAEETlpGvt3WBGXP/view?usp=drivesdk\nKoshi: https://drive.google.com/file/d/1_93_VFtwQBdqN8j5N7vka9ArQelc5oYQ/view?usp=drivesdk\nMadhesh: https://drive.google.com/file/d/1apjOxBHoej9Ops30tbldzHMnU-SDlX5E/view?usp=drivesdk\nBagmati: https://drive.google.com/file/d/14RXwkit5lFaR0lY0YglM3AiDrUG3qtAZ/view?usp=drivesdk\nGandaki: https://drive.google.com/drive/folders/1SBYRm50_vKwDR5Ityhp_1MFQugzbgyW1\nLumbini: https://drive.google.com/file/d/19cpx3cT2S5UnyE40dpG49zc-XVQDPqks/view?usp=drivesdk\nKarnali: https://drive.google.com/file/d/17mhPNy2Gr6Dagjp-81uZr99vTSDihZ5h/view?usp=drivesdk",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-third-paper-service-management-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
+      "title": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
       "reqIds": [
         "REQ-6"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-reusable-subject-content-page-pattern-used-by-gk-iq-office-management-constitution-maths-service-management-accounting-and-law-header-with-back-button-and-subject-title-two-sections-tabs-videos-and-notes-layout-videos-pane-takes-62-width-and-notes-pane-38-width-on-desktop-on-small-screens-use-tabs-stacked-layout-videos-list-is-topic-wise-with-numbered-items-clicking-an-item-opens-an-embedded-youtube-player-notes-section-embeds-the-provided-google-drive-pdf-when-a-notes-link-exists-add-a-bookmark-favorite-control-on-video-items-and-on-notes-at-minimum-per-subject-to-save-to-bookmarks",
-      "title": "Create a reusable Subject Content page pattern used by GK, IQ, Office Management, Constitution, Maths, Service Management, Accounting, and Law:\n- Header with back button and subject title.\n- Two sections/tabs: \"Videos\" and \"Notes\".\n- Layout: Videos pane takes ~62% width and Notes pane ~38% width on desktop; on small screens use tabs/stacked layout.\n- Videos list is topic-wise with numbered items; clicking an item opens an embedded YouTube player.\n- Notes section embeds the provided Google Drive PDF when a notes link exists.\n- Add a bookmark/favorite control on video items and on notes (at minimum per subject) to save to Bookmarks.",
+      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-exam-section-that-allow-adding-new-mock-exams-with-title-duration-description-and-google-drive-pdf-url-fields",
+      "title": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
       "reqIds": [
         "REQ-7"
       ],
       "version": 1
     },
     {
-      "id": "feature-populate-gk-content-exactly-with-the-provided-topic-groupings-and-youtube-links-and-set-gk-notes-to-https-drive-google-com-file-d-1uhxxsnpmseitseuunj0xafgekgn1tx4x-view-usp-drivesdk",
-      "title": "Populate GK content exactly with the provided topic groupings and YouTube links, and set GK Notes to: https://drive.google.com/file/d/1UhxXsnpMsEitsEUunj0XAFgEkGN1tX4X/view?usp=drivesdk",
+      "id": "feature-add-content-management-capability-in-the-admin-panel-for-the-video-sections-across-all-subjects-that-allows-adding-standalone-videos-with-title-description-and-youtube-url-fields",
+      "title": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
       "reqIds": [
         "REQ-8"
       ],
       "version": 1
     },
     {
-      "id": "feature-populate-iq-content-exactly-with-the-provided-topic-groupings-and-youtube-links-provide-a-notes-section-following-the-same-ui-pattern-even-if-notes-links-are-not-provided-show-an-empty-state-and-allow-bookmarking-when-notes-exist",
-      "title": "Populate IQ content exactly with the provided topic groupings and YouTube links; provide a Notes section following the same UI pattern (even if notes links are not provided, show an empty state and allow bookmarking when notes exist).",
+      "id": "feature-add-content-management-capability-in-the-admin-panel-for-the-notes-sections-across-all-subjects-that-allows-adding-notes-with-title-description-and-google-drive-url-fields",
+      "title": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
       "reqIds": [
         "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-populate-second-paper-subjects-with-the-provided-links-office-management-notes-https-drive-google-com-file-d-1evacu6sx1ijrukwkdkzbzkdwq4-8ndyp-view-usp-drivesdk-and-all-listed-office-management-videos-constitution-notes-https-drive-google-com-file-d-192rav87fa-xti8kw-a6sogoyzmveoutt-view-usp-drivesdk-and-all-listed-constitution-videos-maths-notes-https-drive-google-com-file-d-1rrnn4gdzlknqketx-uzon95kbt4je0e4-view-usp-drivesdk-and-all-listed-maths-videos",
-      "title": "Populate Second paper subjects with the provided links:\n- Office Management: notes https://drive.google.com/file/d/1EvAcU6sX1ijRUkWkdkzbzkdwQ4-8Ndyp/view?usp=drivesdk and all listed Office Management videos.\n- Constitution: notes https://drive.google.com/file/d/192Rav87FA_xTi8kW_a6SOGOYZmVeoUTt/view?usp=drivesdk and all listed Constitution videos.\n- Maths: notes https://drive.google.com/file/d/1RRnN4GDZLKnqKEtX_uZOn95Kbt4Je0E4/view?usp=drivesdk and all listed Maths videos.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-populate-third-paper-subjects-with-the-provided-links-service-management-notes-https-drive-google-com-file-d-1pi8nbtg-j25p4bfurrykjsjgt3bejylm-view-usp-drivesdk-and-all-listed-service-management-videos-accounting-notes-https-drive-google-com-file-d-14foz9ylce9o1mk4dsjczhsvt3t3yafjh-view-usp-drivesdk-and-all-listed-accounting-videos-law-notes-https-drive-google-com-file-d-1em9fdjbhok1vukxwsvjdmv4za9ewpqx3-view-usp-drivesdk-and-all-listed-law-videos",
-      "title": "Populate Third paper subjects with the provided links:\n- Service Management: notes https://drive.google.com/file/d/1pI8Nbtg_J25P4bfurrYkjsJGt3BeJyLM/view?usp=drivesdk and all listed Service Management videos.\n- Accounting: notes https://drive.google.com/file/d/14FOZ9YlcE9o1MK4dsJcZHsVt3t3YAfJH/view?usp=drivesdk and all listed Accounting videos.\n- Law: notes https://drive.google.com/file/d/1EM9FDjBhOk1vUkxWsVJdmV4Za9EwPqX3/view?usp=drivesdk and all listed Law videos.",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-bookmarks-favorites-users-can-bookmark-individual-video-items-and-bookmark-notes-documents-the-bottom-navigation-video-tab-shows-only-bookmarked-videos-the-bottom-navigation-notes-tab-shows-only-bookmarked-notes-provide-ability-to-remove-bookmarks-from-the-bookmark-screens-persist-bookmarks-locally-on-the-device-also-add-optional-cloud-sync-when-the-user-is-authenticated-with-internet-identity-save-bookmarks-per-user-principal",
-      "title": "Implement Bookmarks/Favorites:\n- Users can bookmark individual video items and bookmark notes documents.\n- The bottom navigation \"Video\" tab shows only bookmarked videos.\n- The bottom navigation \"Notes\" tab shows only bookmarked notes.\n- Provide ability to remove bookmarks from the bookmark screens.\n- Persist bookmarks locally on the device; also add optional cloud sync when the user is authenticated with Internet Identity (save bookmarks per user principal).",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-old-questions-module-accessible-from-dashboard-show-three-sections-first-paper-second-paper-third-paper-inside-each-paper-show-year-entries-2083-2082-2081-2080-2079-2078-and-a-province-entry-where-provided-for-missing-years-show-coming-soon-open-embedded-view-the-corresponding-google-drive-links-exactly-as-provided-second-paper-2082-https-drive-google-com-drive-folders-1i4cxkdqfrqcx6qdu7fsvuucpp10eodmo-2081-https-drive-google-com-drive-folders-1c15g19rpddp4cnq6vd9wgocn3ghj5r4w-2080-https-drive-google-com-drive-folders-1ykn55vc7-9gfyqtx-zbndgzabkqtmzb1-2079-https-drive-google-com-file-d-1e18i0xtmjhs5fbhtkoqa6-twlsou4r6y-view-usp-drivesdk-2078-https-drive-google-com-file-d-13cnunkt8472-u04k2q6rbdarm2m4orz8-view-usp-drivesdk-province-https-drive-google-com-file-d-1xmzz8mbkct0pxxr0z-d4-sqxfgyk1wya-view-usp-drivesdk-third-paper-2082-https-drive-google-com-drive-folders-1bh-xa3pxc1pwg51lswauqhobyep60g-x-2081-https-drive-google-com-drive-folders-1j2poubcoiddpucoexftxjv1gzrkcmrjy-2080-https-drive-google-com-file-d-1bnsqdllkbrueiybj9jcz12fatomntekq-view-usp-drivesdk-2079-https-drive-google-com-file-d-1xdb4mtv7graerdtk2xu31hzl-5lg5h4q-view-usp-drivesdk-2078-https-drive-google-com-drive-folders-1ykz61ei-fifl4z5jktt1unnugp05h-wx-province-https-drive-google-com-file-d-1cjrcikvti3ufocbflnfnmzdk25-cudow-view-usp-drivesdk-first-paper-show-the-year-list-2083-2078-and-implement-2083-coming-soon-and-2078-opens-the-first-paper-2078-paper-link-not-provided-by-the-user",
-      "title": "Implement the Old Questions module:\n- Accessible from dashboard.\n- Show three sections: \"First paper\", \"Second paper\", \"Third paper\".\n- Inside each paper, show year entries: 2083, 2082, 2081, 2080, 2079, 2078 (and a \"Province\" entry where provided).\n- For missing years, show \"Coming soon\".\n- Open/embedded-view the corresponding Google Drive links exactly as provided:\nSecond paper:\n2082 https://drive.google.com/drive/folders/1I4cxkDQfRQcX6qDu7fSvUUcpP10eoDmO\n2081 https://drive.google.com/drive/folders/1C15G19rpDDp4cNq6Vd9WGOCN3GhJ5R4W\n2080 https://drive.google.com/drive/folders/1YKN55VC7-9GFyQtX_zBNDGZABKQtMzb1\n2079 https://drive.google.com/file/d/1e18I0XTmjhs5fBhtKOQa6-twlsou4R6y/view?usp=drivesdk\n2078 https://drive.google.com/file/d/13cNunKT8472-u04k2q6Rbdarm2M4ORZ8/view?usp=drivesdk\nProvince https://drive.google.com/file/d/1xMZZ8mbkCT0PxXr0Z_D4-sQxFGYk1wYA/view?usp=drivesdk\nThird paper:\n2082 https://drive.google.com/drive/folders/1bh-xa3pXc1PWg51LswAUQHOBYep60g_x\n2081 https://drive.google.com/drive/folders/1j2poUbcOIDDpucOeXFtxjv1gZrkCMRjY\n2080 https://drive.google.com/file/d/1bNSqDLlKBRuEiYBj9JCz12fAtOmNTEkq/view?usp=drivesdk\n2079 https://drive.google.com/file/d/1xdb4MTv7gRAErDtk2xu31hZL-5lg5H4q/view?usp=drivesdk\n2078 https://drive.google.com/drive/folders/1YKz61eI_FifL4Z5jKtT1unnuGp05H-WX\nProvince https://drive.google.com/file/d/1CjRCiKvTi3ufOCBFLnFNMzDK25_cudow/view?usp=drivesdk\nFirst paper:\nShow the year list (2083–2078) and implement \"2083: Coming soon\" and \"2078 opens the First paper 2078 paper\" (link not provided by the user).",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-exam-mock-test-module-under-the-bottom-navigation-exam-allow-selecting-paper-set-s-first-paper-second-paper-third-paper-when-starting-an-exam-show-the-question-paper-content-from-the-provided-google-drive-links-in-an-embedded-pdf-viewer-and-start-a-countdown-timer-timers-for-the-first-second-paper-exam-start-a-45-minute-timer-for-the-third-paper-exam-start-a-2-hour-30-minute-timer-when-the-timer-reaches-zero-play-a-bell-ring-sound-and-show-a-finished-screen-state-use-these-exact-links-second-paper-exam-https-drive-google-com-file-d-1sbsabsjf0dlcbja7yin-i1rtp6oirm-b-view-usp-drivesdk-https-drive-google-com-file-d-1vx2kminbjqeoo17axm54rr7-5b2jcgyb-view-u-third-paper-exam-https-drive-google-com-file-d-170sb1cxpgwbp32bdsphvdon7b0uecol0-view-usp-drivesdk-https-drive-google-com-file-d-1f-wprvgfyhrff4qk-wfm9dlwhawh5j09-view-usp-drivesdk",
-      "title": "Implement the Exam/Mock Test module under the bottom navigation \"Exam\":\n- Allow selecting paper set(s): First paper, Second paper, Third paper.\n- When starting an exam, show the question paper content from the provided Google Drive links in an embedded PDF viewer and start a countdown timer.\n- Timers:\n  - For the first/second paper exam: start a 45-minute timer.\n  - For the third paper exam: start a 2-hour 30-minute timer.\n- When the timer reaches zero, play a bell/ring sound and show a \"Finished\" screen/state.\nUse these exact links:\nSecond paper exam:\nhttps://drive.google.com/file/d/1SBsaBSjf0DlCBja7yiN_I1rtp6Oirm-b/view?usp=drivesdk\nhttps://drive.google.com/file/d/1vx2KMInBjqEOO17Axm54Rr7_5B2jCgyB/view?u\nThird paper exam:\nhttps://drive.google.com/file/d/170sb1CXPGWbp32BdspHVDoN7B0UecOL0/view?usp=drivesdk\nhttps://drive.google.com/file/d/1F_WPrVGfYHRFf4QK-wFm9DlwHAwh5j09/view?usp=drivesdk",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-an-offline-friendly-workflow-for-notes-and-question-sets-provide-a-download-action-on-notes-pdfs-and-old-question-exam-pdfs-that-opens-a-downloadable-url-or-opens-in-a-new-tab-if-direct-download-is-blocked-persist-a-per-device-offline-library-list-of-downloaded-saved-items-metadata-link-so-users-can-find-them-again-inside-the-app",
-      "title": "Add an offline-friendly workflow for notes and question sets:\n- Provide a \"Download\" action on notes PDFs and old question/exam PDFs that opens a downloadable URL (or opens in a new tab if direct download is blocked).\n- Persist a per-device \"Offline Library\" list of downloaded/saved items (metadata + link) so users can find them again inside the app.",
-      "reqIds": [
-        "REQ-15"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-tanstack-router-setup-so-the-app-reliably-renders-after-the-splash-screen-without-creating-nested-recursive-routerprovider-instances",
-      "title": "Fix the TanStack Router setup so the app reliably renders after the splash screen without creating nested/recursive RouterProvider instances.",
-      "reqIds": [
-        "REQ-17"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-an-app-level-runtime-error-fallback-for-routing-rendering-failures-that-shows-a-simple-english-error-screen-with-a-reload-action-and-logs-the-underlying-error-to-the-console-for-debugging",
-      "title": "Add an app-level runtime error fallback for routing/rendering failures that shows a simple English error screen with a reload action, and logs the underlying error to the console for debugging.",
-      "reqIds": [
-        "REQ-18"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-frontend-bookmark-sync-logic-gracefully-handles-backend-failures-including-authorization-config-issues-without-breaking-the-ui-and-continues-using-local-bookmarks-as-the-source-of-truth-when-sync-fails",
-      "title": "Ensure the frontend bookmark sync logic gracefully handles backend failures (including authorization/config issues) without breaking the UI, and continues using local bookmarks as the source of truth when sync fails.",
-      "reqIds": [
-        "REQ-20"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-support-for-the-user-s-own-app-logo-and-use-it-consistently-wherever-the-logo-is-shown-at-minimum-splash-screen-and-dashboard-header-with-a-safe-fallback-to-the-current-logo-if-the-custom-logo-file-is-not-present",
-      "title": "Add support for the user’s own app logo and use it consistently wherever the logo is shown (at minimum: Splash screen and Dashboard header), with a safe fallback to the current logo if the custom logo file is not present.",
-      "reqIds": [
-        "REQ-21"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-improve-the-overall-background-color-mixing-by-updating-the-dominant-page-background-gradients-to-be-more-attractive-and-cohesive-across-the-app-dashboard-subjectcontent-exam-oldquestions-videobookmarks-notesbookmarks-avoiding-harsh-undesired-blue-heavy-backgrounds",
-      "title": "Improve the overall background color “mixing” by updating the dominant page background gradients to be more attractive and cohesive across the app (Dashboard, SubjectContent, Exam, OldQuestions, VideoBookmarks, NotesBookmarks), avoiding harsh/undesired blue-heavy backgrounds.",
-      "reqIds": [
-        "REQ-22"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-video-search-so-users-can-quickly-find-videos-by-keyword-within-subject-video-lists-filter-across-topic-titles-and-video-titles-and-within-the-bookmarked-videos-screen",
-      "title": "Implement video search so users can quickly find videos by keyword within subject video lists (filter across topic titles and video titles) and within the bookmarked videos screen.",
-      "reqIds": [
-        "REQ-23"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-enhance-the-dashboard-kharidar-courses-section-to-include-3-4-course-photos-thumbnails-in-a-visually-rich-layout-e-g-row-grid-carousel-while-keeping-the-section-compact-and-mobile-friendly",
-      "title": "Enhance the Dashboard “Kharidar Courses” section to include 3–4 course photos/thumbnails in a visually rich layout (e.g., row/grid/carousel) while keeping the section compact and mobile-friendly.",
-      "reqIds": [
-        "REQ-24"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-remaining-english-ui-text-across-the-app-with-nepali-text-or-bilingual-where-necessary-including-paper-labels-tabs-first-second-third-paper-old-questions-labels-bookmarks-labels-exam-labels-common-actions-start-back-open-save-offline-and-empty-state-messages",
-      "title": "Replace remaining English UI text across the app with Nepali text (or bilingual where necessary), including: paper labels/tabs (First/Second/Third Paper), Old Questions labels, Bookmarks labels, Exam labels, common actions (Start, Back, Open, Save Offline), and empty-state messages.",
-      "reqIds": [
-        "REQ-25"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-exam-module-so-it-includes-a-first-paper-option-and-does-not-incorrectly-show-second-paper-content-under-first-paper-if-first-paper-exam-urls-are-not-available-show-the-first-paper-option-as-coming-soon-rather-than-mapping-it-to-another-paper-s-content",
-      "title": "Fix the Exam module so it includes a First Paper option and does not incorrectly show Second Paper content under First Paper. If First Paper exam URLs are not available, show the First Paper option as “Coming soon” rather than mapping it to another paper’s content.",
-      "reqIds": [
-        "REQ-26"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-splash-screen-branding-layout-to-1-use-the-new-thah-study-logo-remove-the-old-raya-logo-2-render-the-title-text-kharidar-tayari-slightly-below-the-logo-and-3-increase-vertical-spacing-so-the-tagline-safalata-ko-saathi-is-clearly-separated-below-the-title-not-too-close",
-      "title": "Update the Splash Screen branding layout to: (1) use the new Thah Study logo (remove the old Raya logo); (2) render the title text \"Kharidar Tayari\" slightly below the logo; and (3) increase vertical spacing so the tagline \"Safalata ko saathi\" is clearly separated below the title (not too close).",
-      "reqIds": [
-        "REQ-27"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-on-the-dashboard-courses-section-change-the-section-heading-text-from-nepali-to-english-use-exactly-kharidar-courses",
-      "title": "On the Dashboard courses section, change the section heading text from Nepali to English: use exactly \"Kharidar Courses\".",
-      "reqIds": [
-        "REQ-28"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-the-dashboard-kharidar-tayari-course-card-replace-the-course-thumbnails-grid-with-a-compact-horizontal-slider-carousel-where-the-course-images-slide-one-after-another-automatically-and-reduce-the-thumbnail-display-size-compared-to-the-current-grid",
-      "title": "In the Dashboard \"Kharidar Tayari\" course card, replace the course thumbnails grid with a compact horizontal slider/carousel where the course images slide one after another automatically, and reduce the thumbnail display size compared to the current grid.",
-      "reqIds": [
-        "REQ-29"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-exam-module-so-the-second-paper-exam-duration-is-2-hours-30-minutes-150-minutes",
-      "title": "Update the Exam module so the Second Paper exam duration is 2 hours 30 minutes (150 minutes).",
-      "reqIds": [
-        "REQ-30"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-on-the-dashboard-change-the-paper-section-headings-to-english-exactly-as-first-paper-second-paper-and-third-paper",
-      "title": "On the Dashboard, change the paper section headings to English exactly as: \"First paper\", \"Second paper\", and \"Third paper\".",
-      "reqIds": [
-        "REQ-31"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-main-generated-fallback-app-logo-asset-so-that-when-a-custom-logo-file-is-not-present-the-app-still-shows-the-new-thah-study-logo-instead-of-the-old-raya-logo-via-the-existing-applogo-fallback-behavior",
-      "title": "Update the main generated fallback app logo asset so that when a custom logo file is not present, the app still shows the new Thah Study logo (instead of the old Raya logo) via the existing AppLogo fallback behavior.",
-      "reqIds": [
-        "REQ-32"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-currently-displayed-logo-image-the-selected-element-at-xpath-html-1-body-1-div-1-div-1-div-1-div-1-img-1-with-a-new-png-logo-based-on-the-referenced-freepik-design-and-ensure-the-new-png-is-the-one-rendered-by-the-app-wherever-that-selected-logo-image-is-shown",
-      "title": "Replace the currently displayed logo image (the selected element at XPath /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/img[1]) with a new PNG logo based on the referenced Freepik design, and ensure the new PNG is the one rendered by the app wherever that selected logo image is shown.",
-      "reqIds": [
-        "REQ-33"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-adjust-styling-of-the-selected-container-element-at-xpath-html-1-body-1-div-1-div-1-main-1-section-1-div-1-so-that-its-rendered-size-appears-slightly-larger-than-the-youtube-player-element-on-the-same-screen-i-e-increase-the-container-s-visual-prominence-by-increasing-its-effective-width-height-and-or-padding-margins-while-keeping-layout-stable",
-      "title": "Adjust styling of the selected container element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/section[1]/div[1] so that its rendered size appears slightly larger than the YouTube player element on the same screen (i.e., increase the container’s visual prominence by increasing its effective width/height and/or padding/margins while keeping layout stable).",
-      "reqIds": [
-        "REQ-34"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-top-profile-header-screen-text-so-that-anywhere-the-app-currently-shows-the-phrase-design-by-build-tayari-it-instead-shows-exactly-tayari-and-does-not-include-any-other-words-around-it",
-      "title": "Update the top profile/header screen text so that anywhere the app currently shows the phrase \"design by build tayari\" it instead shows exactly \"Tayari\" (and does not include any other words around it).",
-      "reqIds": [
-        "REQ-35"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-profile-image-on-the-profile-header-area-that-visually-looks-like-someone-preparing-for-psc-and-ensure-it-is-displayed-as-the-profile-avatar-image-in-that-profile-area-with-sensible-cropping-such-as-a-circle-or-rounded-avatar",
-      "title": "Add a profile image on the profile/header area that visually looks like someone preparing for PSC, and ensure it is displayed as the profile avatar/image in that profile area (with sensible cropping such as a circle or rounded avatar).",
-      "reqIds": [
-        "REQ-36"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-wire-the-newly-generated-psc-preparation-profile-image-asset-as-a-static-frontend-asset-do-not-fetch-it-from-the-backend-and-reference-it-via-a-stable-assets-generated-path-from-the-profile-ui",
-      "title": "Wire the newly generated PSC-preparation profile image asset as a static frontend asset (do not fetch it from the backend), and reference it via a stable /assets/generated/... path from the profile UI.",
-      "reqIds": [
-        "REQ-37"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-splash-screen-to-remove-the-current-applogo-based-logo-and-instead-render-a-new-static-png-logo-showing-a-person-preparing-for-psc-with-many-books-in-front-display-the-tagline-text-exactly-under-the-logo-replacing-the-current-tagline-text",
-      "title": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
-      "reqIds": [
-        "REQ-38"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-on-the-main-dashboard-header-remove-the-small-earth-globe-with-book-logo-the-applogo-component-so-it-is-no-longer-displayed-in-the-header-row",
-      "title": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
-      "reqIds": [
-        "REQ-39"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-make-the-course-card-box-on-the-dashboard-smaller-in-vertical-size-by-reducing-its-effective-height-primarily-by-bringing-the-bottom-edge-spacing-upward-while-keeping-the-left-right-and-top-visual-edges-consistent-with-the-current-design",
-      "title": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
-      "reqIds": [
-        "REQ-40"
       ],
       "version": 1
     }
@@ -325,172 +85,28 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Intro/Splash screen (3 seconds) with logo PNG, tagline 'सफलता को साथी' loading, and name 'Janak prasad pande' bottom-right",
+      "summary": "Admin panel with form to add links/content (title, description, URL) and publish directly to app",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Main page UI: top title 'Tayari' with search + notification buttons; notifications for new updates and exam dates",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Main dashboard content layout: purchased courses section + three paper sections with subject tiles (with icons/images) and colorful bottom navigation (Home, Video, Notes, Exam)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Syllabus module: syllabus page with back button; syllabus buttons including province-wise syllabus; open embedded Google Drive PDFs; show 'coming soon' where applicable",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Subject content pages (e.g., GK, IQ, Office Management, Constitution, Maths, Service Management, Accounting, Law): split view/tabs for Videos and Notes; topic-wise numbered video lists; embedded YouTube playback; embedded notes PDF reader",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Bookmark/Favorites system for videos and notes; bookmarked items appear in Video/Notes sections",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Old Questions module: three sections (First/Second/Third paper) with year-wise lists (2083–2078 etc.); open Google Drive links; show 'coming soon' for missing years",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Mock Test/Exam module: choose paper set; show questions and start timers (e.g., 45 min and 2h30m); finish screen + bell/ring sound when time ends",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Offline access: allow saving/downloading notes and question sets for offline viewing",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Advanced UX components: modern buttons, advanced video player, advanced note/PDF reader, timer UI, and sound effects; overall beautiful and attractive design",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-26",
-      "summary": "Backend support for bookmark sync (Internet Identity optional): implement Motoko APIs to save/load the authenticated user’s bookmarked videos and bookmarked notes, keyed by principal; the frontend should merge local bookmarks with server bookmarks on login and keep them in sync.",
+      "summary": "Add content management buttons in all sections: syllabus, GK, IQ, second paper (3 sections), third paper (3 sections), exam section, video section, and notes section",
       "reqIds": [
-        "REQ-16"
+        "AR-1"
       ],
       "status": "pending"
     },
     {
-      "id": "AR-29",
-      "summary": "Make bookmark cloud-sync operations work for authenticated Internet Identity users by removing unintended authorization traps in the backend bookmark APIs (video/note bookmark add/remove/list).",
+      "id": "AR-12",
+      "summary": "Implement backend storage and retrieval for all admin-added content with persistence across app sessions, ensuring content is stored securely and can be updated or deleted by admins",
       "reqIds": [
-        "REQ-19"
+        "REQ-10"
       ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-30",
-      "summary": "Add video search: allow users to search/filter the topic-wise video lists (and/or the Video tab) by keyword.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-31",
-      "summary": "Update dashboard 'Kharidar courses' section to include 3–4 course photos/thumbnails (more visually rich layout).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-32",
-      "summary": "Replace/insert the user’s provided app logo (use consistently where the logo is shown, including splash/app header as applicable).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-33",
-      "summary": "Localization/content cleanup: replace remaining English UI text with Nepali (or the requested language) across the app screens.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-34",
-      "summary": "Update first/splash page branding: remove existing 'Raya' logo, add new 'Thah Study' logo, and adjust title/tagline layout (show 'Kharidar Tayari' below logo; move 'सफलताको साथी' further down if too close)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-35",
-      "summary": "Dashboard 'Kharidar Courses' section: make course images slide one-after-another (carousel/slider) and reduce thumbnail size",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-36",
-      "summary": "Exam module: set Second Paper timer to 2 hours 30 minutes (150 minutes)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-37",
-      "summary": "Courses/Papers labels: display paper names in English as 'First paper', 'Second paper', 'Third paper' on the courses screen",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-38",
-      "summary": "Replace current app image/logo with the provided Freepik 3D education globe+graduation-cap image, using a PNG asset.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-39",
-      "summary": "Adjust UI element 'div 1ogtiq1' size to be slightly larger than the YouTube element size.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-40",
-      "summary": "Change the top/profile screen header text from \"design by build tayari\" to only \"Tayari\" (exact text).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-41",
-      "summary": "Update/replace the profile image with one that looks like someone preparing for PSC (PSC तयारी गरिरहेको जस्तो).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-42",
-      "summary": "Update first/splash page: remove current logo and replace with a new PNG logo showing PSC तयारी (person studying) with many books in front; show tagline text exactly \"सफलता को साथी\" below the logo",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-43",
-      "summary": "Main page: remove the small earth-with-book logo/icon currently shown (header/main page small logo)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-44",
-      "summary": "Dashboard: make the \"खरीदार तयारी कोर्स\" box smaller by keeping left/right/top borders the same but moving the bottom border line slightly upward (reduce vertical size)",
-      "reqIds": [],
       "status": "pending"
     }
   ],
-  "projectName": "Design and build Tayari exam-preparation app UI with syllabus, videos/notes, bookmarks, old questions, and timed mock exams",
+  "projectName": "Kharidar Tayari",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

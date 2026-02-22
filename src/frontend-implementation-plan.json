@@ -1,57 +1,284 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Splash logo replacement, Dashboard header logo removal, and shorter course card",
+  "title": "Add admin content management across all sections",
   "requirements": [
     {
-      "id": "REQ-38",
-      "summary": "Replace Splash Screen AppLogo with the new static PSC-preparation PNG and update tagline text to exactly \"सफलता को साथी\".",
+      "id": "REQ-1",
+      "summary": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
       "acceptanceCriteria": [
-        "On the splash screen, the logo shown is the new PSC-preparation PNG (not the current AppLogo globe/education logo).",
-        "The splash screen tagline text is exactly \"सफलता को साथी\" (same spelling and spacing).",
-        "No other splash screen content (e.g., title timing/navigation behavior) regresses."
+        "Admin panel is accessible from the app navigation",
+        "Panel provides a unified interface for managing content across all sections",
+        "Interface is intuitive and supports Nepali language users"
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/psc-study-logo.dim_512x512.png",
+          "path": "frontend/src/pages/AdminPanel.tsx",
           "operation": "create",
-          "description": "Add the required generated static PNG asset for the new splash logo (PSC exam preparation logo illustration). Keep it served directly from the frontend public assets per constraints."
+          "description": "Create the main admin panel page component that serves as the unified interface for managing content across all app sections. Use the authorization component to verify admin access before rendering the panel. Include a tabbed or sectioned layout for organizing different content types (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, Notes). Verify the authorization component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/SplashScreen.tsx",
+          "path": "frontend/src/components/AdminGuard.tsx",
+          "operation": "create",
+          "description": "Create an admin guard wrapper component that uses the authorization component to check if the current user has admin role via isCallerAdmin() backend method. Show an access denied screen for non-admin users and render children for admins. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Remove AppLogo usage on the splash screen and render the static image from frontend/public/assets/generated/psc-study-logo.dim_512x512.png. Update the tagline text to exactly \"सफलता को साथी\" while preserving existing splash timing, animations, and scroll-lock behavior."
+          "description": "Add a new route for the admin panel at /admin that wraps the AdminPanel page with AdminGuard. Update the main navigation or add an admin-only navigation item that links to the admin panel, visible only to authenticated admin users."
+        },
+        {
+          "path": "frontend/src/components/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Add a conditional admin navigation item to the bottom nav that appears only when the user is authenticated and has admin role. This item should link to /admin and use an appropriate icon."
         }
       ]
     },
     {
-      "id": "REQ-39",
-      "summary": "Remove the AppLogo from the main Dashboard header row while keeping the header aligned and balanced.",
+      "id": "REQ-2",
+      "summary": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
       "acceptanceCriteria": [
-        "The Dashboard header no longer renders the AppLogo image next to the avatar/title.",
-        "Header layout remains aligned and visually balanced after removing the logo."
+        "Form includes fields for title, description, and Drive URL",
+        "Publish button immediately adds the syllabus entry to the app",
+        "New entries appear in the Syllabus page without requiring app restart"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/Dashboard.tsx",
+          "path": "frontend/src/components/admin/SyllabusManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing syllabus entries with input fields for title (text), description (textarea), driveUrl (text), and a published (checkbox) field. Include a submit button that calls the addSyllabusEntry backend method. Display a list of existing entries retrieved via getSyllabusEntries with edit and delete actions. Use React Query mutations with cache invalidation to ensure immediate UI updates. Support Nepali language labels."
+        },
+        {
+          "path": "frontend/src/hooks/useSyllabusManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook that provides React Query mutations for addSyllabusEntry, updateSyllabusEntry, and deleteSyllabusEntry backend methods. Include a query for getSyllabusEntries. Implement proper cache invalidation on mutations to refresh the syllabus list immediately."
+        },
+        {
+          "path": "frontend/src/pages/Syllabus.tsx",
           "operation": "modify",
-          "description": "Remove the AppLogo import and the <AppLogo /> element from the header row. Adjust spacing/alignment classes in the header container if needed so the Avatar and title remain visually balanced."
+          "description": "Update the Syllabus page to fetch and display both hardcoded syllabus items from frontend/src/content/syllabus.ts and dynamic entries from getSyllabusEntries backend method. Merge the two sources and render them in the existing list format. Ensure the page refreshes when admin adds new entries."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the SyllabusManagementForm component in the Syllabus section tab of the admin panel."
         }
       ]
     },
     {
-      "id": "REQ-40",
-      "summary": "Reduce the vertical size of the \"खरिदार तयारी कोर्स\" course card on the Dashboard without changing its width or the left/right/top visual edges.",
+      "id": "REQ-3",
+      "summary": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
       "acceptanceCriteria": [
-        "The Dashboard course card is visibly shorter in height than before (less vertical padding/space), without changing its overall width.",
-        "The card’s left/right/top visual boundaries remain consistent with the current style; only the vertical size is reduced.",
-        "Course carousel and course text remain readable and not clipped on common mobile viewport sizes."
+        "Form supports adding topics and videos to GK section",
+        "Published content appears immediately in the GK subject page",
+        "Videos can be played directly from the app after publishing"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/Dashboard.tsx",
+          "path": "frontend/src/components/admin/GKManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing GK topics and videos with separate sub-forms. The topic form should have title and description fields calling addGKTopic. The video form should have title, description, and youtubeUrl fields calling addGKVideo. Display lists of existing items via getGKTopics and getGKVideos with delete actions using deleteGKTopic and deleteGKVideo. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useGKManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for GK topics (addGKTopic, deleteGKTopic, getGKTopics) and videos (addGKVideo, deleteGKVideo, getGKVideos) with proper cache management."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
           "operation": "modify",
-          "description": "Tune the course Card layout to be shorter by reducing vertical padding and/or internal vertical spacing (e.g., Card padding and space-y/margins around the carousel) while keeping the card’s gradient, width, and top/left/right boundaries consistent. Ensure carousel aspect ratio remains intact and text is not clipped on mobile."
+          "description": "Update the SubjectContent page to merge hardcoded GK data from frontend/src/content/gk.ts with dynamic data fetched from getGKTopics and getGKVideos backend methods when rendering GK subject. Ensure the merged data structure matches the existing SubjectConfig interface."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the GKManagementForm component in the GK section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
+      "acceptanceCriteria": [
+        "Form supports adding IQ test categories and videos",
+        "Published content appears immediately in the IQ subject page",
+        "New videos integrate with existing bookmark functionality"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/IQManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing IQ categories and videos. Include sub-forms for adding categories (title, description via addIQCategory) and videos (title, description, youtubeUrl via addIQVideo). Display existing items via getIQCategories and getIQVideos with delete functionality. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useIQManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for IQ categories (addIQCategory, deleteIQCategory, getIQCategories) and videos (addIQVideo, deleteIQVideo, getIQVideos) with cache management."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
+          "operation": "modify",
+          "description": "Update the SubjectContent page to merge hardcoded IQ data from frontend/src/content/iq.ts with dynamic data from getIQCategories and getIQVideos backend methods when rendering IQ subject. Ensure bookmark functionality works with dynamically added videos."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the IQManagementForm component in the IQ section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+      "acceptanceCriteria": [
+        "Forms support adding content to all three sections of Second Paper",
+        "Published videos and notes appear immediately in the respective Second Paper pages",
+        "Content integrates with existing video player and notes viewer"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/SecondPaperManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing Second Paper content with sub-forms for topics (title, description via addSecondPaperTopic), videos (title, description, youtubeUrl via addSecondPaperVideo), and notes (title, description, driveUrl via addSecondPaperNote). Display existing items via getSecondPaperTopics, getSecondPaperVideos, and getSecondPaperNotes with delete actions. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useSecondPaperManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for Second Paper topics, videos, and notes with proper cache management for add and delete operations."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
+          "operation": "modify",
+          "description": "Update the SubjectContent page to merge hardcoded Second Paper data from frontend/src/content/secondPaper.ts with dynamic data from getSecondPaperTopics, getSecondPaperVideos, and getSecondPaperNotes backend methods when rendering Second Paper subjects. Ensure the merged content works with existing video player and notes viewer."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the SecondPaperManagementForm component in the Second Paper section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+      "acceptanceCriteria": [
+        "Forms support adding content to all three sections of Third Paper",
+        "Published content appears immediately in the respective Third Paper pages",
+        "New entries maintain consistency with existing content structure"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing Third Paper content with sub-forms for topics (title, description via addThirdPaperTopic), videos (title, description, youtubeUrl via addThirdPaperVideo), and notes (title, description, driveUrl via addThirdPaperNote). Display existing items via getThirdPaperTopics, getThirdPaperVideos, and getThirdPaperNotes with delete actions. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useThirdPaperManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for Third Paper topics, videos, and notes with proper cache management for add and delete operations."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
+          "operation": "modify",
+          "description": "Update the SubjectContent page to merge hardcoded Third Paper data from frontend/src/content/thirdPaper.ts with dynamic data from getThirdPaperTopics, getThirdPaperVideos, and getThirdPaperNotes backend methods when rendering Third Paper subjects. Ensure consistency with existing content structure."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the ThirdPaperManagementForm component in the Third Paper section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
+      "acceptanceCriteria": [
+        "Form includes fields for exam title, duration, description, and Drive URL",
+        "Published exams appear immediately in the Exam page selection",
+        "New exams work with existing timer and completion functionality"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/ExamManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing mock exams with fields for title, duration (number in minutes), description, and pdfUrl (Drive URL) calling addMockExam. Display existing exams via getMockExams with delete actions using deleteMockExam. Use React Query with cache invalidation. Support Nepali language labels."
+        },
+        {
+          "path": "frontend/src/hooks/useExamManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for mock exams (addMockExam, deleteMockExam, getMockExams) with proper cache management."
+        },
+        {
+          "path": "frontend/src/pages/Exam.tsx",
+          "operation": "modify",
+          "description": "Update the Exam page to merge hardcoded exam data from frontend/src/content/exams.ts with dynamic data from getMockExams backend method. Ensure new exams work with the existing timer and completion flow."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the ExamManagementForm component in the Exams section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
+      "acceptanceCriteria": [
+        "Admin can add videos to any subject's video section",
+        "Published videos appear in the appropriate subject content page",
+        "Videos integrate with existing bookmark and search functionality"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing standalone videos with fields for title, description, and youtubeUrl calling addStandaloneVideo. Display existing videos via getStandaloneVideos with delete actions using deleteStandaloneVideo. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useStandaloneVideoManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for standalone videos (addStandaloneVideo, deleteStandaloneVideo, getStandaloneVideos) with cache management."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
+          "operation": "modify",
+          "description": "Update the SubjectContent page to include standalone videos from getStandaloneVideos backend method in the video list for all subjects. Ensure these videos work with existing bookmark and search functionality."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the StandaloneVideoManagementForm component in the Videos section tab of the admin panel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
+      "acceptanceCriteria": [
+        "Admin can add notes to any subject's notes section",
+        "Published notes appear in the appropriate subject content page",
+        "Notes integrate with existing bookmark and viewer functionality"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+          "operation": "create",
+          "description": "Create a form component for managing standalone notes with fields for title, description, and driveUrl calling addStandaloneNote. Display existing notes via getStandaloneNotes with delete actions using deleteStandaloneNote. Use React Query with cache invalidation."
+        },
+        {
+          "path": "frontend/src/hooks/useStandaloneNoteManagement.ts",
+          "operation": "create",
+          "description": "Create a custom hook providing React Query mutations and queries for standalone notes (addStandaloneNote, deleteStandaloneNote, getStandaloneNotes) with cache management."
+        },
+        {
+          "path": "frontend/src/pages/SubjectContent.tsx",
+          "operation": "modify",
+          "description": "Update the SubjectContent page to include standalone notes from getStandaloneNotes backend method in the notes list for all subjects. Ensure these notes work with existing bookmark and viewer functionality."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Import and render the StandaloneNoteManagementForm component in the Notes section tab of the admin panel."
         }
       ]
     }

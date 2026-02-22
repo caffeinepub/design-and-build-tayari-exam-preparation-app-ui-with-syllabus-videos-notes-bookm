@@ -2,10 +2,13 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-splash-screen-to-remove-the-current-applogo-based-logo-and-instead-render-a-new-static-png-logo-showing-a-person-preparing-for-psc-with-many-books-in-front-display-the-tagline-text-exactly-under-the-logo-replacing-the-current-tagline-text",
-      "featureTitle": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
+      "featureId": "feature-create-an-admin-panel-interface-accessible-from-the-main-navigation-that-allows-administrators-to-add-and-manage-content-across-all-sections-of-the-app",
+      "featureTitle": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
       "files": [
-        "frontend/src/pages/SplashScreen.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/AdminGuard.tsx",
+        "frontend/src/components/BottomNav.tsx",
+        "frontend/src/pages/AdminPanel.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -16,15 +19,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-38"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-on-the-main-dashboard-header-remove-the-small-earth-globe-with-book-logo-the-applogo-component-so-it-is-no-longer-displayed-in-the-header-row",
-      "featureTitle": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-the-syllabus-section-that-allow-adding-new-syllabus-entries-with-title-description-and-google-drive-url-fields-with-a-publish-button-to-make-entries-immediately-visible-in-the-app",
+      "featureTitle": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
       "files": [
-        "frontend/src/pages/Dashboard.tsx"
+        "frontend/src/components/admin/SyllabusManagementForm.tsx",
+        "frontend/src/hooks/useSyllabusManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -35,15 +40,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-39"
+        "REQ-2"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-make-the-course-card-box-on-the-dashboard-smaller-in-vertical-size-by-reducing-its-effective-height-primarily-by-bringing-the-bottom-edge-spacing-upward-while-keeping-the-left-right-and-top-visual-edges-consistent-with-the-current-design",
-      "featureTitle": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-the-gk-general-knowledge-section-that-allow-adding-new-topics-and-videos-with-title-description-and-youtube-url-fields",
+      "featureTitle": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
       "files": [
-        "frontend/src/pages/Dashboard.tsx"
+        "frontend/src/components/admin/GKManagementForm.tsx",
+        "frontend/src/hooks/useGKManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -54,7 +61,133 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-40"
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-the-iq-section-that-allow-adding-new-test-categories-and-videos-with-title-description-and-youtube-url-fields",
+      "featureTitle": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
+      "files": [
+        "frontend/src/components/admin/IQManagementForm.tsx",
+        "frontend/src/hooks/useIQManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-second-paper-office-management-and-constitution-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
+      "featureTitle": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+      "files": [
+        "frontend/src/components/admin/SecondPaperManagementForm.tsx",
+        "frontend/src/hooks/useSecondPaperManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-third-paper-service-management-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
+      "featureTitle": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+      "files": [
+        "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
+        "frontend/src/hooks/useThirdPaperManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-forms-in-the-admin-panel-for-the-exam-section-that-allow-adding-new-mock-exams-with-title-duration-description-and-google-drive-pdf-url-fields",
+      "featureTitle": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
+      "files": [
+        "frontend/src/components/admin/ExamManagementForm.tsx",
+        "frontend/src/hooks/useExamManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-capability-in-the-admin-panel-for-the-video-sections-across-all-subjects-that-allows-adding-standalone-videos-with-title-description-and-youtube-url-fields",
+      "featureTitle": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
+      "files": [
+        "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+        "frontend/src/hooks/useStandaloneVideoManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-content-management-capability-in-the-admin-panel-for-the-notes-sections-across-all-subjects-that-allows-adding-notes-with-title-description-and-google-drive-url-fields",
+      "featureTitle": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
+      "files": [
+        "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+        "frontend/src/hooks/useStandaloneNoteManagement.ts",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
       ],
       "confidence": "high"
     }

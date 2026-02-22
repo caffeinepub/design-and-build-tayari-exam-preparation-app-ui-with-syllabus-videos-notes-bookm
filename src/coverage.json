@@ -1,60 +1,202 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T21:06:29.564Z",
+  "generatedAt": "2026-02-22T02:36:25.665Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 10,
+    "implemented": 9,
     "items": [
       {
-        "id": "REQ-38",
-        "summary": "Update the Splash Screen to remove the current AppLogo-based logo and instead render a new static PNG logo showing a person preparing for PSC with many books in front. Display the tagline text exactly \"सफलता को साथी\" under the logo (replacing the current tagline text).",
+        "id": "REQ-1",
+        "summary": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/psc-study-logo.dim_512x512.png",
-          "frontend/src/pages/SplashScreen.tsx"
+          "frontend/src/pages/AdminPanel.tsx",
+          "frontend/src/components/AdminGuard.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/BottomNav.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/psc-study-logo.dim_512x512.png",
-          "frontend/src/pages/SplashScreen.tsx"
+          "frontend/src/pages/AdminPanel.tsx",
+          "frontend/src/components/AdminGuard.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/BottomNav.tsx"
         ]
       },
       {
-        "id": "REQ-39",
-        "summary": "On the main Dashboard header, remove the small earth/globe-with-book logo (the AppLogo component) so it is no longer displayed in the header row.",
+        "id": "REQ-10",
+        "summary": "Implement backend storage and retrieval for all admin-added content with persistence across app sessions, ensuring content is stored securely and can be updated or deleted by admins",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/src/components/admin/SyllabusManagementForm.tsx",
+          "frontend/src/hooks/useSyllabusManagement.ts",
+          "frontend/src/pages/Syllabus.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/src/components/admin/SyllabusManagementForm.tsx",
+          "frontend/src/hooks/useSyllabusManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
         ]
       },
       {
-        "id": "REQ-40",
-        "summary": "Make the \"खरिदार तयारी कोर्स\" course card/box on the Dashboard smaller in vertical size by reducing its effective height (primarily by bringing the bottom edge/spacing upward) while keeping the left, right, and top visual edges consistent with the current design.",
+        "id": "REQ-3",
+        "summary": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/src/components/admin/GKManagementForm.tsx",
+          "frontend/src/hooks/useGKManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/src/components/admin/GKManagementForm.tsx",
+          "frontend/src/hooks/useGKManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/IQManagementForm.tsx",
+          "frontend/src/hooks/useIQManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/IQManagementForm.tsx",
+          "frontend/src/hooks/useIQManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/SecondPaperManagementForm.tsx",
+          "frontend/src/hooks/useSecondPaperManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/SecondPaperManagementForm.tsx",
+          "frontend/src/hooks/useSecondPaperManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
+          "frontend/src/hooks/useThirdPaperManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
+          "frontend/src/hooks/useThirdPaperManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/ExamManagementForm.tsx",
+          "frontend/src/hooks/useExamManagement.ts",
+          "frontend/src/pages/Exam.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/ExamManagementForm.tsx",
+          "frontend/src/hooks/useExamManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "frontend/src/hooks/useStandaloneVideoManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "frontend/src/hooks/useStandaloneVideoManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+          "frontend/src/hooks/useStandaloneNoteManagement.ts",
+          "frontend/src/pages/SubjectContent.tsx",
+          "frontend/src/pages/AdminPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+          "frontend/src/hooks/useStandaloneNoteManagement.ts",
+          "frontend/src/pages/AdminPanel.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/psc-study-logo.dim_512x512.png",
-    "frontend/src/pages/Dashboard.tsx",
-    "frontend/src/pages/SplashScreen.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/AdminGuard.tsx",
+    "frontend/src/components/BottomNav.tsx",
+    "frontend/src/components/admin/ExamManagementForm.tsx",
+    "frontend/src/components/admin/GKManagementForm.tsx",
+    "frontend/src/components/admin/IQManagementForm.tsx",
+    "frontend/src/components/admin/SecondPaperManagementForm.tsx",
+    "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+    "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+    "frontend/src/components/admin/SyllabusManagementForm.tsx",
+    "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useExamManagement.ts",
+    "frontend/src/hooks/useGKManagement.ts",
+    "frontend/src/hooks/useIQManagement.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useSecondPaperManagement.ts",
+    "frontend/src/hooks/useStandaloneNoteManagement.ts",
+    "frontend/src/hooks/useStandaloneVideoManagement.ts",
+    "frontend/src/hooks/useSyllabusManagement.ts",
+    "frontend/src/hooks/useThirdPaperManagement.ts",
+    "frontend/src/pages/AdminPanel.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

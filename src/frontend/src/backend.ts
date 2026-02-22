@@ -89,10 +89,78 @@ export class ExternalBlob {
         return this;
     }
 }
-export type NoteIdentifier = string;
+export interface ThirdPaperVideo {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+}
+export interface SecondPaperVideo {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+}
+export interface SyllabusEntry {
+    driveUrl: string;
+    title: string;
+    published: boolean;
+    description: string;
+}
+export interface StandaloneVideo {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+}
+export interface StandaloneNote {
+    driveUrl: string;
+    title: string;
+    description: string;
+}
+export interface SecondPaperTopic {
+    title: string;
+    description: string;
+}
+export interface SecondPaperNote {
+    driveUrl: string;
+    title: string;
+    description: string;
+}
+export interface IQVideo {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+}
+export interface GKVideo {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+}
+export interface ThirdPaperTopic {
+    title: string;
+    description: string;
+}
+export interface IQCategory {
+    title: string;
+    description: string;
+}
+export interface GKTopic {
+    title: string;
+    description: string;
+}
 export type DocumentIdentifier = string;
+export interface ThirdPaperNote {
+    driveUrl: string;
+    title: string;
+    description: string;
+}
+export type NoteIdentifier = string;
 export interface UserProfile {
     name: string;
+}
+export interface MockExam {
+    title: string;
+    duration: bigint;
+    description: string;
+    pdfUrl: string;
 }
 export enum UserRole {
     admin = "admin",
@@ -101,18 +169,63 @@ export enum UserRole {
 }
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    addComment(comment: string, replyId: bigint): Promise<void>;
+    addGKTopic(topic: GKTopic): Promise<void>;
+    addGKVideo(video: GKVideo): Promise<void>;
+    addIQCategory(category: IQCategory): Promise<void>;
+    addIQVideo(video: IQVideo): Promise<void>;
+    addMockExam(exam: MockExam): Promise<void>;
+    addSecondPaperNote(note: SecondPaperNote): Promise<void>;
+    addSecondPaperTopic(topic: SecondPaperTopic): Promise<void>;
+    addSecondPaperVideo(video: SecondPaperVideo): Promise<void>;
+    addStandaloneNote(note: StandaloneNote): Promise<void>;
+    addStandaloneVideo(video: StandaloneVideo): Promise<void>;
+    addSyllabusEntry(entry: SyllabusEntry): Promise<void>;
+    addThirdPaperNote(note: ThirdPaperNote): Promise<void>;
+    addThirdPaperTopic(topic: ThirdPaperTopic): Promise<void>;
+    addThirdPaperVideo(video: ThirdPaperVideo): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     bookmarkNote(noteId: NoteIdentifier): Promise<void>;
     bookmarkVideo(documentId: DocumentIdentifier): Promise<void>;
+    deleteGKTopic(index: bigint): Promise<void>;
+    deleteGKVideo(index: bigint): Promise<void>;
+    deleteIQCategory(index: bigint): Promise<void>;
+    deleteIQVideo(index: bigint): Promise<void>;
+    deleteMockExam(index: bigint): Promise<void>;
+    deleteSecondPaperNote(index: bigint): Promise<void>;
+    deleteSecondPaperTopic(index: bigint): Promise<void>;
+    deleteSecondPaperVideo(index: bigint): Promise<void>;
+    deleteStandaloneNote(index: bigint): Promise<void>;
+    deleteStandaloneVideo(index: bigint): Promise<void>;
+    deleteSyllabusEntry(index: bigint): Promise<void>;
+    deleteThirdPaperNote(index: bigint): Promise<void>;
+    deleteThirdPaperTopic(index: bigint): Promise<void>;
+    deleteThirdPaperVideo(index: bigint): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getComments(): Promise<Array<Array<string>>>;
+    getGKTopics(): Promise<Array<GKTopic>>;
+    getGKVideos(): Promise<Array<GKVideo>>;
+    getIQCategories(): Promise<Array<IQCategory>>;
+    getIQVideos(): Promise<Array<IQVideo>>;
+    getMockExams(): Promise<Array<MockExam>>;
     getNoteBookmarks(): Promise<Array<NoteIdentifier>>;
+    getSecondPaperNotes(): Promise<Array<SecondPaperNote>>;
+    getSecondPaperTopics(): Promise<Array<SecondPaperTopic>>;
+    getSecondPaperVideos(): Promise<Array<SecondPaperVideo>>;
+    getStandaloneNotes(): Promise<Array<StandaloneNote>>;
+    getStandaloneVideos(): Promise<Array<StandaloneVideo>>;
+    getSyllabusEntries(): Promise<Array<SyllabusEntry>>;
+    getThirdPaperNotes(): Promise<Array<ThirdPaperNote>>;
+    getThirdPaperTopics(): Promise<Array<ThirdPaperTopic>>;
+    getThirdPaperVideos(): Promise<Array<ThirdPaperVideo>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     getVideoBookmarks(): Promise<Array<DocumentIdentifier>>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     unbookmarkNote(noteId: NoteIdentifier): Promise<void>;
     unbookmarkVideo(documentId: DocumentIdentifier): Promise<void>;
+    updateSyllabusEntry(index: bigint, entry: SyllabusEntry): Promise<void>;
 }
 import type { UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
@@ -128,6 +241,216 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
+    async addComment(arg0: string, arg1: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addComment(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addComment(arg0, arg1);
+            return result;
+        }
+    }
+    async addGKTopic(arg0: GKTopic): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addGKTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addGKTopic(arg0);
+            return result;
+        }
+    }
+    async addGKVideo(arg0: GKVideo): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addGKVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addGKVideo(arg0);
+            return result;
+        }
+    }
+    async addIQCategory(arg0: IQCategory): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addIQCategory(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addIQCategory(arg0);
+            return result;
+        }
+    }
+    async addIQVideo(arg0: IQVideo): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addIQVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addIQVideo(arg0);
+            return result;
+        }
+    }
+    async addMockExam(arg0: MockExam): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addMockExam(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addMockExam(arg0);
+            return result;
+        }
+    }
+    async addSecondPaperNote(arg0: SecondPaperNote): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addSecondPaperNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addSecondPaperNote(arg0);
+            return result;
+        }
+    }
+    async addSecondPaperTopic(arg0: SecondPaperTopic): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addSecondPaperTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addSecondPaperTopic(arg0);
+            return result;
+        }
+    }
+    async addSecondPaperVideo(arg0: SecondPaperVideo): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addSecondPaperVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addSecondPaperVideo(arg0);
+            return result;
+        }
+    }
+    async addStandaloneNote(arg0: StandaloneNote): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addStandaloneNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addStandaloneNote(arg0);
+            return result;
+        }
+    }
+    async addStandaloneVideo(arg0: StandaloneVideo): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addStandaloneVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addStandaloneVideo(arg0);
+            return result;
+        }
+    }
+    async addSyllabusEntry(arg0: SyllabusEntry): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addSyllabusEntry(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addSyllabusEntry(arg0);
+            return result;
+        }
+    }
+    async addThirdPaperNote(arg0: ThirdPaperNote): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addThirdPaperNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addThirdPaperNote(arg0);
+            return result;
+        }
+    }
+    async addThirdPaperTopic(arg0: ThirdPaperTopic): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addThirdPaperTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addThirdPaperTopic(arg0);
+            return result;
+        }
+    }
+    async addThirdPaperVideo(arg0: ThirdPaperVideo): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addThirdPaperVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addThirdPaperVideo(arg0);
             return result;
         }
     }
@@ -173,6 +496,202 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async deleteGKTopic(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteGKTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteGKTopic(arg0);
+            return result;
+        }
+    }
+    async deleteGKVideo(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteGKVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteGKVideo(arg0);
+            return result;
+        }
+    }
+    async deleteIQCategory(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteIQCategory(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteIQCategory(arg0);
+            return result;
+        }
+    }
+    async deleteIQVideo(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteIQVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteIQVideo(arg0);
+            return result;
+        }
+    }
+    async deleteMockExam(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteMockExam(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteMockExam(arg0);
+            return result;
+        }
+    }
+    async deleteSecondPaperNote(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteSecondPaperNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteSecondPaperNote(arg0);
+            return result;
+        }
+    }
+    async deleteSecondPaperTopic(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteSecondPaperTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteSecondPaperTopic(arg0);
+            return result;
+        }
+    }
+    async deleteSecondPaperVideo(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteSecondPaperVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteSecondPaperVideo(arg0);
+            return result;
+        }
+    }
+    async deleteStandaloneNote(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteStandaloneNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteStandaloneNote(arg0);
+            return result;
+        }
+    }
+    async deleteStandaloneVideo(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteStandaloneVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteStandaloneVideo(arg0);
+            return result;
+        }
+    }
+    async deleteSyllabusEntry(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteSyllabusEntry(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteSyllabusEntry(arg0);
+            return result;
+        }
+    }
+    async deleteThirdPaperNote(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteThirdPaperNote(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteThirdPaperNote(arg0);
+            return result;
+        }
+    }
+    async deleteThirdPaperTopic(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteThirdPaperTopic(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteThirdPaperTopic(arg0);
+            return result;
+        }
+    }
+    async deleteThirdPaperVideo(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteThirdPaperVideo(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteThirdPaperVideo(arg0);
+            return result;
+        }
+    }
     async getCallerUserProfile(): Promise<UserProfile | null> {
         if (this.processError) {
             try {
@@ -201,6 +720,90 @@ export class Backend implements backendInterface {
             return from_candid_UserRole_n4(this._uploadFile, this._downloadFile, result);
         }
     }
+    async getComments(): Promise<Array<Array<string>>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getComments();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getComments();
+            return result;
+        }
+    }
+    async getGKTopics(): Promise<Array<GKTopic>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getGKTopics();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getGKTopics();
+            return result;
+        }
+    }
+    async getGKVideos(): Promise<Array<GKVideo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getGKVideos();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getGKVideos();
+            return result;
+        }
+    }
+    async getIQCategories(): Promise<Array<IQCategory>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getIQCategories();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getIQCategories();
+            return result;
+        }
+    }
+    async getIQVideos(): Promise<Array<IQVideo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getIQVideos();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getIQVideos();
+            return result;
+        }
+    }
+    async getMockExams(): Promise<Array<MockExam>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMockExams();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMockExams();
+            return result;
+        }
+    }
     async getNoteBookmarks(): Promise<Array<NoteIdentifier>> {
         if (this.processError) {
             try {
@@ -212,6 +815,132 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getNoteBookmarks();
+            return result;
+        }
+    }
+    async getSecondPaperNotes(): Promise<Array<SecondPaperNote>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSecondPaperNotes();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSecondPaperNotes();
+            return result;
+        }
+    }
+    async getSecondPaperTopics(): Promise<Array<SecondPaperTopic>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSecondPaperTopics();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSecondPaperTopics();
+            return result;
+        }
+    }
+    async getSecondPaperVideos(): Promise<Array<SecondPaperVideo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSecondPaperVideos();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSecondPaperVideos();
+            return result;
+        }
+    }
+    async getStandaloneNotes(): Promise<Array<StandaloneNote>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getStandaloneNotes();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getStandaloneNotes();
+            return result;
+        }
+    }
+    async getStandaloneVideos(): Promise<Array<StandaloneVideo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getStandaloneVideos();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getStandaloneVideos();
+            return result;
+        }
+    }
+    async getSyllabusEntries(): Promise<Array<SyllabusEntry>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSyllabusEntries();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSyllabusEntries();
+            return result;
+        }
+    }
+    async getThirdPaperNotes(): Promise<Array<ThirdPaperNote>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getThirdPaperNotes();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getThirdPaperNotes();
+            return result;
+        }
+    }
+    async getThirdPaperTopics(): Promise<Array<ThirdPaperTopic>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getThirdPaperTopics();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getThirdPaperTopics();
+            return result;
+        }
+    }
+    async getThirdPaperVideos(): Promise<Array<ThirdPaperVideo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getThirdPaperVideos();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getThirdPaperVideos();
             return result;
         }
     }
@@ -296,6 +1025,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.unbookmarkVideo(arg0);
+            return result;
+        }
+    }
+    async updateSyllabusEntry(arg0: bigint, arg1: SyllabusEntry): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateSyllabusEntry(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateSyllabusEntry(arg0, arg1);
             return result;
         }
     }

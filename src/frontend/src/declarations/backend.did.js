@@ -8,6 +8,74 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const GKTopic = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const GKVideo = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'youtubeUrl' : IDL.Text,
+});
+export const IQCategory = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const IQVideo = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'youtubeUrl' : IDL.Text,
+});
+export const MockExam = IDL.Record({
+  'title' : IDL.Text,
+  'duration' : IDL.Nat,
+  'description' : IDL.Text,
+  'pdfUrl' : IDL.Text,
+});
+export const SecondPaperNote = IDL.Record({
+  'driveUrl' : IDL.Text,
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const SecondPaperTopic = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const SecondPaperVideo = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'youtubeUrl' : IDL.Text,
+});
+export const StandaloneNote = IDL.Record({
+  'driveUrl' : IDL.Text,
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const StandaloneVideo = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'youtubeUrl' : IDL.Text,
+});
+export const SyllabusEntry = IDL.Record({
+  'driveUrl' : IDL.Text,
+  'title' : IDL.Text,
+  'published' : IDL.Bool,
+  'description' : IDL.Text,
+});
+export const ThirdPaperNote = IDL.Record({
+  'driveUrl' : IDL.Text,
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const ThirdPaperTopic = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const ThirdPaperVideo = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'youtubeUrl' : IDL.Text,
+});
 export const UserRole = IDL.Variant({
   'admin' : IDL.Null,
   'user' : IDL.Null,
@@ -19,12 +87,56 @@ export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addComment' : IDL.Func([IDL.Text, IDL.Nat], [], []),
+  'addGKTopic' : IDL.Func([GKTopic], [], []),
+  'addGKVideo' : IDL.Func([GKVideo], [], []),
+  'addIQCategory' : IDL.Func([IQCategory], [], []),
+  'addIQVideo' : IDL.Func([IQVideo], [], []),
+  'addMockExam' : IDL.Func([MockExam], [], []),
+  'addSecondPaperNote' : IDL.Func([SecondPaperNote], [], []),
+  'addSecondPaperTopic' : IDL.Func([SecondPaperTopic], [], []),
+  'addSecondPaperVideo' : IDL.Func([SecondPaperVideo], [], []),
+  'addStandaloneNote' : IDL.Func([StandaloneNote], [], []),
+  'addStandaloneVideo' : IDL.Func([StandaloneVideo], [], []),
+  'addSyllabusEntry' : IDL.Func([SyllabusEntry], [], []),
+  'addThirdPaperNote' : IDL.Func([ThirdPaperNote], [], []),
+  'addThirdPaperTopic' : IDL.Func([ThirdPaperTopic], [], []),
+  'addThirdPaperVideo' : IDL.Func([ThirdPaperVideo], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'bookmarkNote' : IDL.Func([NoteIdentifier], [], []),
   'bookmarkVideo' : IDL.Func([DocumentIdentifier], [], []),
+  'deleteGKTopic' : IDL.Func([IDL.Nat], [], []),
+  'deleteGKVideo' : IDL.Func([IDL.Nat], [], []),
+  'deleteIQCategory' : IDL.Func([IDL.Nat], [], []),
+  'deleteIQVideo' : IDL.Func([IDL.Nat], [], []),
+  'deleteMockExam' : IDL.Func([IDL.Nat], [], []),
+  'deleteSecondPaperNote' : IDL.Func([IDL.Nat], [], []),
+  'deleteSecondPaperTopic' : IDL.Func([IDL.Nat], [], []),
+  'deleteSecondPaperVideo' : IDL.Func([IDL.Nat], [], []),
+  'deleteStandaloneNote' : IDL.Func([IDL.Nat], [], []),
+  'deleteStandaloneVideo' : IDL.Func([IDL.Nat], [], []),
+  'deleteSyllabusEntry' : IDL.Func([IDL.Nat], [], []),
+  'deleteThirdPaperNote' : IDL.Func([IDL.Nat], [], []),
+  'deleteThirdPaperTopic' : IDL.Func([IDL.Nat], [], []),
+  'deleteThirdPaperVideo' : IDL.Func([IDL.Nat], [], []),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getComments' : IDL.Func([], [IDL.Vec(IDL.Vec(IDL.Text))], ['query']),
+  'getGKTopics' : IDL.Func([], [IDL.Vec(GKTopic)], ['query']),
+  'getGKVideos' : IDL.Func([], [IDL.Vec(GKVideo)], ['query']),
+  'getIQCategories' : IDL.Func([], [IDL.Vec(IQCategory)], ['query']),
+  'getIQVideos' : IDL.Func([], [IDL.Vec(IQVideo)], ['query']),
+  'getMockExams' : IDL.Func([], [IDL.Vec(MockExam)], ['query']),
   'getNoteBookmarks' : IDL.Func([], [IDL.Vec(NoteIdentifier)], ['query']),
+  'getSecondPaperNotes' : IDL.Func([], [IDL.Vec(SecondPaperNote)], ['query']),
+  'getSecondPaperTopics' : IDL.Func([], [IDL.Vec(SecondPaperTopic)], ['query']),
+  'getSecondPaperVideos' : IDL.Func([], [IDL.Vec(SecondPaperVideo)], ['query']),
+  'getStandaloneNotes' : IDL.Func([], [IDL.Vec(StandaloneNote)], ['query']),
+  'getStandaloneVideos' : IDL.Func([], [IDL.Vec(StandaloneVideo)], ['query']),
+  'getSyllabusEntries' : IDL.Func([], [IDL.Vec(SyllabusEntry)], ['query']),
+  'getThirdPaperNotes' : IDL.Func([], [IDL.Vec(ThirdPaperNote)], ['query']),
+  'getThirdPaperTopics' : IDL.Func([], [IDL.Vec(ThirdPaperTopic)], ['query']),
+  'getThirdPaperVideos' : IDL.Func([], [IDL.Vec(ThirdPaperVideo)], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
@@ -35,11 +147,77 @@ export const idlService = IDL.Service({
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'unbookmarkNote' : IDL.Func([NoteIdentifier], [], []),
   'unbookmarkVideo' : IDL.Func([DocumentIdentifier], [], []),
+  'updateSyllabusEntry' : IDL.Func([IDL.Nat, SyllabusEntry], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const GKTopic = IDL.Record({ 'title' : IDL.Text, 'description' : IDL.Text });
+  const GKVideo = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'youtubeUrl' : IDL.Text,
+  });
+  const IQCategory = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const IQVideo = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'youtubeUrl' : IDL.Text,
+  });
+  const MockExam = IDL.Record({
+    'title' : IDL.Text,
+    'duration' : IDL.Nat,
+    'description' : IDL.Text,
+    'pdfUrl' : IDL.Text,
+  });
+  const SecondPaperNote = IDL.Record({
+    'driveUrl' : IDL.Text,
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const SecondPaperTopic = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const SecondPaperVideo = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'youtubeUrl' : IDL.Text,
+  });
+  const StandaloneNote = IDL.Record({
+    'driveUrl' : IDL.Text,
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const StandaloneVideo = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'youtubeUrl' : IDL.Text,
+  });
+  const SyllabusEntry = IDL.Record({
+    'driveUrl' : IDL.Text,
+    'title' : IDL.Text,
+    'published' : IDL.Bool,
+    'description' : IDL.Text,
+  });
+  const ThirdPaperNote = IDL.Record({
+    'driveUrl' : IDL.Text,
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const ThirdPaperTopic = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const ThirdPaperVideo = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'youtubeUrl' : IDL.Text,
+  });
   const UserRole = IDL.Variant({
     'admin' : IDL.Null,
     'user' : IDL.Null,
@@ -51,12 +229,64 @@ export const idlFactory = ({ IDL }) => {
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addComment' : IDL.Func([IDL.Text, IDL.Nat], [], []),
+    'addGKTopic' : IDL.Func([GKTopic], [], []),
+    'addGKVideo' : IDL.Func([GKVideo], [], []),
+    'addIQCategory' : IDL.Func([IQCategory], [], []),
+    'addIQVideo' : IDL.Func([IQVideo], [], []),
+    'addMockExam' : IDL.Func([MockExam], [], []),
+    'addSecondPaperNote' : IDL.Func([SecondPaperNote], [], []),
+    'addSecondPaperTopic' : IDL.Func([SecondPaperTopic], [], []),
+    'addSecondPaperVideo' : IDL.Func([SecondPaperVideo], [], []),
+    'addStandaloneNote' : IDL.Func([StandaloneNote], [], []),
+    'addStandaloneVideo' : IDL.Func([StandaloneVideo], [], []),
+    'addSyllabusEntry' : IDL.Func([SyllabusEntry], [], []),
+    'addThirdPaperNote' : IDL.Func([ThirdPaperNote], [], []),
+    'addThirdPaperTopic' : IDL.Func([ThirdPaperTopic], [], []),
+    'addThirdPaperVideo' : IDL.Func([ThirdPaperVideo], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'bookmarkNote' : IDL.Func([NoteIdentifier], [], []),
     'bookmarkVideo' : IDL.Func([DocumentIdentifier], [], []),
+    'deleteGKTopic' : IDL.Func([IDL.Nat], [], []),
+    'deleteGKVideo' : IDL.Func([IDL.Nat], [], []),
+    'deleteIQCategory' : IDL.Func([IDL.Nat], [], []),
+    'deleteIQVideo' : IDL.Func([IDL.Nat], [], []),
+    'deleteMockExam' : IDL.Func([IDL.Nat], [], []),
+    'deleteSecondPaperNote' : IDL.Func([IDL.Nat], [], []),
+    'deleteSecondPaperTopic' : IDL.Func([IDL.Nat], [], []),
+    'deleteSecondPaperVideo' : IDL.Func([IDL.Nat], [], []),
+    'deleteStandaloneNote' : IDL.Func([IDL.Nat], [], []),
+    'deleteStandaloneVideo' : IDL.Func([IDL.Nat], [], []),
+    'deleteSyllabusEntry' : IDL.Func([IDL.Nat], [], []),
+    'deleteThirdPaperNote' : IDL.Func([IDL.Nat], [], []),
+    'deleteThirdPaperTopic' : IDL.Func([IDL.Nat], [], []),
+    'deleteThirdPaperVideo' : IDL.Func([IDL.Nat], [], []),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getComments' : IDL.Func([], [IDL.Vec(IDL.Vec(IDL.Text))], ['query']),
+    'getGKTopics' : IDL.Func([], [IDL.Vec(GKTopic)], ['query']),
+    'getGKVideos' : IDL.Func([], [IDL.Vec(GKVideo)], ['query']),
+    'getIQCategories' : IDL.Func([], [IDL.Vec(IQCategory)], ['query']),
+    'getIQVideos' : IDL.Func([], [IDL.Vec(IQVideo)], ['query']),
+    'getMockExams' : IDL.Func([], [IDL.Vec(MockExam)], ['query']),
     'getNoteBookmarks' : IDL.Func([], [IDL.Vec(NoteIdentifier)], ['query']),
+    'getSecondPaperNotes' : IDL.Func([], [IDL.Vec(SecondPaperNote)], ['query']),
+    'getSecondPaperTopics' : IDL.Func(
+        [],
+        [IDL.Vec(SecondPaperTopic)],
+        ['query'],
+      ),
+    'getSecondPaperVideos' : IDL.Func(
+        [],
+        [IDL.Vec(SecondPaperVideo)],
+        ['query'],
+      ),
+    'getStandaloneNotes' : IDL.Func([], [IDL.Vec(StandaloneNote)], ['query']),
+    'getStandaloneVideos' : IDL.Func([], [IDL.Vec(StandaloneVideo)], ['query']),
+    'getSyllabusEntries' : IDL.Func([], [IDL.Vec(SyllabusEntry)], ['query']),
+    'getThirdPaperNotes' : IDL.Func([], [IDL.Vec(ThirdPaperNote)], ['query']),
+    'getThirdPaperTopics' : IDL.Func([], [IDL.Vec(ThirdPaperTopic)], ['query']),
+    'getThirdPaperVideos' : IDL.Func([], [IDL.Vec(ThirdPaperVideo)], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],
@@ -71,6 +301,7 @@ export const idlFactory = ({ IDL }) => {
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'unbookmarkNote' : IDL.Func([NoteIdentifier], [], []),
     'unbookmarkVideo' : IDL.Func([DocumentIdentifier], [], []),
+    'updateSyllabusEntry' : IDL.Func([IDL.Nat, SyllabusEntry], [], []),
   });
 };
 

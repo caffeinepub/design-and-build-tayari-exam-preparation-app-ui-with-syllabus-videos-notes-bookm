@@ -10,6 +10,7 @@ import NotesBookmarks from './pages/NotesBookmarks';
 import OldQuestions from './pages/OldQuestions';
 import Exam from './pages/Exam';
 import OfflineLibrary from './pages/OfflineLibrary';
+import AdminPanel from './pages/AdminPanel';
 import { gkContent } from './content/gk';
 import { iqContent } from './content/iq';
 import { officeManagementContent, constitutionContent, mathsContent } from './content/secondPaper';
@@ -72,6 +73,12 @@ const offlineLibraryRoute = createRoute({
   component: OfflineLibrary,
 });
 
+const adminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/admin',
+  component: AdminPanel,
+});
+
 const gkRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/subject/gk',
@@ -129,6 +136,7 @@ const routeTree = rootRoute.addChildren([
   oldQuestionsRoute,
   examRoute,
   offlineLibraryRoute,
+  adminRoute,
   gkRoute,
   iqRoute,
   officeManagementRoute,

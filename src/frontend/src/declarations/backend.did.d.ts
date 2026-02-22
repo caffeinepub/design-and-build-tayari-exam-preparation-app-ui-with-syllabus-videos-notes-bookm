@@ -11,25 +11,126 @@ import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
 export type DocumentIdentifier = string;
+export interface GKTopic { 'title' : string, 'description' : string }
+export interface GKVideo {
+  'title' : string,
+  'description' : string,
+  'youtubeUrl' : string,
+}
+export interface IQCategory { 'title' : string, 'description' : string }
+export interface IQVideo {
+  'title' : string,
+  'description' : string,
+  'youtubeUrl' : string,
+}
+export interface MockExam {
+  'title' : string,
+  'duration' : bigint,
+  'description' : string,
+  'pdfUrl' : string,
+}
 export type NoteIdentifier = string;
+export interface SecondPaperNote {
+  'driveUrl' : string,
+  'title' : string,
+  'description' : string,
+}
+export interface SecondPaperTopic { 'title' : string, 'description' : string }
+export interface SecondPaperVideo {
+  'title' : string,
+  'description' : string,
+  'youtubeUrl' : string,
+}
+export interface StandaloneNote {
+  'driveUrl' : string,
+  'title' : string,
+  'description' : string,
+}
+export interface StandaloneVideo {
+  'title' : string,
+  'description' : string,
+  'youtubeUrl' : string,
+}
+export interface SyllabusEntry {
+  'driveUrl' : string,
+  'title' : string,
+  'published' : boolean,
+  'description' : string,
+}
+export interface ThirdPaperNote {
+  'driveUrl' : string,
+  'title' : string,
+  'description' : string,
+}
+export interface ThirdPaperTopic { 'title' : string, 'description' : string }
+export interface ThirdPaperVideo {
+  'title' : string,
+  'description' : string,
+  'youtubeUrl' : string,
+}
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addComment' : ActorMethod<[string, bigint], undefined>,
+  'addGKTopic' : ActorMethod<[GKTopic], undefined>,
+  'addGKVideo' : ActorMethod<[GKVideo], undefined>,
+  'addIQCategory' : ActorMethod<[IQCategory], undefined>,
+  'addIQVideo' : ActorMethod<[IQVideo], undefined>,
+  'addMockExam' : ActorMethod<[MockExam], undefined>,
+  'addSecondPaperNote' : ActorMethod<[SecondPaperNote], undefined>,
+  'addSecondPaperTopic' : ActorMethod<[SecondPaperTopic], undefined>,
+  'addSecondPaperVideo' : ActorMethod<[SecondPaperVideo], undefined>,
+  'addStandaloneNote' : ActorMethod<[StandaloneNote], undefined>,
+  'addStandaloneVideo' : ActorMethod<[StandaloneVideo], undefined>,
+  'addSyllabusEntry' : ActorMethod<[SyllabusEntry], undefined>,
+  'addThirdPaperNote' : ActorMethod<[ThirdPaperNote], undefined>,
+  'addThirdPaperTopic' : ActorMethod<[ThirdPaperTopic], undefined>,
+  'addThirdPaperVideo' : ActorMethod<[ThirdPaperVideo], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'bookmarkNote' : ActorMethod<[NoteIdentifier], undefined>,
   'bookmarkVideo' : ActorMethod<[DocumentIdentifier], undefined>,
+  'deleteGKTopic' : ActorMethod<[bigint], undefined>,
+  'deleteGKVideo' : ActorMethod<[bigint], undefined>,
+  'deleteIQCategory' : ActorMethod<[bigint], undefined>,
+  'deleteIQVideo' : ActorMethod<[bigint], undefined>,
+  'deleteMockExam' : ActorMethod<[bigint], undefined>,
+  'deleteSecondPaperNote' : ActorMethod<[bigint], undefined>,
+  'deleteSecondPaperTopic' : ActorMethod<[bigint], undefined>,
+  'deleteSecondPaperVideo' : ActorMethod<[bigint], undefined>,
+  'deleteStandaloneNote' : ActorMethod<[bigint], undefined>,
+  'deleteStandaloneVideo' : ActorMethod<[bigint], undefined>,
+  'deleteSyllabusEntry' : ActorMethod<[bigint], undefined>,
+  'deleteThirdPaperNote' : ActorMethod<[bigint], undefined>,
+  'deleteThirdPaperTopic' : ActorMethod<[bigint], undefined>,
+  'deleteThirdPaperVideo' : ActorMethod<[bigint], undefined>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getComments' : ActorMethod<[], Array<Array<string>>>,
+  'getGKTopics' : ActorMethod<[], Array<GKTopic>>,
+  'getGKVideos' : ActorMethod<[], Array<GKVideo>>,
+  'getIQCategories' : ActorMethod<[], Array<IQCategory>>,
+  'getIQVideos' : ActorMethod<[], Array<IQVideo>>,
+  'getMockExams' : ActorMethod<[], Array<MockExam>>,
   'getNoteBookmarks' : ActorMethod<[], Array<NoteIdentifier>>,
+  'getSecondPaperNotes' : ActorMethod<[], Array<SecondPaperNote>>,
+  'getSecondPaperTopics' : ActorMethod<[], Array<SecondPaperTopic>>,
+  'getSecondPaperVideos' : ActorMethod<[], Array<SecondPaperVideo>>,
+  'getStandaloneNotes' : ActorMethod<[], Array<StandaloneNote>>,
+  'getStandaloneVideos' : ActorMethod<[], Array<StandaloneVideo>>,
+  'getSyllabusEntries' : ActorMethod<[], Array<SyllabusEntry>>,
+  'getThirdPaperNotes' : ActorMethod<[], Array<ThirdPaperNote>>,
+  'getThirdPaperTopics' : ActorMethod<[], Array<ThirdPaperTopic>>,
+  'getThirdPaperVideos' : ActorMethod<[], Array<ThirdPaperVideo>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'getVideoBookmarks' : ActorMethod<[], Array<DocumentIdentifier>>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'unbookmarkNote' : ActorMethod<[NoteIdentifier], undefined>,
   'unbookmarkVideo' : ActorMethod<[DocumentIdentifier], undefined>,
+  'updateSyllabusEntry' : ActorMethod<[bigint, SyllabusEntry], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
