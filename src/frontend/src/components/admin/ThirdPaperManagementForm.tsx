@@ -1,82 +1,22 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useThirdPaperManagement } from '@/hooks/useThirdPaperManagement';
 import { toast } from 'sonner';
 
 export default function ThirdPaperManagementForm() {
-  const [topicTitle, setTopicTitle] = useState('');
-  const [topicDescription, setTopicDescription] = useState('');
-  const [videoTitle, setVideoTitle] = useState('');
-  const [videoDescription, setVideoDescription] = useState('');
-  const [youtubeUrl, setYoutubeUrl] = useState('');
-  const [noteTitle, setNoteTitle] = useState('');
-  const [noteDescription, setNoteDescription] = useState('');
-  const [driveUrl, setDriveUrl] = useState('');
-
   const {
     topics,
     videos,
     notes,
-    addTopic,
     deleteTopic,
-    addVideo,
     deleteVideo,
-    addNote,
     deleteNote,
-    isAddingTopic,
-    isAddingVideo,
-    isAddingNote,
     isDeletingTopic,
     isDeletingVideo,
     isDeletingNote,
   } = useThirdPaperManagement();
-
-  const handleAddTopic = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await addTopic({ title: topicTitle, description: topicDescription });
-      toast.success('Third Paper topic added successfully!');
-      setTopicTitle('');
-      setTopicDescription('');
-    } catch (error) {
-      toast.error('Failed to add topic');
-      console.error(error);
-    }
-  };
-
-  const handleAddVideo = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await addVideo({ title: videoTitle, description: videoDescription, youtubeUrl });
-      toast.success('Third Paper video added successfully!');
-      setVideoTitle('');
-      setVideoDescription('');
-      setYoutubeUrl('');
-    } catch (error) {
-      toast.error('Failed to add video');
-      console.error(error);
-    }
-  };
-
-  const handleAddNote = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await addNote({ title: noteTitle, description: noteDescription, driveUrl });
-      toast.success('Third Paper note added successfully!');
-      setNoteTitle('');
-      setNoteDescription('');
-      setDriveUrl('');
-    } catch (error) {
-      toast.error('Failed to add note');
-      console.error(error);
-    }
-  };
 
   return (
     <Tabs defaultValue="topics" className="w-full">
@@ -87,38 +27,6 @@ export default function ThirdPaperManagementForm() {
       </TabsList>
 
       <TabsContent value="topics" className="space-y-6">
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-            Add Third Paper Topic
-          </h2>
-          <form onSubmit={handleAddTopic} className="space-y-4">
-            <div>
-              <Label htmlFor="topic-title">शीर्षक (Title)</Label>
-              <Input
-                id="topic-title"
-                value={topicTitle}
-                onChange={(e) => setTopicTitle(e.target.value)}
-                placeholder="Enter topic title"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="topic-description">विवरण (Description)</Label>
-              <Textarea
-                id="topic-description"
-                value={topicDescription}
-                onChange={(e) => setTopicDescription(e.target.value)}
-                placeholder="Enter topic description"
-                rows={3}
-              />
-            </div>
-            <Button type="submit" disabled={isAddingTopic} className="w-full">
-              <Plus className="w-4 h-4 mr-2" />
-              {isAddingTopic ? 'Adding...' : 'Add Topic'}
-            </Button>
-          </form>
-        </Card>
-
         <Card className="p-6">
           <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
             Existing Topics ({topics?.length || 0})
@@ -156,7 +64,7 @@ export default function ThirdPaperManagementForm() {
             ))}
             {(!topics || topics.length === 0) && (
               <p className="text-center text-slate-500 dark:text-slate-400 py-8">
-                No topics yet. Add your first topic above.
+                No topics available.
               </p>
             )}
           </div>
@@ -164,48 +72,6 @@ export default function ThirdPaperManagementForm() {
       </TabsContent>
 
       <TabsContent value="videos" className="space-y-6">
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-            Add Third Paper Video
-          </h2>
-          <form onSubmit={handleAddVideo} className="space-y-4">
-            <div>
-              <Label htmlFor="video-title">शीर्षक (Title)</Label>
-              <Input
-                id="video-title"
-                value={videoTitle}
-                onChange={(e) => setVideoTitle(e.target.value)}
-                placeholder="Enter video title"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="video-description">विवरण (Description)</Label>
-              <Textarea
-                id="video-description"
-                value={videoDescription}
-                onChange={(e) => setVideoDescription(e.target.value)}
-                placeholder="Enter video description"
-                rows={3}
-              />
-            </div>
-            <div>
-              <Label htmlFor="youtube-url">YouTube URL</Label>
-              <Input
-                id="youtube-url"
-                value={youtubeUrl}
-                onChange={(e) => setYoutubeUrl(e.target.value)}
-                placeholder="https://youtu.be/..."
-                required
-              />
-            </div>
-            <Button type="submit" disabled={isAddingVideo} className="w-full">
-              <Plus className="w-4 h-4 mr-2" />
-              {isAddingVideo ? 'Adding...' : 'Add Video'}
-            </Button>
-          </form>
-        </Card>
-
         <Card className="p-6">
           <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
             Existing Videos ({videos?.length || 0})
@@ -246,7 +112,7 @@ export default function ThirdPaperManagementForm() {
             ))}
             {(!videos || videos.length === 0) && (
               <p className="text-center text-slate-500 dark:text-slate-400 py-8">
-                No videos yet. Add your first video above.
+                No videos available.
               </p>
             )}
           </div>
@@ -254,48 +120,6 @@ export default function ThirdPaperManagementForm() {
       </TabsContent>
 
       <TabsContent value="notes" className="space-y-6">
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-            Add Third Paper Note
-          </h2>
-          <form onSubmit={handleAddNote} className="space-y-4">
-            <div>
-              <Label htmlFor="note-title">शीर्षक (Title)</Label>
-              <Input
-                id="note-title"
-                value={noteTitle}
-                onChange={(e) => setNoteTitle(e.target.value)}
-                placeholder="Enter note title"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="note-description">विवरण (Description)</Label>
-              <Textarea
-                id="note-description"
-                value={noteDescription}
-                onChange={(e) => setNoteDescription(e.target.value)}
-                placeholder="Enter note description"
-                rows={3}
-              />
-            </div>
-            <div>
-              <Label htmlFor="drive-url">Google Drive URL</Label>
-              <Input
-                id="drive-url"
-                value={driveUrl}
-                onChange={(e) => setDriveUrl(e.target.value)}
-                placeholder="https://drive.google.com/..."
-                required
-              />
-            </div>
-            <Button type="submit" disabled={isAddingNote} className="w-full">
-              <Plus className="w-4 h-4 mr-2" />
-              {isAddingNote ? 'Adding...' : 'Add Note'}
-            </Button>
-          </form>
-        </Card>
-
         <Card className="p-6">
           <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
             Existing Notes ({notes?.length || 0})
@@ -336,7 +160,7 @@ export default function ThirdPaperManagementForm() {
             ))}
             {(!notes || notes.length === 0) && (
               <p className="text-center text-slate-500 dark:text-slate-400 py-8">
-                No notes yet. Add your first note above.
+                No notes available.
               </p>
             )}
           </div>

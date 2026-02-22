@@ -1,83 +1,16 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Nepali language exam preparation app (Kharidar Tayari) with admin panel for content management",
-  "architectural_notes": [
-    "Admin panel for content/link management with title, description, and URL fields",
-    "Content add functionality required across multiple sections: syllabus, GK, IQ, second/third paper sections, exams, videos, notes"
-  ],
+  "summary": "New project",
+  "architectural_notes": [],
   "known_issues": [],
-  "isFixRequest": false,
+  "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-create-an-admin-panel-interface-accessible-from-the-main-navigation-that-allows-administrators-to-add-and-manage-content-across-all-sections-of-the-app",
-      "title": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
+      "id": "feature-remove-the-add-button-from-the-admin-panel-display-across-all-management-forms-syllabus-gk-iq-second-paper-third-paper-exams-videos-and-notes",
+      "title": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-syllabus-section-that-allow-adding-new-syllabus-entries-with-title-description-and-google-drive-url-fields-with-a-publish-button-to-make-entries-immediately-visible-in-the-app",
-      "title": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-gk-general-knowledge-section-that-allow-adding-new-topics-and-videos-with-title-description-and-youtube-url-fields",
-      "title": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-iq-section-that-allow-adding-new-test-categories-and-videos-with-title-description-and-youtube-url-fields",
-      "title": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-second-paper-office-management-and-constitution-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
-      "title": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-all-three-sections-of-the-third-paper-service-management-that-allow-adding-new-topics-videos-and-notes-with-title-description-youtube-urls-and-google-drive-urls",
-      "title": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-forms-in-the-admin-panel-for-the-exam-section-that-allow-adding-new-mock-exams-with-title-duration-description-and-google-drive-pdf-url-fields",
-      "title": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-capability-in-the-admin-panel-for-the-video-sections-across-all-subjects-that-allows-adding-standalone-videos-with-title-description-and-youtube-url-fields",
-      "title": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-content-management-capability-in-the-admin-panel-for-the-notes-sections-across-all-subjects-that-allows-adding-notes-with-title-description-and-google-drive-url-fields",
-      "title": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
-      "reqIds": [
-        "REQ-9"
       ],
       "version": 1
     }
@@ -85,28 +18,12 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Admin panel with form to add links/content (title, description, URL) and publish directly to app",
+      "summary": "Remove add button from display",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Add content management buttons in all sections: syllabus, GK, IQ, second paper (3 sections), third paper (3 sections), exam section, video section, and notes section",
-      "reqIds": [
-        "AR-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Implement backend storage and retrieval for all admin-added content with persistence across app sessions, ensuring content is stored securely and can be updated or deleted by admins",
-      "reqIds": [
-        "REQ-10"
-      ],
       "status": "pending"
     }
   ],
-  "projectName": "Kharidar Tayari",
+  "projectName": "Remove add button from display",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

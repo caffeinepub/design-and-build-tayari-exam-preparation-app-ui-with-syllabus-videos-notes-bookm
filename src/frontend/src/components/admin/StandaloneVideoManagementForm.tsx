@@ -1,33 +1,11 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { useStandaloneVideoManagement } from '@/hooks/useStandaloneVideoManagement';
 import { toast } from 'sonner';
 
 export default function StandaloneVideoManagementForm() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [youtubeUrl, setYoutubeUrl] = useState('');
-
-  const { videos, addVideo, deleteVideo, isAdding, isDeleting } = useStandaloneVideoManagement();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await addVideo({ title, description, youtubeUrl });
-      toast.success('Standalone video added successfully!');
-      setTitle('');
-      setDescription('');
-      setYoutubeUrl('');
-    } catch (error) {
-      toast.error('Failed to add video');
-      console.error(error);
-    }
-  };
+  const { videos, deleteVideo, isDeleting } = useStandaloneVideoManagement();
 
   const handleDelete = async (index: number) => {
     if (confirm('Are you sure you want to delete this video?')) {
@@ -43,48 +21,6 @@ export default function StandaloneVideoManagementForm() {
 
   return (
     <div className="space-y-6">
-      <Card className="p-6">
-        <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-          Add Standalone Video
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="title">शीर्षक (Title)</Label>
-            <Input
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter video title"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="description">विवरण (Description)</Label>
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Enter video description"
-              rows={3}
-            />
-          </div>
-          <div>
-            <Label htmlFor="youtubeUrl">YouTube URL</Label>
-            <Input
-              id="youtubeUrl"
-              value={youtubeUrl}
-              onChange={(e) => setYoutubeUrl(e.target.value)}
-              placeholder="https://youtu.be/..."
-              required
-            />
-          </div>
-          <Button type="submit" disabled={isAdding} className="w-full">
-            <Plus className="w-4 h-4 mr-2" />
-            {isAdding ? 'Adding...' : 'Add Video'}
-          </Button>
-        </form>
-      </Card>
-
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
           Existing Videos ({videos?.length || 0})
@@ -121,9 +57,9 @@ export default function StandaloneVideoManagementForm() {
           ))}
           {(!videos || videos.length === 0) && (
             <p className="text-center text-slate-500 dark:text-slate-400 py-8">
-              No videos yet. Add your first video above.
+              No videos available.
             </p>
-            )}
+          )}
         </div>
       </Card>
     </div>

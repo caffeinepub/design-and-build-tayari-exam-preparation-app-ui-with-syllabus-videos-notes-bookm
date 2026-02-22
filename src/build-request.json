@@ -1,200 +1,37 @@
 {
   "kind": "build_request",
-  "title": "Add admin content management across all sections",
-  "projectName": "Kharidar Tayari",
+  "title": "Remove add button from display",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Create an admin panel interface accessible from the main navigation that allows administrators to add and manage content across all sections of the app",
+      "text": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-4"
         ],
         "quotes": [
-          "huncha sabai ma syllabus, gk,iq second paper ko 3 oti khanda ma ra third paper ma pani 3 pti khanda ra exam ma pani video section ma pani ra notes section ma pani sabai ma add garnus"
+          "hlo kina ho add ko botton nai chaina ta display ma"
         ]
       },
       "acceptanceCriteria": [
-        "Admin panel is accessible from the app navigation",
-        "Panel provides a unified interface for managing content across all sections",
-        "Interface is intuitive and supports Nepali language users"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Add content management forms in the admin panel for the Syllabus section that allow adding new syllabus entries with title, description, and Google Drive URL fields, with a publish button to make entries immediately visible in the app",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "huncha sabai ma syllabus"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Form includes fields for title, description, and Drive URL",
-        "Publish button immediately adds the syllabus entry to the app",
-        "New entries appear in the Syllabus page without requiring app restart"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Add content management forms in the admin panel for the GK (General Knowledge) section that allow adding new topics and videos with title, description, and YouTube URL fields",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "gk"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Form supports adding topics and videos to GK section",
-        "Published content appears immediately in the GK subject page",
-        "Videos can be played directly from the app after publishing"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Add content management forms in the admin panel for the IQ section that allow adding new test categories and videos with title, description, and YouTube URL fields",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "iq"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Form supports adding IQ test categories and videos",
-        "Published content appears immediately in the IQ subject page",
-        "New videos integrate with existing bookmark functionality"
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add content management forms in the admin panel for all three sections of the Second Paper (Office Management and Constitution) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "second paper ko 3 oti khanda ma"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Forms support adding content to all three sections of Second Paper",
-        "Published videos and notes appear immediately in the respective Second Paper pages",
-        "Content integrates with existing video player and notes viewer"
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Add content management forms in the admin panel for all three sections of the Third Paper (Service Management) that allow adding new topics, videos, and notes with title, description, YouTube URLs, and Google Drive URLs",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "third paper ma pani 3 pti khanda"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Forms support adding content to all three sections of Third Paper",
-        "Published content appears immediately in the respective Third Paper pages",
-        "New entries maintain consistency with existing content structure"
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Add content management forms in the admin panel for the Exam section that allow adding new mock exams with title, duration, description, and Google Drive PDF URL fields",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "exam ma pani"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Form includes fields for exam title, duration, description, and Drive URL",
-        "Published exams appear immediately in the Exam page selection",
-        "New exams work with existing timer and completion functionality"
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Add content management capability in the admin panel for the Video sections across all subjects that allows adding standalone videos with title, description, and YouTube URL fields",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "video section ma pani"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Admin can add videos to any subject's video section",
-        "Published videos appear in the appropriate subject content page",
-        "Videos integrate with existing bookmark and search functionality"
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Add content management capability in the admin panel for the Notes sections across all subjects that allows adding notes with title, description, and Google Drive URL fields",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "notes section ma pani"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Admin can add notes to any subject's notes section",
-        "Published notes appear in the appropriate subject content page",
-        "Notes integrate with existing bookmark and viewer functionality"
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Implement backend storage and retrieval for all admin-added content with persistence across app sessions, ensuring content is stored securely and can be updated or deleted by admins",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All admin-added content persists across app restarts",
-        "Backend provides query methods for retrieving content by section",
-        "Admin can update or delete previously added content",
-        "Content changes are reflected immediately for all users"
+        "Add buttons are no longer visible in any admin panel section",
+        "Users can still view existing content but cannot add new items",
+        "Delete functionality remains intact if needed",
+        "No console errors or broken UI from button removal"
       ]
     }
   ],
   "constraints": [
-    "Admin panel must integrate with existing Internet Identity authentication system",
-    "All forms must support Nepali language interface text",
-    "Content management must not disrupt existing hardcoded content in config files",
-    "Published content must be immediately visible without requiring app rebuild or redeploy"
+    "Preserve existing delete functionality in admin forms",
+    "Do not modify backend logic or data structures",
+    "Maintain existing UI layout and styling for remaining elements"
   ],
   "nonGoals": [
-    "User role management or permission systems beyond basic admin access",
-    "Content moderation or approval workflows",
-    "Analytics or tracking of content performance",
-    "Bulk import or export of content",
-    "Version history or content rollback features"
+    "Removing delete functionality",
+    "Changing the admin panel navigation or tab structure",
+    "Modifying user authentication or access control"
   ],
   "imageRequirements": {
     "required": [],

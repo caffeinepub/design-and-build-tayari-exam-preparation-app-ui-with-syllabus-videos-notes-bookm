@@ -1,33 +1,11 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { useStandaloneNoteManagement } from '@/hooks/useStandaloneNoteManagement';
 import { toast } from 'sonner';
 
 export default function StandaloneNoteManagementForm() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [driveUrl, setDriveUrl] = useState('');
-
-  const { notes, addNote, deleteNote, isAdding, isDeleting } = useStandaloneNoteManagement();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await addNote({ title, description, driveUrl });
-      toast.success('Standalone note added successfully!');
-      setTitle('');
-      setDescription('');
-      setDriveUrl('');
-    } catch (error) {
-      toast.error('Failed to add note');
-      console.error(error);
-    }
-  };
+  const { notes, deleteNote, isDeleting } = useStandaloneNoteManagement();
 
   const handleDelete = async (index: number) => {
     if (confirm('Are you sure you want to delete this note?')) {
@@ -43,48 +21,6 @@ export default function StandaloneNoteManagementForm() {
 
   return (
     <div className="space-y-6">
-      <Card className="p-6">
-        <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-          Add Standalone Note
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="title">शीर्षक (Title)</Label>
-            <Input
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter note title"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="description">विवरण (Description)</Label>
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Enter note description"
-              rows={3}
-            />
-          </div>
-          <div>
-            <Label htmlFor="driveUrl">Google Drive URL</Label>
-            <Input
-              id="driveUrl"
-              value={driveUrl}
-              onChange={(e) => setDriveUrl(e.target.value)}
-              placeholder="https://drive.google.com/..."
-              required
-            />
-          </div>
-          <Button type="submit" disabled={isAdding} className="w-full">
-            <Plus className="w-4 h-4 mr-2" />
-            {isAdding ? 'Adding...' : 'Add Note'}
-          </Button>
-        </form>
-      </Card>
-
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100">
           Existing Notes ({notes?.length || 0})
@@ -121,7 +57,7 @@ export default function StandaloneNoteManagementForm() {
           ))}
           {(!notes || notes.length === 0) && (
             <p className="text-center text-slate-500 dark:text-slate-400 py-8">
-              No notes yet. Add your first note above.
+              No notes available.
             </p>
           )}
         </div>
