@@ -1,16 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Remove the 'Add' button from all admin panel management forms to prevent adding new content.
+**Goal:** Make Add buttons visible and consistently styled across all management sections in the admin panel.
 
 **Planned changes:**
-- Remove 'Add' button from Syllabus management form
-- Remove 'Add' button from GK management form
-- Remove 'Add' button from IQ management form
-- Remove 'Add' button from Second Paper management form
-- Remove 'Add' button from Third Paper management form
-- Remove 'Add' button from Exams management form
-- Remove 'Add' button from Videos management form
-- Remove 'Add' button from Notes management form
+- Add prominent Add buttons with shadow and mix colors to SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm
+- Ensure all Add buttons use consistent shadow styling and mix colors matching the existing implementation in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm
+- Verify button visibility across all management sections including GK topics, IQ categories, Second Paper topics, Third Paper topics, Syllabus, Old Questions, Exam, and Notes
 
-**User-visible outcome:** Admin users will no longer see 'Add' buttons in any management section, preventing them from adding new content while still being able to view and delete existing items.
+**User-visible outcome:** All Add buttons across management sections are prominently visible with consistent shadow and color styling, making it easier for admins to add new content in any section.

@@ -2,17 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-add-button-from-the-admin-panel-display-across-all-management-forms-syllabus-gk-iq-second-paper-third-paper-exams-videos-and-notes",
-      "featureTitle": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
+      "featureId": "feature-add-prominent-add-buttons-with-shadow-and-mix-colors-to-all-remaining-management-sections-that-currently-lack-visible-add-buttons-ensuring-consistent-styling-with-existing-implementations-in-exammanagementform-gkmanagementform-iqmanagementform-oldquestionsmanagementform-secondpapermanagementform-and-thirdpapermanagementform",
+      "featureTitle": "Add prominent Add buttons with shadow and mix colors to all remaining management sections that currently lack visible Add buttons, ensuring consistent styling with existing implementations in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
       "files": [
-        "frontend/src/components/admin/ExamManagementForm.tsx",
-        "frontend/src/components/admin/GKManagementForm.tsx",
-        "frontend/src/components/admin/IQManagementForm.tsx",
-        "frontend/src/components/admin/SecondPaperManagementForm.tsx",
         "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
         "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
-        "frontend/src/components/admin/SyllabusManagementForm.tsx",
-        "frontend/src/components/admin/ThirdPaperManagementForm.tsx"
+        "frontend/src/components/admin/SyllabusManagementForm.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -23,7 +18,28 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-verify-and-ensure-all-add-buttons-in-syllabusmanagementform-standalonevideomanagementform-and-standalonenotemanagementform-have-the-same-prominent-visibility-treatment-with-shadow-and-mix-colors-as-the-buttons-in-exammanagementform-gkmanagementform-iqmanagementform-oldquestionsmanagementform-secondpapermanagementform-and-thirdpapermanagementform",
+      "featureTitle": "Verify and ensure all Add buttons in SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm have the same prominent visibility treatment with shadow and mix colors as the buttons in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
+      "files": [
+        "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+        "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+        "frontend/src/components/admin/SyllabusManagementForm.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
       ],
       "confidence": "high"
     }

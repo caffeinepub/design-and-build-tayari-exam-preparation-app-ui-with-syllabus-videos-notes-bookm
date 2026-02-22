@@ -1,36 +1,41 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-22T02:46:59.955Z",
+  "generatedAt": "2026-02-22T22:13:27.569Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
+        "id": "REQ-11",
+        "summary": "Add prominent Add buttons with shadow and mix colors to all remaining management sections that currently lack visible Add buttons, ensuring consistent styling with existing implementations in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/admin/SyllabusManagementForm.tsx",
-          "frontend/src/components/admin/GKManagementForm.tsx",
-          "frontend/src/components/admin/IQManagementForm.tsx",
-          "frontend/src/components/admin/SecondPaperManagementForm.tsx",
-          "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
-          "frontend/src/components/admin/ExamManagementForm.tsx",
           "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
           "frontend/src/components/admin/StandaloneNoteManagementForm.tsx"
         ],
         "matchedFiles": [
           "frontend/src/components/admin/SyllabusManagementForm.tsx",
-          "frontend/src/components/admin/GKManagementForm.tsx",
-          "frontend/src/components/admin/IQManagementForm.tsx",
-          "frontend/src/components/admin/SecondPaperManagementForm.tsx",
-          "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
-          "frontend/src/components/admin/ExamManagementForm.tsx",
+          "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "frontend/src/components/admin/StandaloneNoteManagementForm.tsx"
+        ]
+      },
+      {
+        "id": "REQ-12",
+        "summary": "Verify and ensure all Add buttons in SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm have the same prominent visibility treatment with shadow and mix colors as the buttons in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/admin/SyllabusManagementForm.tsx",
+          "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "frontend/src/components/admin/StandaloneNoteManagementForm.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/admin/SyllabusManagementForm.tsx",
           "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
           "frontend/src/components/admin/StandaloneNoteManagementForm.tsx"
         ]
@@ -42,14 +47,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/admin/ExamManagementForm.tsx",
-    "frontend/src/components/admin/GKManagementForm.tsx",
-    "frontend/src/components/admin/IQManagementForm.tsx",
-    "frontend/src/components/admin/SecondPaperManagementForm.tsx",
     "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
     "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
     "frontend/src/components/admin/SyllabusManagementForm.tsx",
-    "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

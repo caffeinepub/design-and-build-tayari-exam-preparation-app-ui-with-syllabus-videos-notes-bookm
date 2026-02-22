@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { IQCategory, IQVideo } from '../backend';
+import type { IQCategory, IQVideo, IQNote } from '../backend';
 
 export function useIQManagement() {
   const { actor, isFetching } = useActor();
@@ -20,6 +20,15 @@ export function useIQManagement() {
     queryFn: async () => {
       if (!actor) return [];
       return actor.getIQVideos();
+    },
+    enabled: !!actor && !isFetching,
+  });
+
+  const notesQuery = useQuery<IQNote[]>({
+    queryKey: ['iqNotes'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getIQNotes();
     },
     enabled: !!actor && !isFetching,
   });
@@ -64,15 +73,28 @@ export function useIQManagement() {
     },
   });
 
+  const addNoteMutation = useMutation({
+    mutationFn: async (note: IQNote) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.addIQNote(note);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['iqNotes'] });
+    },
+  });
+
   return {
     categories: categoriesQuery.data,
     videos: videosQuery.data,
+    notes: notesQuery.data,
     addCategory: addCategoryMutation.mutateAsync,
     deleteCategory: deleteCategoryMutation.mutateAsync,
     addVideo: addVideoMutation.mutateAsync,
     deleteVideo: deleteVideoMutation.mutateAsync,
+    addNote: addNoteMutation.mutateAsync,
     isAddingCategory: addCategoryMutation.isPending,
     isAddingVideo: addVideoMutation.isPending,
+    isAddingNote: addNoteMutation.isPending,
     isDeletingCategory: deleteCategoryMutation.isPending,
     isDeletingVideo: deleteVideoMutation.isPending,
   };

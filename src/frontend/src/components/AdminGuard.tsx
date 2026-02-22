@@ -1,71 +1,62 @@
-import { ReactNode } from 'react';
-import { useInternetIdentity } from '@/hooks/useInternetIdentity';
-import { useIsAdmin } from '@/hooks/useQueries';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ShieldAlert } from 'lucide-react';
+import React from 'react';
+import { useInternetIdentity } from '../hooks/useInternetIdentity';
+import { useIsAdmin } from '../hooks/useQueries';
+import { Loader2 } from 'lucide-react';
 
 interface AdminGuardProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function AdminGuard({ children }: AdminGuardProps) {
-  const { identity, login, loginStatus } = useInternetIdentity();
-  const { data: isAdmin, isLoading: isAdminLoading } = useIsAdmin();
+  const { identity, isInitializing } = useInternetIdentity();
+  const { data: isAdmin, isLoading: isAdminLoading, isFetched } = useIsAdmin();
 
-  // Show loading state
-  if (!identity || isAdminLoading) {
+  // Wait for both identity initialization and admin check to complete
+  if (isInitializing || isAdminLoading || !isFetched) {
     return (
-      <div className="min-h-screen app-page-bg flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md w-full text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4" />
-          <p className="text-slate-600 dark:text-slate-400">Loading...</p>
-        </Card>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Loading admin panel...</p>
+        </div>
       </div>
     );
   }
 
-  // Show login prompt if not authenticated
+  // Check if user is authenticated
   if (!identity) {
     return (
-      <div className="min-h-screen app-page-bg flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md w-full text-center space-y-4">
-          <ShieldAlert className="w-16 h-16 text-amber-500 mx-auto" />
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
-            Authentication Required
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400">
-            Please log in to access the admin panel.
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="text-center max-w-md">
+          <h2 className="text-2xl font-bold mb-4">Authentication Required</h2>
+          <p className="text-muted-foreground mb-6">
+            You need to be logged in to access the admin panel.
           </p>
-          <Button
-            onClick={login}
-            disabled={loginStatus === 'logging-in'}
-            className="w-full"
-          >
-            {loginStatus === 'logging-in' ? 'Logging in...' : 'Login'}
-          </Button>
-        </Card>
+          <p className="text-sm text-muted-foreground">
+            Please log in using the login button in the navigation.
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Show access denied if not admin
+  // Check if user has admin privileges
   if (!isAdmin) {
     return (
-      <div className="min-h-screen app-page-bg flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md w-full text-center space-y-4">
-          <ShieldAlert className="w-16 h-16 text-red-500 mx-auto" />
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
-            Access Denied
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400">
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="text-center max-w-md">
+          <h2 className="text-2xl font-bold mb-4">Access Denied</h2>
+          <p className="text-muted-foreground mb-6">
             You do not have permission to access the admin panel.
           </p>
-        </Card>
+          <p className="text-sm text-muted-foreground">
+            Only administrators can access this area.
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Render children if admin
+  // User is authenticated and is an admin - render children
   return <>{children}</>;
 }

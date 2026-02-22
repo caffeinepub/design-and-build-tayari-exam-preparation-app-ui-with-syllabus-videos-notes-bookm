@@ -83,16 +83,6 @@ export function useSecondPaperManagement() {
     },
   });
 
-  const deleteNoteMutation = useMutation({
-    mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
-      return actor.deleteSecondPaperNote(BigInt(index));
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperNotes'] });
-    },
-  });
-
   return {
     topics: topicsQuery.data,
     videos: videosQuery.data,
@@ -102,12 +92,10 @@ export function useSecondPaperManagement() {
     addVideo: addVideoMutation.mutateAsync,
     deleteVideo: deleteVideoMutation.mutateAsync,
     addNote: addNoteMutation.mutateAsync,
-    deleteNote: deleteNoteMutation.mutateAsync,
     isAddingTopic: addTopicMutation.isPending,
     isAddingVideo: addVideoMutation.isPending,
     isAddingNote: addNoteMutation.isPending,
     isDeletingTopic: deleteTopicMutation.isPending,
     isDeletingVideo: deleteVideoMutation.isPending,
-    isDeletingNote: deleteNoteMutation.isPending,
   };
 }

@@ -1,57 +1,59 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Remove Add Buttons from Admin Panel Display",
+  "title": "Make Add buttons visible across all management sections",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Remove the 'Add' button from all admin management forms while preserving delete functionality and existing UI layout",
+      "id": "REQ-11",
+      "summary": "Add prominent Add buttons with shadow and mix colors to all remaining management sections that currently lack visible Add buttons, ensuring consistent styling with existing implementations",
       "acceptanceCriteria": [
-        "Add buttons are no longer visible in any admin panel section",
-        "Users can still view existing content but cannot add new items",
-        "Delete functionality remains intact if needed",
-        "No console errors or broken UI from button removal"
+        "Add buttons are visible in all management forms including SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm",
+        "All Add buttons use consistent shadow styling and mix colors for high visibility",
+        "Add buttons are positioned consistently across all sections (GK topics, IQ categories, Second Paper topics, Third Paper topics, Syllabus, Old Questions, Exam, Notes)",
+        "Button styling matches the visual design pattern established in existing management forms"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/admin/SyllabusManagementForm.tsx",
           "operation": "modify",
-          "description": "Remove the Add button and form submission functionality from the syllabus management form. Hide or remove the input fields for adding new syllabus entries (title, description, driveUrl, published checkbox) and the submit button. Keep the existing list of syllabus entries visible with their delete functionality intact. Ensure the form layout remains clean without the Add section."
-        },
-        {
-          "path": "frontend/src/components/admin/GKManagementForm.tsx",
-          "operation": "modify",
-          "description": "Remove Add buttons from both the GK Topics tab and GK Videos tab. Hide or remove the input fields for adding new topics (title, description) and videos (title, description, youtubeUrl) along with their respective submit buttons. Preserve the display of existing topics and videos with their delete functionality. Maintain the tab structure and list layout."
-        },
-        {
-          "path": "frontend/src/components/admin/IQManagementForm.tsx",
-          "operation": "modify",
-          "description": "Remove Add buttons from both the IQ Categories tab and IQ Videos tab. Hide or remove the input fields for adding new categories (title, description) and videos (title, description, youtubeUrl) along with their respective submit buttons. Keep the existing categories and videos list visible with delete functionality intact. Preserve the tabbed interface structure."
-        },
-        {
-          "path": "frontend/src/components/admin/SecondPaperManagementForm.tsx",
-          "operation": "modify",
-          "description": "Remove Add buttons from all three tabs: Topics, Videos, and Notes. Hide or remove the input fields for adding new topics (title, description), videos (title, description, youtubeUrl), and notes (title, description, driveUrl) along with their submit buttons. Maintain the display of existing content with delete functionality in each tab. Keep the tab navigation structure intact."
-        },
-        {
-          "path": "frontend/src/components/admin/ThirdPaperManagementForm.tsx",
-          "operation": "modify",
-          "description": "Remove Add buttons from all three tabs: Topics, Videos, and Notes. Hide or remove the input fields for adding new topics (title, description), videos (title, description, youtubeUrl), and notes (title, description, driveUrl) along with their submit buttons. Preserve the existing content lists with delete functionality in each tab. Maintain the tab structure and styling."
-        },
-        {
-          "path": "frontend/src/components/admin/ExamManagementForm.tsx",
-          "operation": "modify",
-          "description": "Remove the Add button and form inputs for creating new mock exams. Hide or remove the input fields for title, duration, description, and pdfUrl along with the submit button. Keep the list of existing mock exams visible with their delete functionality intact. Ensure the layout remains clean without the Add form section."
+          "description": "Update the Add button to use prominent styling with shadow effects and mix colors matching ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Apply className with shadow-lg, bg-gradient or mix-blend classes for high visibility. Ensure button is easily discoverable above the form or in a prominent position."
         },
         {
           "path": "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
           "operation": "modify",
-          "description": "Remove the Add button and form inputs for adding new standalone videos. Hide or remove the input fields for title, description, and youtubeUrl along with the submit button. Preserve the display of existing standalone videos with delete functionality. Maintain the form layout without the Add section."
+          "description": "Update the Add button to use prominent styling with shadow effects and mix colors matching ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Apply className with shadow-lg, bg-gradient or mix-blend classes for high visibility. Ensure button is easily discoverable above the form or in a prominent position."
         },
         {
           "path": "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
           "operation": "modify",
-          "description": "Remove the Add button and form inputs for adding new standalone notes. Hide or remove the input fields for title, description, and driveUrl along with the submit button. Keep the list of existing standalone notes visible with their delete functionality intact. Ensure the layout remains structured without the Add form section."
+          "description": "Update the Add button to use prominent styling with shadow effects and mix colors matching ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Apply className with shadow-lg, bg-gradient or mix-blend classes for high visibility. Ensure button is easily discoverable above the form or in a prominent position."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Verify and ensure all Add buttons in SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm have the same prominent visibility treatment with shadow and mix colors as the buttons in existing management forms",
+      "acceptanceCriteria": [
+        "All management forms have uniformly styled Add buttons",
+        "Shadow effects and mix colors are consistently applied across all forms",
+        "Buttons maintain visibility against different background colors and themes",
+        "Visual consistency is maintained across desktop and mobile views"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/SyllabusManagementForm.tsx",
+          "operation": "modify",
+          "description": "Verify the Add button matches the exact visual treatment (shadow depth, color mixing, spacing, and positioning) used in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Ensure consistent hover states and responsive behavior across desktop and mobile viewports."
+        },
+        {
+          "path": "frontend/src/components/admin/StandaloneVideoManagementForm.tsx",
+          "operation": "modify",
+          "description": "Verify the Add button matches the exact visual treatment (shadow depth, color mixing, spacing, and positioning) used in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Ensure consistent hover states and responsive behavior across desktop and mobile viewports."
+        },
+        {
+          "path": "frontend/src/components/admin/StandaloneNoteManagementForm.tsx",
+          "operation": "modify",
+          "description": "Verify the Add button matches the exact visual treatment (shadow depth, color mixing, spacing, and positioning) used in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm. Ensure consistent hover states and responsive behavior across desktop and mobile viewports."
         }
       ]
     }

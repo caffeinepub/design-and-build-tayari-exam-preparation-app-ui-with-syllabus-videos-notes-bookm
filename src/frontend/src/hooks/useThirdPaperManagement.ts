@@ -83,16 +83,6 @@ export function useThirdPaperManagement() {
     },
   });
 
-  const deleteNoteMutation = useMutation({
-    mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
-      return actor.deleteThirdPaperNote(BigInt(index));
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['thirdPaperNotes'] });
-    },
-  });
-
   return {
     topics: topicsQuery.data,
     videos: videosQuery.data,
@@ -102,12 +92,10 @@ export function useThirdPaperManagement() {
     addVideo: addVideoMutation.mutateAsync,
     deleteVideo: deleteVideoMutation.mutateAsync,
     addNote: addNoteMutation.mutateAsync,
-    deleteNote: deleteNoteMutation.mutateAsync,
     isAddingTopic: addTopicMutation.isPending,
     isAddingVideo: addVideoMutation.isPending,
     isAddingNote: addNoteMutation.isPending,
     isDeletingTopic: deleteTopicMutation.isPending,
     isDeletingVideo: deleteVideoMutation.isPending,
-    isDeletingNote: deleteNoteMutation.isPending,
   };
 }

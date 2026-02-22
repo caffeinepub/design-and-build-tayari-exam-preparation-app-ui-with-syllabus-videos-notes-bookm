@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { GKTopic, GKVideo } from '../backend';
+import type { GKTopic, GKVideo, GKNote } from '../backend';
 
 export function useGKManagement() {
   const { actor, isFetching } = useActor();
@@ -20,6 +20,15 @@ export function useGKManagement() {
     queryFn: async () => {
       if (!actor) return [];
       return actor.getGKVideos();
+    },
+    enabled: !!actor && !isFetching,
+  });
+
+  const notesQuery = useQuery<GKNote[]>({
+    queryKey: ['gkNotes'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getGKNotes();
     },
     enabled: !!actor && !isFetching,
   });
@@ -64,15 +73,28 @@ export function useGKManagement() {
     },
   });
 
+  const addNoteMutation = useMutation({
+    mutationFn: async (note: GKNote) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.addGKNote(note);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['gkNotes'] });
+    },
+  });
+
   return {
     topics: topicsQuery.data,
     videos: videosQuery.data,
+    notes: notesQuery.data,
     addTopic: addTopicMutation.mutateAsync,
     deleteTopic: deleteTopicMutation.mutateAsync,
     addVideo: addVideoMutation.mutateAsync,
     deleteVideo: deleteVideoMutation.mutateAsync,
+    addNote: addNoteMutation.mutateAsync,
     isAddingTopic: addTopicMutation.isPending,
     isAddingVideo: addVideoMutation.isPending,
+    isAddingNote: addNoteMutation.isPending,
     isDeletingTopic: deleteTopicMutation.isPending,
     isDeletingVideo: deleteVideoMutation.isPending,
   };

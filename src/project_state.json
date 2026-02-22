@@ -1,16 +1,30 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "New project",
-  "architectural_notes": [],
+  "summary": "Educational/Exam Preparation Platform with multiple subject categories (GK, IQ, Karalaya Byabasthapan, Sambidhan, Maths, Sewa Byabasthapan, Kanun, Old Questions, Exam, Notes) where users can add questions/content to each topic with prominent Add buttons using shadow and mix colors for visibility",
+  "architectural_notes": [
+    "Backend: Motoko (Internet Computer)",
+    "Frontend: React + TypeScript + Tailwind CSS",
+    "Authentication: Internet Identity",
+    "Subject categories: GK, IQ, Karalaya Byabasthapan, Sambidhan, Maths, Sewa Byabasthapan, Kanun, Old Questions, Exam, Notes",
+    "Uniform design across all sections with prominent Add buttons"
+  ],
   "known_issues": [],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-remove-the-add-button-from-the-admin-panel-display-across-all-management-forms-syllabus-gk-iq-second-paper-third-paper-exams-videos-and-notes",
-      "title": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
+      "id": "feature-add-prominent-add-buttons-with-shadow-and-mix-colors-to-all-remaining-management-sections-that-currently-lack-visible-add-buttons-ensuring-consistent-styling-with-existing-implementations-in-exammanagementform-gkmanagementform-iqmanagementform-oldquestionsmanagementform-secondpapermanagementform-and-thirdpapermanagementform",
+      "title": "Add prominent Add buttons with shadow and mix colors to all remaining management sections that currently lack visible Add buttons, ensuring consistent styling with existing implementations in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
       "reqIds": [
-        "REQ-1"
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-and-ensure-all-add-buttons-in-syllabusmanagementform-standalonevideomanagementform-and-standalonenotemanagementform-have-the-same-prominent-visibility-treatment-with-shadow-and-mix-colors-as-the-buttons-in-exammanagementform-gkmanagementform-iqmanagementform-oldquestionsmanagementform-secondpapermanagementform-and-thirdpapermanagementform",
+      "title": "Verify and ensure all Add buttons in SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm have the same prominent visibility treatment with shadow and mix colors as the buttons in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
+      "reqIds": [
+        "REQ-12"
       ],
       "version": 1
     }
@@ -18,12 +32,18 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Remove add button from display",
+      "summary": "Add prominent Add buttons with shadow and mix colors to all sections/topics (GK, IQ, Karalaya Byabasthapan, Sambidhan, Maths, Sewa Byabasthapan, Kanun, Old Questions, Exam, Notes)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Implement functionality for users to add questions/content to each topic/section",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "projectName": "Remove add button from display",
+  "projectName": "Kharidar Tayari",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

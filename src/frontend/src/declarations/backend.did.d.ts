@@ -11,18 +11,12 @@ import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
 export type DocumentIdentifier = string;
+export interface GKNote { 'title' : string, 'content' : string }
 export interface GKTopic { 'title' : string, 'description' : string }
-export interface GKVideo {
-  'title' : string,
-  'description' : string,
-  'youtubeUrl' : string,
-}
+export interface GKVideo { 'title' : string, 'youtubeUrl' : string }
 export interface IQCategory { 'title' : string, 'description' : string }
-export interface IQVideo {
-  'title' : string,
-  'description' : string,
-  'youtubeUrl' : string,
-}
+export interface IQNote { 'title' : string, 'content' : string }
+export interface IQVideo { 'title' : string, 'youtubeUrl' : string }
 export interface MockExam {
   'title' : string,
   'duration' : bigint,
@@ -30,17 +24,15 @@ export interface MockExam {
   'pdfUrl' : string,
 }
 export type NoteIdentifier = string;
-export interface SecondPaperNote {
-  'driveUrl' : string,
+export interface OldQuestion {
   'title' : string,
-  'description' : string,
+  'year' : bigint,
+  'paperType' : string,
+  'pdfUrl' : string,
 }
+export interface SecondPaperNote { 'title' : string, 'content' : string }
 export interface SecondPaperTopic { 'title' : string, 'description' : string }
-export interface SecondPaperVideo {
-  'title' : string,
-  'description' : string,
-  'youtubeUrl' : string,
-}
+export interface SecondPaperVideo { 'title' : string, 'youtubeUrl' : string }
 export interface StandaloneNote {
   'driveUrl' : string,
   'title' : string,
@@ -57,29 +49,29 @@ export interface SyllabusEntry {
   'published' : boolean,
   'description' : string,
 }
-export interface ThirdPaperNote {
-  'driveUrl' : string,
-  'title' : string,
-  'description' : string,
-}
+export interface ThirdPaperNote { 'title' : string, 'content' : string }
 export interface ThirdPaperTopic { 'title' : string, 'description' : string }
-export interface ThirdPaperVideo {
-  'title' : string,
-  'description' : string,
-  'youtubeUrl' : string,
-}
+export interface ThirdPaperVideo { 'title' : string, 'youtubeUrl' : string }
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  /**
+   * / *********
+   * /    * Comments *
+   * /    ***********
+   */
   'addComment' : ActorMethod<[string, bigint], undefined>,
+  'addGKNote' : ActorMethod<[GKNote], undefined>,
   'addGKTopic' : ActorMethod<[GKTopic], undefined>,
   'addGKVideo' : ActorMethod<[GKVideo], undefined>,
   'addIQCategory' : ActorMethod<[IQCategory], undefined>,
+  'addIQNote' : ActorMethod<[IQNote], undefined>,
   'addIQVideo' : ActorMethod<[IQVideo], undefined>,
   'addMockExam' : ActorMethod<[MockExam], undefined>,
+  'addOldQuestion' : ActorMethod<[OldQuestion], undefined>,
   'addSecondPaperNote' : ActorMethod<[SecondPaperNote], undefined>,
   'addSecondPaperTopic' : ActorMethod<[SecondPaperTopic], undefined>,
   'addSecondPaperVideo' : ActorMethod<[SecondPaperVideo], undefined>,
@@ -97,24 +89,26 @@ export interface _SERVICE {
   'deleteIQCategory' : ActorMethod<[bigint], undefined>,
   'deleteIQVideo' : ActorMethod<[bigint], undefined>,
   'deleteMockExam' : ActorMethod<[bigint], undefined>,
-  'deleteSecondPaperNote' : ActorMethod<[bigint], undefined>,
+  'deleteOldQuestion' : ActorMethod<[bigint], undefined>,
   'deleteSecondPaperTopic' : ActorMethod<[bigint], undefined>,
   'deleteSecondPaperVideo' : ActorMethod<[bigint], undefined>,
   'deleteStandaloneNote' : ActorMethod<[bigint], undefined>,
   'deleteStandaloneVideo' : ActorMethod<[bigint], undefined>,
   'deleteSyllabusEntry' : ActorMethod<[bigint], undefined>,
-  'deleteThirdPaperNote' : ActorMethod<[bigint], undefined>,
   'deleteThirdPaperTopic' : ActorMethod<[bigint], undefined>,
   'deleteThirdPaperVideo' : ActorMethod<[bigint], undefined>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getComments' : ActorMethod<[], Array<Array<string>>>,
+  'getGKNotes' : ActorMethod<[], Array<GKNote>>,
   'getGKTopics' : ActorMethod<[], Array<GKTopic>>,
   'getGKVideos' : ActorMethod<[], Array<GKVideo>>,
   'getIQCategories' : ActorMethod<[], Array<IQCategory>>,
+  'getIQNotes' : ActorMethod<[], Array<IQNote>>,
   'getIQVideos' : ActorMethod<[], Array<IQVideo>>,
   'getMockExams' : ActorMethod<[], Array<MockExam>>,
   'getNoteBookmarks' : ActorMethod<[], Array<NoteIdentifier>>,
+  'getOldQuestions' : ActorMethod<[], Array<OldQuestion>>,
   'getSecondPaperNotes' : ActorMethod<[], Array<SecondPaperNote>>,
   'getSecondPaperTopics' : ActorMethod<[], Array<SecondPaperTopic>>,
   'getSecondPaperVideos' : ActorMethod<[], Array<SecondPaperVideo>>,

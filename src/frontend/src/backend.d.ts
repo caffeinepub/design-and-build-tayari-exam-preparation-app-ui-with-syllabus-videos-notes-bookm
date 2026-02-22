@@ -9,12 +9,10 @@ export interface None {
 export type Option<T> = Some<T> | None;
 export interface ThirdPaperVideo {
     title: string;
-    description: string;
     youtubeUrl: string;
 }
 export interface SecondPaperVideo {
     title: string;
-    description: string;
     youtubeUrl: string;
 }
 export interface SyllabusEntry {
@@ -38,18 +36,15 @@ export interface SecondPaperTopic {
     description: string;
 }
 export interface SecondPaperNote {
-    driveUrl: string;
     title: string;
-    description: string;
+    content: string;
 }
 export interface IQVideo {
     title: string;
-    description: string;
     youtubeUrl: string;
 }
 export interface GKVideo {
     title: string;
-    description: string;
     youtubeUrl: string;
 }
 export interface ThirdPaperTopic {
@@ -64,11 +59,24 @@ export interface GKTopic {
     title: string;
     description: string;
 }
+export interface IQNote {
+    title: string;
+    content: string;
+}
+export interface GKNote {
+    title: string;
+    content: string;
+}
 export type DocumentIdentifier = string;
 export interface ThirdPaperNote {
-    driveUrl: string;
     title: string;
-    description: string;
+    content: string;
+}
+export interface OldQuestion {
+    title: string;
+    year: bigint;
+    paperType: string;
+    pdfUrl: string;
 }
 export type NoteIdentifier = string;
 export interface UserProfile {
@@ -86,12 +94,20 @@ export enum UserRole {
     guest = "guest"
 }
 export interface backendInterface {
+    /**
+     * / *********
+     * /    * Comments *
+     * /    ***********
+     */
     addComment(comment: string, replyId: bigint): Promise<void>;
+    addGKNote(note: GKNote): Promise<void>;
     addGKTopic(topic: GKTopic): Promise<void>;
     addGKVideo(video: GKVideo): Promise<void>;
     addIQCategory(category: IQCategory): Promise<void>;
+    addIQNote(note: IQNote): Promise<void>;
     addIQVideo(video: IQVideo): Promise<void>;
     addMockExam(exam: MockExam): Promise<void>;
+    addOldQuestion(question: OldQuestion): Promise<void>;
     addSecondPaperNote(note: SecondPaperNote): Promise<void>;
     addSecondPaperTopic(topic: SecondPaperTopic): Promise<void>;
     addSecondPaperVideo(video: SecondPaperVideo): Promise<void>;
@@ -109,24 +125,26 @@ export interface backendInterface {
     deleteIQCategory(index: bigint): Promise<void>;
     deleteIQVideo(index: bigint): Promise<void>;
     deleteMockExam(index: bigint): Promise<void>;
-    deleteSecondPaperNote(index: bigint): Promise<void>;
+    deleteOldQuestion(index: bigint): Promise<void>;
     deleteSecondPaperTopic(index: bigint): Promise<void>;
     deleteSecondPaperVideo(index: bigint): Promise<void>;
     deleteStandaloneNote(index: bigint): Promise<void>;
     deleteStandaloneVideo(index: bigint): Promise<void>;
     deleteSyllabusEntry(index: bigint): Promise<void>;
-    deleteThirdPaperNote(index: bigint): Promise<void>;
     deleteThirdPaperTopic(index: bigint): Promise<void>;
     deleteThirdPaperVideo(index: bigint): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getComments(): Promise<Array<Array<string>>>;
+    getGKNotes(): Promise<Array<GKNote>>;
     getGKTopics(): Promise<Array<GKTopic>>;
     getGKVideos(): Promise<Array<GKVideo>>;
     getIQCategories(): Promise<Array<IQCategory>>;
+    getIQNotes(): Promise<Array<IQNote>>;
     getIQVideos(): Promise<Array<IQVideo>>;
     getMockExams(): Promise<Array<MockExam>>;
     getNoteBookmarks(): Promise<Array<NoteIdentifier>>;
+    getOldQuestions(): Promise<Array<OldQuestion>>;
     getSecondPaperNotes(): Promise<Array<SecondPaperNote>>;
     getSecondPaperTopics(): Promise<Array<SecondPaperTopic>>;
     getSecondPaperVideos(): Promise<Array<SecondPaperVideo>>;

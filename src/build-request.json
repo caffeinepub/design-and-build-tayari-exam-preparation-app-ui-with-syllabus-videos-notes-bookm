@@ -1,37 +1,63 @@
 {
   "kind": "build_request",
-  "title": "Remove add button from display",
+  "title": "Make Add buttons visible across all management sections",
+  "projectName": "Kharidar Tayari",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Remove the 'Add' button from the admin panel display across all management forms (Syllabus, GK, IQ, Second Paper, Third Paper, Exams, Videos, and Notes)",
+      "id": "REQ-11",
+      "text": "Add prominent Add buttons with shadow and mix colors to all remaining management sections that currently lack visible Add buttons, ensuring consistent styling with existing implementations in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5",
+          "msg-7",
+          "msg-9"
         ],
         "quotes": [
-          "hlo kina ho add ko botton nai chaina ta display ma"
+          "kunai pani topic or section ma chaina add button: solar system ko pachadi pani chaina geography of world ko pachadi pani dekhinna",
+          "Shadow mix color use gara ra",
+          "kunai pani topic or section ma chaina or visiable chaina"
         ]
       },
       "acceptanceCriteria": [
-        "Add buttons are no longer visible in any admin panel section",
-        "Users can still view existing content but cannot add new items",
-        "Delete functionality remains intact if needed",
-        "No console errors or broken UI from button removal"
+        "Add buttons are visible in all management forms including SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm",
+        "All Add buttons use consistent shadow styling and mix colors for high visibility",
+        "Add buttons are positioned consistently across all sections (GK topics, IQ categories, Second Paper topics, Third Paper topics, Syllabus, Old Questions, Exam, Notes)",
+        "Button styling matches the visual design pattern established in existing management forms"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Verify and ensure all Add buttons in SyllabusManagementForm, StandaloneVideoManagementForm, and StandaloneNoteManagementForm have the same prominent visibility treatment with shadow and mix colors as the buttons in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5",
+          "msg-7"
+        ],
+        "quotes": [
+          "gk ok sabai topic ma, iq ko sabai topic karalaya babastapan ko sabai topic ma , sambhadin ko sabai topic ma, maths ko sabai topic ma , sewa babastapan ko sabai topic ma kanun ko ma pani, old question ko ma pani ra exam ko ma pani add garnus ra notes ko section ma pani"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All management forms have uniformly styled Add buttons",
+        "Shadow effects and mix colors are consistently applied across all forms",
+        "Buttons maintain visibility against different background colors and themes",
+        "Visual consistency is maintained across desktop and mobile views"
       ]
     }
   ],
   "constraints": [
-    "Preserve existing delete functionality in admin forms",
-    "Do not modify backend logic or data structures",
-    "Maintain existing UI layout and styling for remaining elements"
+    "Do not modify the existing functionality of Add buttons in ExamManagementForm, GKManagementForm, IQManagementForm, OldQuestionsManagementForm, SecondPaperManagementForm, and ThirdPaperManagementForm",
+    "Maintain the existing form structure and validation logic in all management components",
+    "Use the same shadow and color mixing approach across all Add buttons for visual consistency"
   ],
   "nonGoals": [
-    "Removing delete functionality",
-    "Changing the admin panel navigation or tab structure",
-    "Modifying user authentication or access control"
+    "Changing the data models or backend API endpoints",
+    "Modifying the authentication or admin guard logic",
+    "Altering the functionality of existing CRUD operations",
+    "Redesigning the overall admin panel layout or navigation"
   ],
   "imageRequirements": {
     "required": [],
