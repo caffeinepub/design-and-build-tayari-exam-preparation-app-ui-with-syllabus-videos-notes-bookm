@@ -1,0 +1,60 @@
+{
+  "kind": "build_request",
+  "title": "Fix TAYARI logo transparent background and shrink signature on SplashScreen",
+  "projectName": "TAYARI",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "In SplashScreen.tsx, apply CSS mix-blend-mode: multiply (or equivalent technique) to the TAYARI logo image so its white/checkered background becomes transparent and blends seamlessly with the teal/green gradient background of the intro page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ],
+        "quotes": [
+          "png bg intro page ko color sanga milos",
+          "transparent dekhauma"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The TAYARI logo no longer shows a visible white or checkered box around it on the splash screen.",
+        "The logo graphic appears to float directly on the teal gradient background.",
+        "No white rectangle or checkered pattern is visible behind the logo."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "In SplashScreen.tsx, make the signature image (जनक प्रसाद पाण्डे) smaller in size and remove its black background box by applying mix-blend-mode: multiply or screen so the signature blends with the teal gradient background without any black rectangle visible.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ],
+        "quotes": [
+          "sing halko sano banaunus",
+          "Signature (जनक प्रसाद पाण्डे) — कालो black box background हटाएर हल्का र साना बनाउने"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The signature image is noticeably smaller than its current size on the splash screen.",
+        "No black rectangular background box is visible around the signature.",
+        "The signature text/graphic blends with the teal gradient background.",
+        "The 'जनक प्रसाद पाण्डे' label below the signature remains visible."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files listed in frontend.immutablePaths.",
+    "Only modify SplashScreen.tsx and related CSS/styling — do not alter other pages or components."
+  ],
+  "nonGoals": [
+    "Replacing the actual PNG image files with new transparent versions.",
+    "Changes to any page other than the SplashScreen/intro page.",
+    "Backend changes."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        --background: 0.98 0.02 150;
+        --foreground: 0.15 0.02 150;
+        --card: 1 0 0;
+        --card-foreground: 0.15 0.02 150;
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0.02 150;
+        --primary: 0.55 0.18 165;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.95 0.02 150;
+        --secondary-foreground: 0.15 0.02 150;
+        --muted: 0.95 0.02 150;
+        --muted-foreground: 0.50 0.02 150;
+        --accent: 0.95 0.02 165;
+        --accent-foreground: 0.15 0.02 150;
+        --destructive: 0.58 0.24 27;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.92 0.02 150;
+        --input: 0.92 0.02 150;
+        --ring: 0.55 0.18 165;
+        --chart-1: 0.65 0.22 165;
+        --chart-2: 0.60 0.20 200;
+        --chart-3: 0.70 0.18 140;
+        --chart-4: 0.55 0.25 40;
+        --chart-5: 0.65 0.20 280;
+        
+        /* App page background gradient */
+        --app-bg-from: 0.97 0.01 40;
+        --app-bg-via: 0.96 0.02 60;
+        --app-bg-to: 0.95 0.03 80;
+    }
+
+    .dark {
+        --background: 0.15 0.02 150;
+        --foreground: 0.98 0.02 150;
+        --card: 0.20 0.02 150;
+        --card-foreground: 0.98 0.02 150;
+        --popover: 0.18 0.02 150;
+        --popover-foreground: 0.98 0.02 150;
+        --primary: 0.55 0.18 165;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.25 0.02 150;
+        --secondary-foreground: 0.98 0.02 150;
+        --muted: 0.25 0.02 150;
+        --muted-foreground: 0.65 0.02 150;
+        --accent: 0.30 0.02 165;
+        --accent-foreground: 0.98 0.02 150;
+        --destructive: 0.60 0.22 27;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.30 0.02 150;
+        --input: 0.30 0.02 150;
+        --ring: 0.55 0.18 165;
+        --chart-1: 0.65 0.22 165;
+        --chart-2: 0.60 0.20 200;
+        --chart-3: 0.70 0.18 140;
+        --chart-4: 0.55 0.25 40;
+        --chart-5: 0.65 0.20 280;
+        
+        /* App page background gradient - dark mode */
+        --app-bg-from: 0.12 0.02 240;
+        --app-bg-via: 0.14 0.02 220;
+        --app-bg-to: 0.16 0.02 200;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+@layer utilities {
+    .animate-in {
+        animation: enter 0.3s ease-out;
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.5s ease-in;
+    }
+    
+    .slide-in-from-bottom-4 {
+        animation: slideInFromBottom 0.5s ease-out;
+    }
+    
+    .app-page-bg {
+        background: linear-gradient(
+            to bottom right,
+            oklch(var(--app-bg-from)),
+            oklch(var(--app-bg-via)),
+            oklch(var(--app-bg-to))
+        );
+    }
+}
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Project involves a TAYARI-branded app with an intro page featuring a teal/green gradient background. Work is ongoing to make the TAYARI logo PNG transparent (removing white/checkered background) and make the signature (जनक प्रसाद पाण्डे) smaller with no black background, so both blend with the intro page color.",
+  "architectural_notes": [
+    "Intro page uses a teal/green gradient background; logo and signature images must have transparent backgrounds to blend correctly.",
+    "Use CSS mix-blend-mode: multiply and background: transparent to remove white/black boxes around PNG images."
+  ],
+  "known_issues": [
+    "TAYARI logo PNG has a visible white/checkered background that does not match the intro page teal gradient.",
+    "Signature (जनक प्रसाद पाण्डे) has a black background box and needs to be made smaller."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-in-splashscreen-tsx-apply-css-mix-blend-mode-multiply-or-equivalent-technique-to-the-tayari-logo-image-so-its-white-checkered-background-becomes-transparent-and-blends-seamlessly-with-the-teal-green-gradient-background-of-the-intro-page",
+      "title": "In SplashScreen.tsx, apply CSS mix-blend-mode: multiply (or equivalent technique) to the TAYARI logo image so its white/checkered background becomes transparent and blends seamlessly with the teal/green gradient background of the intro page.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-splashscreen-tsx-make-the-signature-image-smaller-in-size-and-remove-its-black-background-box-by-applying-mix-blend-mode-multiply-or-screen-so-the-signature-blends-with-the-teal-gradient-background-without-any-black-rectangle-visible",
+      "title": "In SplashScreen.tsx, make the signature image (जनक प्रसाद पाण्डे) smaller in size and remove its black background box by applying mix-blend-mode: multiply or screen so the signature blends with the teal gradient background without any black rectangle visible.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "gameProjectType": "none",
+  "projectName": "TAYARI",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

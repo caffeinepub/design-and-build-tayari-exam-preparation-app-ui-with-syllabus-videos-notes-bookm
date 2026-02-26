@@ -1,0 +1,48 @@
+import { useEffect } from 'react';
+
+export default function SplashScreen() {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500">
+      <div className="flex flex-col items-center justify-center space-y-12 animate-in fade-in duration-700">
+        <div className="relative">
+          <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl animate-pulse" />
+          <img
+            src="/assets/generated/tayari-logo.dim_512x512.png"
+            alt="TAYARI"
+            className="relative w-52 h-52 object-contain drop-shadow-2xl"
+            style={{ mixBlendMode: 'multiply' }}
+          />
+        </div>
+        <div className="text-center space-y-8">
+          <h1 className="text-3xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700 delay-150">
+            Kharidar Tayari
+          </h1>
+          <h2 className="text-2xl font-semibold text-white/95 drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700 delay-300">
+            सफलता को साथी
+          </h2>
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-8 right-8 flex flex-col items-end space-y-1">
+        <img
+          src="/assets/generated/signature.dim_800x300.png"
+          alt="Signature"
+          className="w-20 h-auto object-contain"
+          style={{ mixBlendMode: 'screen' }}
+        />
+        <span className="text-white/90 text-sm font-medium">जनक प्रसाद पाण्डे</span>
+      </div>
+    </div>
+  );
+}

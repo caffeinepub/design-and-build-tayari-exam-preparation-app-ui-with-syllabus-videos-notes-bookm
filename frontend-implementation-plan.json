@@ -1,0 +1,40 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix TAYARI logo transparent background and shrink signature on SplashScreen",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Apply CSS mix-blend-mode technique to TAYARI logo in SplashScreen.tsx so its white/checkered background becomes transparent and blends seamlessly with the teal gradient background",
+      "acceptanceCriteria": [
+        "The TAYARI logo no longer shows a visible white or checkered box around it on the splash screen.",
+        "The logo graphic appears to float directly on the teal gradient background.",
+        "No white rectangle or checkered pattern is visible behind the logo."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/SplashScreen.tsx",
+          "operation": "modify",
+          "description": "Apply mix-blend-mode: multiply (or screen/darken) CSS to the TAYARI logo image element (frontend/public/assets/generated/tayari-logo.dim_512x512.png) to remove the white/checkered background and blend it seamlessly with the teal gradient. Use inline style or className with Tailwind to add the blend mode. Verify the logo appears to float directly on the gradient background without any visible white rectangle."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Make the signature image smaller and remove its black background box by applying mix-blend-mode so it blends with the teal gradient background in SplashScreen.tsx",
+      "acceptanceCriteria": [
+        "The signature image is noticeably smaller than its current size on the splash screen.",
+        "No black rectangular background box is visible around the signature.",
+        "The signature text/graphic blends with the teal gradient background.",
+        "The 'जनक प्रसाद पाण्डे' label below the signature remains visible."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/SplashScreen.tsx",
+          "operation": "modify",
+          "description": "Reduce the size of the signature image (frontend/public/assets/generated/janak-prasad-signature.dim_400x200.png) by adjusting its width/height CSS (e.g., reduce from current size to 50-60% smaller using Tailwind classes or inline styles). Apply mix-blend-mode: multiply or screen to remove the black background box and blend the signature with the teal gradient. Ensure the 'जनक प्रसाद पाण्डे' text label below the signature remains visible and readable."
+        }
+      ]
+    }
+  ]
+}

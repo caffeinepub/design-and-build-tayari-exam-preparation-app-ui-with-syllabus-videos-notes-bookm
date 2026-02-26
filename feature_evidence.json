@@ -1,0 +1,43 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-in-splashscreen-tsx-apply-css-mix-blend-mode-multiply-or-equivalent-technique-to-the-tayari-logo-image-so-its-white-checkered-background-becomes-transparent-and-blends-seamlessly-with-the-teal-green-gradient-background-of-the-intro-page",
+      "featureTitle": "In SplashScreen.tsx, apply CSS mix-blend-mode: multiply (or equivalent technique) to the TAYARI logo image so its white/checkered background becomes transparent and blends seamlessly with the teal/green gradient background of the intro page.",
+      "files": [
+        "frontend/src/pages/SplashScreen.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-splashscreen-tsx-make-the-signature-image-smaller-in-size-and-remove-its-black-background-box-by-applying-mix-blend-mode-multiply-or-screen-so-the-signature-blends-with-the-teal-gradient-background-without-any-black-rectangle-visible",
+      "featureTitle": "In SplashScreen.tsx, make the signature image (जनक प्रसाद पाण्डे) smaller in size and remove its black background box by applying mix-blend-mode: multiply or screen so the signature blends with the teal gradient background without any black rectangle visible.",
+      "files": [
+        "frontend/src/pages/SplashScreen.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

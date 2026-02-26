@@ -1,0 +1,48 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T08:43:14.001Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "In SplashScreen.tsx, apply CSS mix-blend-mode: multiply (or equivalent technique) to the TAYARI logo image so its white/checkered background becomes transparent and blends seamlessly with the teal/green gradient background of the intro page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/SplashScreen.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/SplashScreen.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "In SplashScreen.tsx, make the signature image (जनक प्रसाद पाण्डे) smaller in size and remove its black background box by applying mix-blend-mode: multiply or screen so the signature blends with the teal gradient background without any black rectangle visible.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/SplashScreen.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/SplashScreen.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/pages/SplashScreen.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
