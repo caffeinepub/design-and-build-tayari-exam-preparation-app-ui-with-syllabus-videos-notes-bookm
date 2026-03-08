@@ -4,19 +4,19 @@ interface YouTubePlayerProps {
 
 export default function YouTubePlayer({ url }: YouTubePlayerProps) {
   const getEmbedUrl = (videoUrl: string) => {
-    let videoId = '';
-    
-    if (videoUrl.includes('youtu.be/')) {
-      videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0] || '';
-    } else if (videoUrl.includes('youtube.com/watch')) {
-      videoId = videoUrl.split('v=')[1]?.split('&')[0] || '';
-    } else if (videoUrl.includes('youtube.com/live/')) {
-      videoId = videoUrl.split('live/')[1]?.split('?')[0] || '';
-    } else if (videoUrl.includes('youtube.com/playlist')) {
-      const listId = videoUrl.split('list=')[1]?.split('&')[0] || '';
+    let videoId = "";
+
+    if (videoUrl.includes("youtu.be/")) {
+      videoId = videoUrl.split("youtu.be/")[1]?.split("?")[0] || "";
+    } else if (videoUrl.includes("youtube.com/watch")) {
+      videoId = videoUrl.split("v=")[1]?.split("&")[0] || "";
+    } else if (videoUrl.includes("youtube.com/live/")) {
+      videoId = videoUrl.split("live/")[1]?.split("?")[0] || "";
+    } else if (videoUrl.includes("youtube.com/playlist")) {
+      const listId = videoUrl.split("list=")[1]?.split("&")[0] || "";
       return `https://www.youtube.com/embed/videoseries?list=${listId}`;
     }
-    
+
     return `https://www.youtube.com/embed/${videoId}`;
   };
 

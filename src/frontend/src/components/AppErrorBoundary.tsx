@@ -1,5 +1,6 @@
-import React, { Component, ReactNode } from 'react';
-import { Button } from './ui/button';
+import type React from "react";
+import { Component, type ReactNode } from "react";
+import { Button } from "./ui/button";
 
 interface Props {
   children: ReactNode;
@@ -21,9 +22,9 @@ class AppErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Application error caught by boundary:', error);
-    console.error('Error stack:', error.stack);
-    console.error('Component stack:', errorInfo.componentStack);
+    console.error("Application error caught by boundary:", error);
+    console.error("Error stack:", error.stack);
+    console.error("Component stack:", errorInfo.componentStack);
   }
 
   handleReload = () => {
@@ -40,10 +41,11 @@ class AppErrorBoundary extends Component<Props, State> {
                 Something went wrong
               </h1>
               <p className="text-muted-foreground">
-                We encountered an unexpected error. Please try reloading the page.
+                We encountered an unexpected error. Please try reloading the
+                page.
               </p>
             </div>
-            
+
             {this.state.error && (
               <div className="bg-muted p-4 rounded-lg text-left">
                 <p className="text-sm font-mono text-muted-foreground break-all">
@@ -51,12 +53,8 @@ class AppErrorBoundary extends Component<Props, State> {
                 </p>
               </div>
             )}
-            
-            <Button 
-              onClick={this.handleReload}
-              size="lg"
-              className="w-full"
-            >
+
+            <Button onClick={this.handleReload} size="lg" className="w-full">
               Reload Page
             </Button>
           </div>

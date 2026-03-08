@@ -14,4 +14,5 @@ export interface SubjectConfig {
   title: string;
   topics: Topic[];
   notesUrl?: string;
+  notesUrls?: string[];
 }

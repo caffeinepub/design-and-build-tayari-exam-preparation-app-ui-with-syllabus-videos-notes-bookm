@@ -1,30 +1,31 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
-import { useSyllabusManagement } from '@/hooks/useSyllabusManagement';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useSyllabusManagement } from "@/hooks/useSyllabusManagement";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function SyllabusManagementForm() {
-  const { entries, addEntry, deleteEntry, isAdding, isDeleting } = useSyllabusManagement();
+  const { entries, addEntry, deleteEntry, isAdding, isDeleting } =
+    useSyllabusManagement();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    driveUrl: '',
+    title: "",
+    description: "",
+    driveUrl: "",
     published: true,
   });
 
   const handleDelete = async (index: number) => {
-    if (confirm('Are you sure you want to delete this syllabus entry?')) {
+    if (confirm("Are you sure you want to delete this syllabus entry?")) {
       try {
         await deleteEntry(index);
-        toast.success('Syllabus entry deleted successfully!');
+        toast.success("Syllabus entry deleted successfully!");
       } catch (error) {
-        toast.error('Failed to delete syllabus entry');
+        toast.error("Failed to delete syllabus entry");
         console.error(error);
       }
     }
@@ -33,17 +34,22 @@ export default function SyllabusManagementForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.driveUrl.trim()) {
-      toast.error('Title and Drive URL are required');
+      toast.error("Title and Drive URL are required");
       return;
     }
 
     try {
       await addEntry(formData);
-      toast.success('Syllabus entry added successfully!');
-      setFormData({ title: '', description: '', driveUrl: '', published: true });
+      toast.success("Syllabus entry added successfully!");
+      setFormData({
+        title: "",
+        description: "",
+        driveUrl: "",
+        published: true,
+      });
       setShowForm(false);
     } catch (error) {
-      toast.error('Failed to add syllabus entry');
+      toast.error("Failed to add syllabus entry");
       console.error(error);
     }
   };
@@ -57,23 +63,28 @@ export default function SyllabusManagementForm() {
           </h2>
           <Button
             onClick={() => setShowForm(!showForm)}
-            variant={showForm ? 'outline' : 'default'}
+            variant={showForm ? "outline" : "default"}
             size="default"
             className="shrink-0 w-full sm:w-auto bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold"
           >
             <Plus className="w-4 h-4 mr-2" />
-            {showForm ? 'Cancel' : 'Add Entry'}
+            {showForm ? "Cancel" : "Add Entry"}
           </Button>
         </div>
 
         {showForm && (
-          <form onSubmit={handleSubmit} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+          <form
+            onSubmit={handleSubmit}
+            className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+          >
             <div>
               <Label htmlFor="title">Title *</Label>
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
                 placeholder="Enter syllabus title"
                 required
               />
@@ -83,7 +94,9 @@ export default function SyllabusManagementForm() {
               <Textarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Enter syllabus description"
                 rows={3}
               />
@@ -93,16 +106,22 @@ export default function SyllabusManagementForm() {
               <Input
                 id="driveUrl"
                 value={formData.driveUrl}
-                onChange={(e) => setFormData({ ...formData, driveUrl: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, driveUrl: e.target.value })
+                }
                 placeholder="Enter Google Drive URL"
                 required
               />
             </div>
             <div className="flex gap-2">
               <Button type="submit" disabled={isAdding}>
-                {isAdding ? 'Adding...' : 'Add Entry'}
+                {isAdding ? "Adding..." : "Add Entry"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowForm(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -112,6 +131,7 @@ export default function SyllabusManagementForm() {
         <div className="space-y-3">
           {entries?.map((entry, index) => (
             <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
               key={index}
               className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
             >

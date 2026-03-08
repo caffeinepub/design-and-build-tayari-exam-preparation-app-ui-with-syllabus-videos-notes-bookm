@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useIQManagement } from '@/hooks/useIQManagement';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { useIQManagement } from "@/hooks/useIQManagement";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function IQManagementForm() {
   const {
@@ -29,29 +29,35 @@ export default function IQManagementForm() {
   const [showCategoryForm, setShowCategoryForm] = useState(false);
   const [showVideoForm, setShowVideoForm] = useState(false);
   const [showNoteForm, setShowNoteForm] = useState(false);
-  const [categoryFormData, setCategoryFormData] = useState({ title: '', description: '' });
-  const [videoFormData, setVideoFormData] = useState({ title: '', youtubeUrl: '' });
-  const [noteFormData, setNoteFormData] = useState({ title: '', content: '' });
+  const [categoryFormData, setCategoryFormData] = useState({
+    title: "",
+    description: "",
+  });
+  const [videoFormData, setVideoFormData] = useState({
+    title: "",
+    youtubeUrl: "",
+  });
+  const [noteFormData, setNoteFormData] = useState({ title: "", content: "" });
 
   const handleDeleteCategory = async (index: number) => {
-    if (confirm('Are you sure you want to delete this category?')) {
+    if (confirm("Are you sure you want to delete this category?")) {
       try {
         await deleteCategory(index);
-        toast.success('Category deleted successfully!');
+        toast.success("Category deleted successfully!");
       } catch (error) {
-        toast.error('Failed to delete category');
+        toast.error("Failed to delete category");
         console.error(error);
       }
     }
   };
 
   const handleDeleteVideo = async (index: number) => {
-    if (confirm('Are you sure you want to delete this video?')) {
+    if (confirm("Are you sure you want to delete this video?")) {
       try {
         await deleteVideo(index);
-        toast.success('Video deleted successfully!');
+        toast.success("Video deleted successfully!");
       } catch (error) {
-        toast.error('Failed to delete video');
+        toast.error("Failed to delete video");
         console.error(error);
       }
     }
@@ -60,17 +66,17 @@ export default function IQManagementForm() {
   const handleSubmitCategory = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!categoryFormData.title.trim()) {
-      toast.error('Title is required');
+      toast.error("Title is required");
       return;
     }
 
     try {
       await addCategory(categoryFormData);
-      toast.success('Category added successfully!');
-      setCategoryFormData({ title: '', description: '' });
+      toast.success("Category added successfully!");
+      setCategoryFormData({ title: "", description: "" });
       setShowCategoryForm(false);
     } catch (error) {
-      toast.error('Failed to add category');
+      toast.error("Failed to add category");
       console.error(error);
     }
   };
@@ -78,24 +84,24 @@ export default function IQManagementForm() {
   const handleSubmitVideo = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!videoFormData.title.trim() || !videoFormData.youtubeUrl.trim()) {
-      toast.error('Title and YouTube URL are required');
+      toast.error("Title and YouTube URL are required");
       return;
     }
 
     // Validate YouTube URL format
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
     if (!youtubeRegex.test(videoFormData.youtubeUrl)) {
-      toast.error('Please enter a valid YouTube URL');
+      toast.error("Please enter a valid YouTube URL");
       return;
     }
 
     try {
       await addVideo(videoFormData);
-      toast.success('Video added successfully!');
-      setVideoFormData({ title: '', youtubeUrl: '' });
+      toast.success("Video added successfully!");
+      setVideoFormData({ title: "", youtubeUrl: "" });
       setShowVideoForm(false);
     } catch (error) {
-      toast.error('Failed to add video');
+      toast.error("Failed to add video");
       console.error(error);
     }
   };
@@ -103,17 +109,17 @@ export default function IQManagementForm() {
   const handleSubmitNote = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!noteFormData.title.trim() || !noteFormData.content.trim()) {
-      toast.error('Title and content are required');
+      toast.error("Title and content are required");
       return;
     }
 
     try {
       await addNote(noteFormData);
-      toast.success('Note added successfully!');
-      setNoteFormData({ title: '', content: '' });
+      toast.success("Note added successfully!");
+      setNoteFormData({ title: "", content: "" });
       setShowNoteForm(false);
     } catch (error) {
-      toast.error('Failed to add note');
+      toast.error("Failed to add note");
       console.error(error);
     }
   };
@@ -134,23 +140,31 @@ export default function IQManagementForm() {
             </h2>
             <Button
               onClick={() => setShowCategoryForm(!showCategoryForm)}
-              variant={showCategoryForm ? 'outline' : 'default'}
+              variant={showCategoryForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showCategoryForm ? 'Cancel' : 'Add Category'}
+              {showCategoryForm ? "Cancel" : "Add Category"}
             </Button>
           </div>
 
           {showCategoryForm && (
-            <form onSubmit={handleSubmitCategory} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitCategory}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="category-title">Title *</Label>
                 <Input
                   id="category-title"
                   value={categoryFormData.title}
-                  onChange={(e) => setCategoryFormData({ ...categoryFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setCategoryFormData({
+                      ...categoryFormData,
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter category title"
                   required
                 />
@@ -160,16 +174,25 @@ export default function IQManagementForm() {
                 <Textarea
                   id="category-description"
                   value={categoryFormData.description}
-                  onChange={(e) => setCategoryFormData({ ...categoryFormData, description: e.target.value })}
+                  onChange={(e) =>
+                    setCategoryFormData({
+                      ...categoryFormData,
+                      description: e.target.value,
+                    })
+                  }
                   placeholder="Enter category description"
                   rows={3}
                 />
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAddingCategory}>
-                  {isAddingCategory ? 'Adding...' : 'Add Category'}
+                  {isAddingCategory ? "Adding..." : "Add Category"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowCategoryForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowCategoryForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -179,6 +202,7 @@ export default function IQManagementForm() {
           <div className="space-y-3">
             {categories?.map((category, index) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                 key={index}
                 className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
               >
@@ -220,23 +244,31 @@ export default function IQManagementForm() {
             </h2>
             <Button
               onClick={() => setShowVideoForm(!showVideoForm)}
-              variant={showVideoForm ? 'outline' : 'default'}
+              variant={showVideoForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showVideoForm ? 'Cancel' : 'Add Video'}
+              {showVideoForm ? "Cancel" : "Add Video"}
             </Button>
           </div>
 
           {showVideoForm && (
-            <form onSubmit={handleSubmitVideo} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitVideo}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="video-title">Topic Name *</Label>
                 <Input
                   id="video-title"
                   value={videoFormData.title}
-                  onChange={(e) => setVideoFormData({ ...videoFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setVideoFormData({
+                      ...videoFormData,
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter topic name"
                   required
                 />
@@ -246,16 +278,25 @@ export default function IQManagementForm() {
                 <Input
                   id="video-url"
                   value={videoFormData.youtubeUrl}
-                  onChange={(e) => setVideoFormData({ ...videoFormData, youtubeUrl: e.target.value })}
+                  onChange={(e) =>
+                    setVideoFormData({
+                      ...videoFormData,
+                      youtubeUrl: e.target.value,
+                    })
+                  }
                   placeholder="https://www.youtube.com/watch?v=..."
                   required
                 />
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAddingVideo}>
-                  {isAddingVideo ? 'Adding...' : 'Add Video'}
+                  {isAddingVideo ? "Adding..." : "Add Video"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowVideoForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowVideoForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -265,6 +306,7 @@ export default function IQManagementForm() {
           <div className="space-y-3">
             {videos?.map((video, index) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                 key={index}
                 className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
               >
@@ -309,23 +351,28 @@ export default function IQManagementForm() {
             </h2>
             <Button
               onClick={() => setShowNoteForm(!showNoteForm)}
-              variant={showNoteForm ? 'outline' : 'default'}
+              variant={showNoteForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showNoteForm ? 'Cancel' : 'Add Note'}
+              {showNoteForm ? "Cancel" : "Add Note"}
             </Button>
           </div>
 
           {showNoteForm && (
-            <form onSubmit={handleSubmitNote} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitNote}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="note-title">Topic Name *</Label>
                 <Input
                   id="note-title"
                   value={noteFormData.title}
-                  onChange={(e) => setNoteFormData({ ...noteFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setNoteFormData({ ...noteFormData, title: e.target.value })
+                  }
                   placeholder="Enter topic name"
                   required
                 />
@@ -335,7 +382,12 @@ export default function IQManagementForm() {
                 <Textarea
                   id="note-content"
                   value={noteFormData.content}
-                  onChange={(e) => setNoteFormData({ ...noteFormData, content: e.target.value })}
+                  onChange={(e) =>
+                    setNoteFormData({
+                      ...noteFormData,
+                      content: e.target.value,
+                    })
+                  }
                   placeholder="Enter note content"
                   rows={5}
                   required
@@ -343,9 +395,13 @@ export default function IQManagementForm() {
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAddingNote}>
-                  {isAddingNote ? 'Adding...' : 'Add Note'}
+                  {isAddingNote ? "Adding..." : "Add Note"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowNoteForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowNoteForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -355,6 +411,7 @@ export default function IQManagementForm() {
           <div className="space-y-3">
             {notes?.map((note, index) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                 key={index}
                 className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
               >

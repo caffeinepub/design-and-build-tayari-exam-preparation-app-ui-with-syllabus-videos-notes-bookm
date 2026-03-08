@@ -1,39 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 interface Notification {
   id: string;
   title: string;
   message: string;
-  category: 'update' | 'exam';
+  category: "update" | "exam";
   date: string;
   read: boolean;
 }
 
-const STORAGE_KEY = 'tayari_notifications';
+const STORAGE_KEY = "tayari_notifications";
 
 const defaultNotifications: Notification[] = [
   {
-    id: '1',
-    title: 'New Video Added',
-    message: 'New GK videos have been added to the course.',
-    category: 'update',
-    date: '2026-02-13',
+    id: "1",
+    title: "New Video Added",
+    message: "New GK videos have been added to the course.",
+    category: "update",
+    date: "2026-02-13",
     read: false,
   },
   {
-    id: '2',
-    title: 'Exam Schedule Released',
-    message: 'Kharidar exam dates have been announced for 2083.',
-    category: 'exam',
-    date: '2026-02-12',
+    id: "2",
+    title: "Exam Schedule Released",
+    message: "Kharidar exam dates have been announced for 2083.",
+    category: "exam",
+    date: "2026-02-12",
     read: false,
   },
   {
-    id: '3',
-    title: 'Notes Updated',
-    message: 'Constitution notes have been updated with latest amendments.',
-    category: 'update',
-    date: '2026-02-10',
+    id: "3",
+    title: "Notes Updated",
+    message: "Constitution notes have been updated with latest amendments.",
+    category: "update",
+    date: "2026-02-10",
     read: false,
   },
 ];
@@ -55,7 +55,9 @@ export function useNotifications() {
   }, []);
 
   const markAsRead = (id: string) => {
-    const updated = notifications.map((n) => (n.id === id ? { ...n, read: true } : n));
+    const updated = notifications.map((n) =>
+      n.id === id ? { ...n, read: true } : n,
+    );
     setNotifications(updated);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   };

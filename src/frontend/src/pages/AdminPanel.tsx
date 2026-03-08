@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AdminGuard from '../components/AdminGuard';
-import SyllabusManagementForm from '../components/admin/SyllabusManagementForm';
-import GKManagementForm from '../components/admin/GKManagementForm';
-import IQManagementForm from '../components/admin/IQManagementForm';
-import SecondPaperManagementForm from '../components/admin/SecondPaperManagementForm';
-import ThirdPaperManagementForm from '../components/admin/ThirdPaperManagementForm';
-import ExamManagementForm from '../components/admin/ExamManagementForm';
-import StandaloneVideoManagementForm from '../components/admin/StandaloneVideoManagementForm';
-import StandaloneNoteManagementForm from '../components/admin/StandaloneNoteManagementForm';
-import OldQuestionsManagementForm from '../components/admin/OldQuestionsManagementForm';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React, { useState } from "react";
+import AdminGuard from "../components/AdminGuard";
+import ExamManagementForm from "../components/admin/ExamManagementForm";
+import GKManagementForm from "../components/admin/GKManagementForm";
+import IQManagementForm from "../components/admin/IQManagementForm";
+import OldQuestionsManagementForm from "../components/admin/OldQuestionsManagementForm";
+import SecondPaperManagementForm from "../components/admin/SecondPaperManagementForm";
+import StandaloneNoteManagementForm from "../components/admin/StandaloneNoteManagementForm";
+import StandaloneVideoManagementForm from "../components/admin/StandaloneVideoManagementForm";
+import SyllabusManagementForm from "../components/admin/SyllabusManagementForm";
+import ThirdPaperManagementForm from "../components/admin/ThirdPaperManagementForm";
 
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState('syllabus');
+  const [activeTab, setActiveTab] = useState("syllabus");
 
   return (
     <AdminGuard>
@@ -25,7 +25,11 @@ export default function AdminPanel() {
             </p>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-3 lg:grid-cols-9 mb-8">
               <TabsTrigger value="syllabus">Syllabus</TabsTrigger>
               <TabsTrigger value="gk">GK</TabsTrigger>

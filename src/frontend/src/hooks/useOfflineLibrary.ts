@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 interface OfflineItem {
   id: string;
   title: string;
   url: string;
-  type: 'document' | 'video' | 'note';
+  type: "document" | "video" | "note";
 }
 
-const STORAGE_KEY = 'tayari_offline_library';
+const STORAGE_KEY = "tayari_offline_library";
 
 export function useOfflineLibrary() {
   const [items, setItems] = useState<OfflineItem[]>([]);

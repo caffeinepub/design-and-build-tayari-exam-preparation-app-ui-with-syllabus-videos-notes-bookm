@@ -1,13 +1,17 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { SecondPaperTopic, SecondPaperVideo, SecondPaperNote } from '../backend';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type {
+  SecondPaperNote,
+  SecondPaperTopic,
+  SecondPaperVideo,
+} from "../backend";
+import { useActor } from "./useActor";
 
 export function useSecondPaperManagement() {
   const { actor, isFetching } = useActor();
   const queryClient = useQueryClient();
 
   const topicsQuery = useQuery<SecondPaperTopic[]>({
-    queryKey: ['secondPaperTopics'],
+    queryKey: ["secondPaperTopics"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getSecondPaperTopics();
@@ -16,7 +20,7 @@ export function useSecondPaperManagement() {
   });
 
   const videosQuery = useQuery<SecondPaperVideo[]>({
-    queryKey: ['secondPaperVideos'],
+    queryKey: ["secondPaperVideos"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getSecondPaperVideos();
@@ -25,7 +29,7 @@ export function useSecondPaperManagement() {
   });
 
   const notesQuery = useQuery<SecondPaperNote[]>({
-    queryKey: ['secondPaperNotes'],
+    queryKey: ["secondPaperNotes"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getSecondPaperNotes();
@@ -35,51 +39,51 @@ export function useSecondPaperManagement() {
 
   const addTopicMutation = useMutation({
     mutationFn: async (topic: SecondPaperTopic) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addSecondPaperTopic(topic);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperTopics'] });
+      queryClient.invalidateQueries({ queryKey: ["secondPaperTopics"] });
     },
   });
 
   const deleteTopicMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteSecondPaperTopic(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperTopics'] });
+      queryClient.invalidateQueries({ queryKey: ["secondPaperTopics"] });
     },
   });
 
   const addVideoMutation = useMutation({
     mutationFn: async (video: SecondPaperVideo) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addSecondPaperVideo(video);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperVideos'] });
+      queryClient.invalidateQueries({ queryKey: ["secondPaperVideos"] });
     },
   });
 
   const deleteVideoMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteSecondPaperVideo(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperVideos'] });
+      queryClient.invalidateQueries({ queryKey: ["secondPaperVideos"] });
     },
   });
 
   const addNoteMutation = useMutation({
     mutationFn: async (note: SecondPaperNote) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addSecondPaperNote(note);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['secondPaperNotes'] });
+      queryClient.invalidateQueries({ queryKey: ["secondPaperNotes"] });
     },
   });
 

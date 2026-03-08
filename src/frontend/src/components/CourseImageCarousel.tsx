@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface CourseImageCarouselProps {
   images: string[];
   autoAdvanceInterval?: number;
 }
 
-export default function CourseImageCarousel({ 
-  images, 
-  autoAdvanceInterval = 3000 
+export default function CourseImageCarousel({
+  images,
+  autoAdvanceInterval = 3000,
 }: CourseImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -38,7 +38,7 @@ export default function CourseImageCarousel({
           alt={`खरिदार कोर्स ${currentIndex + 1}`}
           className="w-full h-full object-cover transition-opacity duration-500"
         />
-        
+
         {/* Navigation Buttons */}
         <Button
           variant="ghost"
@@ -60,14 +60,15 @@ export default function CourseImageCarousel({
 
       {/* Indicators */}
       <div className="flex items-center justify-center space-x-2 mt-3">
-        {images.map((_, index) => (
+        {images.map((img, index) => (
           <button
-            key={index}
+            type="button"
+            key={img}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex 
-                ? 'bg-white w-6' 
-                : 'bg-white/50 hover:bg-white/70'
+              index === currentIndex
+                ? "bg-white w-6"
+                : "bg-white/50 hover:bg-white/70"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

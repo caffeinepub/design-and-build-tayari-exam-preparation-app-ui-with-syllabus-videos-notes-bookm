@@ -1,7 +1,7 @@
-import React from 'react';
-import { useInternetIdentity } from '../hooks/useInternetIdentity';
-import { useIsAdmin } from '../hooks/useQueries';
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
+import type React from "react";
+import { useInternetIdentity } from "../hooks/useInternetIdentity";
+import { useIsAdmin } from "../hooks/useQueries";
 
 interface AdminGuardProps {
   children: React.ReactNode;

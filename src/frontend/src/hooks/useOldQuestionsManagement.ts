@@ -1,13 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { OldQuestion } from '../backend';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { OldQuestion } from "../backend";
+import { useActor } from "./useActor";
 
 export function useOldQuestionsManagement() {
   const { actor, isFetching } = useActor();
   const queryClient = useQueryClient();
 
   const questionsQuery = useQuery<OldQuestion[]>({
-    queryKey: ['oldQuestions'],
+    queryKey: ["oldQuestions"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getOldQuestions();
@@ -17,21 +17,21 @@ export function useOldQuestionsManagement() {
 
   const addMutation = useMutation({
     mutationFn: async (question: OldQuestion) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addOldQuestion(question);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['oldQuestions'] });
+      queryClient.invalidateQueries({ queryKey: ["oldQuestions"] });
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteOldQuestion(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['oldQuestions'] });
+      queryClient.invalidateQueries({ queryKey: ["oldQuestions"] });
     },
   });
 

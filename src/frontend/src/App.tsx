@@ -1,21 +1,35 @@
-import { RouterProvider, createRouter, createRoute, createRootRoute, Outlet } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import SplashScreen from './pages/SplashScreen';
-import Dashboard from './pages/Dashboard';
-import Syllabus from './pages/Syllabus';
-import SubjectContent from './pages/SubjectContent';
-import Notifications from './pages/Notifications';
-import VideoBookmarks from './pages/VideoBookmarks';
-import NotesBookmarks from './pages/NotesBookmarks';
-import OldQuestions from './pages/OldQuestions';
-import Exam from './pages/Exam';
-import OfflineLibrary from './pages/OfflineLibrary';
-import AdminPanel from './pages/AdminPanel';
-import { gkContent } from './content/gk';
-import { iqContent } from './content/iq';
-import { officeManagementContent, constitutionContent, mathsContent } from './content/secondPaper';
-import { serviceManagementContent, accountingContent, lawContent } from './content/thirdPaper';
-import AppErrorBoundary from './components/AppErrorBoundary';
+import {
+  Outlet,
+  RouterProvider,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import AppErrorBoundary from "./components/AppErrorBoundary";
+import { gkContent } from "./content/gk";
+import { iqContent } from "./content/iq";
+import {
+  constitutionContent,
+  mathsContent,
+  officeManagementContent,
+} from "./content/secondPaper";
+import {
+  accountingContent,
+  lawContent,
+  serviceManagementContent,
+} from "./content/thirdPaper";
+import AdminPanel from "./pages/AdminPanel";
+import Dashboard from "./pages/Dashboard";
+import Exam from "./pages/Exam";
+import NotesBookmarks from "./pages/NotesBookmarks";
+import Notifications from "./pages/Notifications";
+import OfflineLibrary from "./pages/OfflineLibrary";
+import OldQuestions from "./pages/OldQuestions";
+import SplashScreen from "./pages/SplashScreen";
+import SubjectContent from "./pages/SubjectContent";
+import Syllabus from "./pages/Syllabus";
+import VideoBookmarks from "./pages/VideoBookmarks";
 
 function RootComponent() {
   return <Outlet />;
@@ -27,103 +41,103 @@ const rootRoute = createRootRoute({
 
 const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/',
+  path: "/",
   component: Dashboard,
 });
 
 const syllabusRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/syllabus',
+  path: "/syllabus",
   component: Syllabus,
 });
 
 const notificationsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/notifications',
+  path: "/notifications",
   component: Notifications,
 });
 
 const videoBookmarksRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/bookmarks/videos',
+  path: "/bookmarks/videos",
   component: VideoBookmarks,
 });
 
 const notesBookmarksRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/bookmarks/notes',
+  path: "/bookmarks/notes",
   component: NotesBookmarks,
 });
 
 const oldQuestionsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/old-questions',
+  path: "/old-questions",
   component: OldQuestions,
 });
 
 const examRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/exam',
+  path: "/exam",
   component: Exam,
 });
 
 const offlineLibraryRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/offline-library',
+  path: "/offline-library",
   component: OfflineLibrary,
 });
 
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/admin',
+  path: "/admin",
   component: AdminPanel,
 });
 
 const gkRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/gk',
+  path: "/subject/gk",
   component: () => <SubjectContent config={gkContent} />,
 });
 
 const iqRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/iq',
+  path: "/subject/iq",
   component: () => <SubjectContent config={iqContent} />,
 });
 
 const officeManagementRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/office-management',
+  path: "/subject/office-management",
   component: () => <SubjectContent config={officeManagementContent} />,
 });
 
 const constitutionRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/constitution',
+  path: "/subject/constitution",
   component: () => <SubjectContent config={constitutionContent} />,
 });
 
 const mathsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/maths',
+  path: "/subject/maths",
   component: () => <SubjectContent config={mathsContent} />,
 });
 
 const serviceManagementRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/service-management',
+  path: "/subject/service-management",
   component: () => <SubjectContent config={serviceManagementContent} />,
 });
 
 const accountingRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/accounting',
+  path: "/subject/accounting",
   component: () => <SubjectContent config={accountingContent} />,
 });
 
 const lawRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/subject/law',
+  path: "/subject/law",
   component: () => <SubjectContent config={lawContent} />,
 });
 

@@ -1,13 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { MockExam } from '../backend';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { MockExam } from "../backend";
+import { useActor } from "./useActor";
 
 export function useExamManagement() {
   const { actor, isFetching } = useActor();
   const queryClient = useQueryClient();
 
   const examsQuery = useQuery<MockExam[]>({
-    queryKey: ['mockExams'],
+    queryKey: ["mockExams"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getMockExams();
@@ -17,21 +17,21 @@ export function useExamManagement() {
 
   const addMutation = useMutation({
     mutationFn: async (exam: MockExam) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addMockExam(exam);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['mockExams'] });
+      queryClient.invalidateQueries({ queryKey: ["mockExams"] });
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteMockExam(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['mockExams'] });
+      queryClient.invalidateQueries({ queryKey: ["mockExams"] });
     },
   });
 

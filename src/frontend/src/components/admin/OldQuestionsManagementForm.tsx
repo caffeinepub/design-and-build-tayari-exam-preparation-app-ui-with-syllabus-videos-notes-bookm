@@ -1,31 +1,44 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useOldQuestionsManagement } from '@/hooks/useOldQuestionsManagement';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useOldQuestionsManagement } from "@/hooks/useOldQuestionsManagement";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function OldQuestionsManagementForm() {
-  const { questions, addQuestion, deleteQuestion, isAdding, isDeleting } = useOldQuestionsManagement();
+  const { questions, addQuestion, deleteQuestion, isAdding, isDeleting } =
+    useOldQuestionsManagement();
 
   const [showFirstForm, setShowFirstForm] = useState(false);
   const [showSecondForm, setShowSecondForm] = useState(false);
   const [showThirdForm, setShowThirdForm] = useState(false);
 
-  const [firstFormData, setFirstFormData] = useState({ title: '', pdfUrl: '', year: '' });
-  const [secondFormData, setSecondFormData] = useState({ title: '', pdfUrl: '', year: '' });
-  const [thirdFormData, setThirdFormData] = useState({ title: '', pdfUrl: '', year: '' });
+  const [firstFormData, setFirstFormData] = useState({
+    title: "",
+    pdfUrl: "",
+    year: "",
+  });
+  const [secondFormData, setSecondFormData] = useState({
+    title: "",
+    pdfUrl: "",
+    year: "",
+  });
+  const [thirdFormData, setThirdFormData] = useState({
+    title: "",
+    pdfUrl: "",
+    year: "",
+  });
 
   const handleDelete = async (index: number) => {
-    if (confirm('Are you sure you want to delete this question paper?')) {
+    if (confirm("Are you sure you want to delete this question paper?")) {
       try {
         await deleteQuestion(index);
-        toast.success('Question paper deleted successfully!');
+        toast.success("Question paper deleted successfully!");
       } catch (error) {
-        toast.error('Failed to delete question paper');
+        toast.error("Failed to delete question paper");
         console.error(error);
       }
     }
@@ -33,94 +46,109 @@ export default function OldQuestionsManagementForm() {
 
   const handleSubmitFirst = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstFormData.title.trim() || !firstFormData.pdfUrl.trim() || !firstFormData.year) {
-      toast.error('All fields are required');
+    if (
+      !firstFormData.title.trim() ||
+      !firstFormData.pdfUrl.trim() ||
+      !firstFormData.year
+    ) {
+      toast.error("All fields are required");
       return;
     }
 
     // Validate Google Drive URL
-    if (!firstFormData.pdfUrl.includes('drive.google.com')) {
-      toast.error('Please enter a valid Google Drive URL');
+    if (!firstFormData.pdfUrl.includes("drive.google.com")) {
+      toast.error("Please enter a valid Google Drive URL");
       return;
     }
 
     try {
       await addQuestion({
         title: firstFormData.title,
-        paperType: 'First',
+        paperType: "First",
         pdfUrl: firstFormData.pdfUrl,
         year: BigInt(firstFormData.year),
       });
-      toast.success('Question paper added successfully!');
-      setFirstFormData({ title: '', pdfUrl: '', year: '' });
+      toast.success("Question paper added successfully!");
+      setFirstFormData({ title: "", pdfUrl: "", year: "" });
       setShowFirstForm(false);
     } catch (error) {
-      toast.error('Failed to add question paper');
+      toast.error("Failed to add question paper");
       console.error(error);
     }
   };
 
   const handleSubmitSecond = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!secondFormData.title.trim() || !secondFormData.pdfUrl.trim() || !secondFormData.year) {
-      toast.error('All fields are required');
+    if (
+      !secondFormData.title.trim() ||
+      !secondFormData.pdfUrl.trim() ||
+      !secondFormData.year
+    ) {
+      toast.error("All fields are required");
       return;
     }
 
     // Validate Google Drive URL
-    if (!secondFormData.pdfUrl.includes('drive.google.com')) {
-      toast.error('Please enter a valid Google Drive URL');
+    if (!secondFormData.pdfUrl.includes("drive.google.com")) {
+      toast.error("Please enter a valid Google Drive URL");
       return;
     }
 
     try {
       await addQuestion({
         title: secondFormData.title,
-        paperType: 'Second',
+        paperType: "Second",
         pdfUrl: secondFormData.pdfUrl,
         year: BigInt(secondFormData.year),
       });
-      toast.success('Question paper added successfully!');
-      setSecondFormData({ title: '', pdfUrl: '', year: '' });
+      toast.success("Question paper added successfully!");
+      setSecondFormData({ title: "", pdfUrl: "", year: "" });
       setShowSecondForm(false);
     } catch (error) {
-      toast.error('Failed to add question paper');
+      toast.error("Failed to add question paper");
       console.error(error);
     }
   };
 
   const handleSubmitThird = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!thirdFormData.title.trim() || !thirdFormData.pdfUrl.trim() || !thirdFormData.year) {
-      toast.error('All fields are required');
+    if (
+      !thirdFormData.title.trim() ||
+      !thirdFormData.pdfUrl.trim() ||
+      !thirdFormData.year
+    ) {
+      toast.error("All fields are required");
       return;
     }
 
     // Validate Google Drive URL
-    if (!thirdFormData.pdfUrl.includes('drive.google.com')) {
-      toast.error('Please enter a valid Google Drive URL');
+    if (!thirdFormData.pdfUrl.includes("drive.google.com")) {
+      toast.error("Please enter a valid Google Drive URL");
       return;
     }
 
     try {
       await addQuestion({
         title: thirdFormData.title,
-        paperType: 'Third',
+        paperType: "Third",
         pdfUrl: thirdFormData.pdfUrl,
         year: BigInt(thirdFormData.year),
       });
-      toast.success('Question paper added successfully!');
-      setThirdFormData({ title: '', pdfUrl: '', year: '' });
+      toast.success("Question paper added successfully!");
+      setThirdFormData({ title: "", pdfUrl: "", year: "" });
       setShowThirdForm(false);
     } catch (error) {
-      toast.error('Failed to add question paper');
+      toast.error("Failed to add question paper");
       console.error(error);
     }
   };
 
-  const firstPaperQuestions = questions?.filter((q) => q.paperType === 'First') || [];
-  const secondPaperQuestions = questions?.filter((q) => q.paperType === 'Second') || [];
-  const thirdPaperQuestions = questions?.filter((q) => q.paperType === 'Third') || [];
+  const firstPaperQuestions =
+    questions?.filter((q) => q.paperType === "First") || [];
+  const secondPaperQuestions =
+    questions?.filter((q) => q.paperType === "Second") || [];
+  const thirdPaperQuestions =
+    questions?.filter((q) => q.paperType === "Third") || [];
 
   return (
     <Tabs defaultValue="first" className="w-full">
@@ -138,23 +166,31 @@ export default function OldQuestionsManagementForm() {
             </h2>
             <Button
               onClick={() => setShowFirstForm(!showFirstForm)}
-              variant={showFirstForm ? 'outline' : 'default'}
+              variant={showFirstForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showFirstForm ? 'Cancel' : 'Add Question'}
+              {showFirstForm ? "Cancel" : "Add Question"}
             </Button>
           </div>
 
           {showFirstForm && (
-            <form onSubmit={handleSubmitFirst} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitFirst}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="first-title">Title *</Label>
                 <Input
                   id="first-title"
                   value={firstFormData.title}
-                  onChange={(e) => setFirstFormData({ ...firstFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setFirstFormData({
+                      ...firstFormData,
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter question paper title"
                   required
                 />
@@ -165,7 +201,9 @@ export default function OldQuestionsManagementForm() {
                   id="first-year"
                   type="number"
                   value={firstFormData.year}
-                  onChange={(e) => setFirstFormData({ ...firstFormData, year: e.target.value })}
+                  onChange={(e) =>
+                    setFirstFormData({ ...firstFormData, year: e.target.value })
+                  }
                   placeholder="Enter year (e.g., 2078)"
                   required
                   min="2000"
@@ -177,16 +215,25 @@ export default function OldQuestionsManagementForm() {
                 <Input
                   id="first-url"
                   value={firstFormData.pdfUrl}
-                  onChange={(e) => setFirstFormData({ ...firstFormData, pdfUrl: e.target.value })}
+                  onChange={(e) =>
+                    setFirstFormData({
+                      ...firstFormData,
+                      pdfUrl: e.target.value,
+                    })
+                  }
                   placeholder="https://drive.google.com/..."
                   required
                 />
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAdding}>
-                  {isAdding ? 'Adding...' : 'Add Question'}
+                  {isAdding ? "Adding..." : "Add Question"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowFirstForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowFirstForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -195,9 +242,11 @@ export default function OldQuestionsManagementForm() {
 
           <div className="space-y-3">
             {firstPaperQuestions.map((question, index) => {
-              const actualIndex = questions?.findIndex((q) => q === question) ?? -1;
+              const actualIndex =
+                questions?.findIndex((q) => q === question) ?? -1;
               return (
                 <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                   key={index}
                   className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
                 >
@@ -246,23 +295,31 @@ export default function OldQuestionsManagementForm() {
             </h2>
             <Button
               onClick={() => setShowSecondForm(!showSecondForm)}
-              variant={showSecondForm ? 'outline' : 'default'}
+              variant={showSecondForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showSecondForm ? 'Cancel' : 'Add Question'}
+              {showSecondForm ? "Cancel" : "Add Question"}
             </Button>
           </div>
 
           {showSecondForm && (
-            <form onSubmit={handleSubmitSecond} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitSecond}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="second-title">Title *</Label>
                 <Input
                   id="second-title"
                   value={secondFormData.title}
-                  onChange={(e) => setSecondFormData({ ...secondFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setSecondFormData({
+                      ...secondFormData,
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter question paper title"
                   required
                 />
@@ -273,7 +330,12 @@ export default function OldQuestionsManagementForm() {
                   id="second-year"
                   type="number"
                   value={secondFormData.year}
-                  onChange={(e) => setSecondFormData({ ...secondFormData, year: e.target.value })}
+                  onChange={(e) =>
+                    setSecondFormData({
+                      ...secondFormData,
+                      year: e.target.value,
+                    })
+                  }
                   placeholder="Enter year (e.g., 2078)"
                   required
                   min="2000"
@@ -285,16 +347,25 @@ export default function OldQuestionsManagementForm() {
                 <Input
                   id="second-url"
                   value={secondFormData.pdfUrl}
-                  onChange={(e) => setSecondFormData({ ...secondFormData, pdfUrl: e.target.value })}
+                  onChange={(e) =>
+                    setSecondFormData({
+                      ...secondFormData,
+                      pdfUrl: e.target.value,
+                    })
+                  }
                   placeholder="https://drive.google.com/..."
                   required
                 />
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAdding}>
-                  {isAdding ? 'Adding...' : 'Add Question'}
+                  {isAdding ? "Adding..." : "Add Question"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowSecondForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowSecondForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -303,9 +374,11 @@ export default function OldQuestionsManagementForm() {
 
           <div className="space-y-3">
             {secondPaperQuestions.map((question, index) => {
-              const actualIndex = questions?.findIndex((q) => q === question) ?? -1;
+              const actualIndex =
+                questions?.findIndex((q) => q === question) ?? -1;
               return (
                 <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                   key={index}
                   className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
                 >
@@ -354,23 +427,31 @@ export default function OldQuestionsManagementForm() {
             </h2>
             <Button
               onClick={() => setShowThirdForm(!showThirdForm)}
-              variant={showThirdForm ? 'outline' : 'default'}
+              variant={showThirdForm ? "outline" : "default"}
               size="default"
               className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
-              {showThirdForm ? 'Cancel' : 'Add Question'}
+              {showThirdForm ? "Cancel" : "Add Question"}
             </Button>
           </div>
 
           {showThirdForm && (
-            <form onSubmit={handleSubmitThird} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+            <form
+              onSubmit={handleSubmitThird}
+              className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+            >
               <div>
                 <Label htmlFor="third-title">Title *</Label>
                 <Input
                   id="third-title"
                   value={thirdFormData.title}
-                  onChange={(e) => setThirdFormData({ ...thirdFormData, title: e.target.value })}
+                  onChange={(e) =>
+                    setThirdFormData({
+                      ...thirdFormData,
+                      title: e.target.value,
+                    })
+                  }
                   placeholder="Enter question paper title"
                   required
                 />
@@ -381,7 +462,9 @@ export default function OldQuestionsManagementForm() {
                   id="third-year"
                   type="number"
                   value={thirdFormData.year}
-                  onChange={(e) => setThirdFormData({ ...thirdFormData, year: e.target.value })}
+                  onChange={(e) =>
+                    setThirdFormData({ ...thirdFormData, year: e.target.value })
+                  }
                   placeholder="Enter year (e.g., 2078)"
                   required
                   min="2000"
@@ -393,16 +476,25 @@ export default function OldQuestionsManagementForm() {
                 <Input
                   id="third-url"
                   value={thirdFormData.pdfUrl}
-                  onChange={(e) => setThirdFormData({ ...thirdFormData, pdfUrl: e.target.value })}
+                  onChange={(e) =>
+                    setThirdFormData({
+                      ...thirdFormData,
+                      pdfUrl: e.target.value,
+                    })
+                  }
                   placeholder="https://drive.google.com/..."
                   required
                 />
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={isAdding}>
-                  {isAdding ? 'Adding...' : 'Add Question'}
+                  {isAdding ? "Adding..." : "Add Question"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowThirdForm(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowThirdForm(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -411,9 +503,11 @@ export default function OldQuestionsManagementForm() {
 
           <div className="space-y-3">
             {thirdPaperQuestions.map((question, index) => {
-              const actualIndex = questions?.findIndex((q) => q === question) ?? -1;
+              const actualIndex =
+                questions?.findIndex((q) => q === question) ?? -1;
               return (
                 <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
                   key={index}
                   className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
                 >

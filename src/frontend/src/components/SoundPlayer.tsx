@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface SoundPlayerProps {
   play: boolean;
@@ -11,12 +11,13 @@ export default function SoundPlayer({ play, onEnded }: SoundPlayerProps) {
   useEffect(() => {
     if (play && audioRef.current) {
       audioRef.current.play().catch((error) => {
-        console.warn('Audio playback failed:', error);
+        console.warn("Audio playback failed:", error);
       });
     }
   }, [play]);
 
   return (
+    // biome-ignore lint/a11y/useMediaCaption: exam bell sound has no dialogue requiring captions
     <audio
       ref={audioRef}
       src="/assets/sounds/exam-finish-bell.mp3"

@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function SplashScreen() {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, []);
 
@@ -13,10 +13,11 @@ export default function SplashScreen() {
       <div className="flex flex-col items-center justify-center space-y-12 animate-in fade-in duration-700">
         <div className="relative">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl animate-pulse" />
-          <img 
-            src="/assets/generated/psc-study-logo.dim_512x512.png" 
-            alt="PSC तयारी"
-            className="relative w-40 h-40 drop-shadow-2xl"
+          <img
+            src="/assets/generated/tayari-logo.dim_512x512.png"
+            alt="TAYARI"
+            className="relative w-52 h-52 object-contain drop-shadow-2xl"
+            style={{ mixBlendMode: "multiply" }}
           />
         </div>
         <div className="text-center space-y-8">
@@ -27,14 +28,31 @@ export default function SplashScreen() {
             सफलता को साथी
           </h2>
           <div className="flex items-center justify-center space-x-2">
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "0ms" }}
+            />
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "150ms" }}
+            />
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "300ms" }}
+            />
           </div>
         </div>
       </div>
-      <div className="absolute bottom-8 right-8 text-white/90 text-sm font-medium">
-        Janak prasad pande
+      <div className="absolute bottom-8 right-8 flex flex-col items-end space-y-1">
+        <img
+          src="/assets/generated/signature.dim_800x300.png"
+          alt="Signature"
+          className="w-20 h-auto object-contain"
+          style={{ mixBlendMode: "screen" }}
+        />
+        <span className="text-white/90 text-sm font-medium">
+          जनक प्रसाद पाण्डे
+        </span>
       </div>
     </div>
   );

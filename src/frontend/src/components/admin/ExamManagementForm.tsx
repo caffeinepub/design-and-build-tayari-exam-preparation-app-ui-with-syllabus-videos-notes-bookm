@@ -1,30 +1,31 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Trash2, Plus } from 'lucide-react';
-import { useExamManagement } from '@/hooks/useExamManagement';
-import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useExamManagement } from "@/hooks/useExamManagement";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ExamManagementForm() {
-  const { exams, addExam, deleteExam, isAdding, isDeleting } = useExamManagement();
+  const { exams, addExam, deleteExam, isAdding, isDeleting } =
+    useExamManagement();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    duration: '',
-    description: '',
-    pdfUrl: '',
+    title: "",
+    duration: "",
+    description: "",
+    pdfUrl: "",
   });
 
   const handleDelete = async (index: number) => {
-    if (confirm('Are you sure you want to delete this exam?')) {
+    if (confirm("Are you sure you want to delete this exam?")) {
       try {
         await deleteExam(index);
-        toast.success('Exam deleted successfully!');
+        toast.success("Exam deleted successfully!");
       } catch (error) {
-        toast.error('Failed to delete exam');
+        toast.error("Failed to delete exam");
         console.error(error);
       }
     }
@@ -32,8 +33,12 @@ export default function ExamManagementForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title.trim() || !formData.duration || !formData.pdfUrl.trim()) {
-      toast.error('Title, duration, and PDF URL are required');
+    if (
+      !formData.title.trim() ||
+      !formData.duration ||
+      !formData.pdfUrl.trim()
+    ) {
+      toast.error("Title, duration, and PDF URL are required");
       return;
     }
 
@@ -44,11 +49,11 @@ export default function ExamManagementForm() {
         description: formData.description,
         pdfUrl: formData.pdfUrl,
       });
-      toast.success('Exam added successfully!');
-      setFormData({ title: '', duration: '', description: '', pdfUrl: '' });
+      toast.success("Exam added successfully!");
+      setFormData({ title: "", duration: "", description: "", pdfUrl: "" });
       setShowForm(false);
     } catch (error) {
-      toast.error('Failed to add exam');
+      toast.error("Failed to add exam");
       console.error(error);
     }
   };
@@ -62,23 +67,28 @@ export default function ExamManagementForm() {
           </h2>
           <Button
             onClick={() => setShowForm(!showForm)}
-            variant={showForm ? 'outline' : 'default'}
+            variant={showForm ? "outline" : "default"}
             size="default"
             className="shrink-0 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
           >
             <Plus className="w-4 h-4 mr-2" />
-            {showForm ? 'Cancel' : 'Add Exam'}
+            {showForm ? "Cancel" : "Add Exam"}
           </Button>
         </div>
 
         {showForm && (
-          <form onSubmit={handleSubmit} className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4">
+          <form
+            onSubmit={handleSubmit}
+            className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg space-y-4"
+          >
             <div>
               <Label htmlFor="title">Title *</Label>
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
                 placeholder="Enter exam title"
                 required
               />
@@ -89,7 +99,9 @@ export default function ExamManagementForm() {
                 id="duration"
                 type="number"
                 value={formData.duration}
-                onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, duration: e.target.value })
+                }
                 placeholder="Enter duration in minutes"
                 required
                 min="1"
@@ -100,7 +112,9 @@ export default function ExamManagementForm() {
               <Textarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Enter exam description"
                 rows={3}
               />
@@ -110,16 +124,22 @@ export default function ExamManagementForm() {
               <Input
                 id="pdfUrl"
                 value={formData.pdfUrl}
-                onChange={(e) => setFormData({ ...formData, pdfUrl: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, pdfUrl: e.target.value })
+                }
                 placeholder="Enter PDF URL"
                 required
               />
             </div>
             <div className="flex gap-2">
               <Button type="submit" disabled={isAdding}>
-                {isAdding ? 'Adding...' : 'Add Exam'}
+                {isAdding ? "Adding..." : "Add Exam"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowForm(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -129,6 +149,7 @@ export default function ExamManagementForm() {
         <div className="space-y-3">
           {exams?.map((exam, index) => (
             <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: stable backend-indexed list
               key={index}
               className="flex items-start justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg"
             >

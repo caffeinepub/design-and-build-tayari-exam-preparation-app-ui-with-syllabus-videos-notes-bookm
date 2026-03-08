@@ -13,7 +13,10 @@ interface Topic {
  * Filters topics and videos by a search keyword (case-insensitive).
  * Returns only topics that have matching videos or a matching topic title.
  */
-export function filterVideosByKeyword(topics: Topic[], keyword: string): Topic[] {
+export function filterVideosByKeyword(
+  topics: Topic[],
+  keyword: string,
+): Topic[] {
   if (!keyword.trim()) {
     return topics;
   }
@@ -24,13 +27,14 @@ export function filterVideosByKeyword(topics: Topic[], keyword: string): Topic[]
     .map((topic) => {
       const topicMatches = topic.title.toLowerCase().includes(lowerKeyword);
       const matchingVideos = topic.videos.filter((video) =>
-        video.title.toLowerCase().includes(lowerKeyword)
+        video.title.toLowerCase().includes(lowerKeyword),
       );
 
       // Include topic if title matches or if it has matching videos
       if (topicMatches) {
         return topic;
-      } else if (matchingVideos.length > 0) {
+      }
+      if (matchingVideos.length > 0) {
         return { ...topic, videos: matchingVideos };
       }
       return null;

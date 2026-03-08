@@ -1,13 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { GKTopic, GKVideo, GKNote } from '../backend';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { GKNote, GKTopic, GKVideo } from "../backend";
+import { useActor } from "./useActor";
 
 export function useGKManagement() {
   const { actor, isFetching } = useActor();
   const queryClient = useQueryClient();
 
   const topicsQuery = useQuery<GKTopic[]>({
-    queryKey: ['gkTopics'],
+    queryKey: ["gkTopics"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getGKTopics();
@@ -16,7 +16,7 @@ export function useGKManagement() {
   });
 
   const videosQuery = useQuery<GKVideo[]>({
-    queryKey: ['gkVideos'],
+    queryKey: ["gkVideos"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getGKVideos();
@@ -25,7 +25,7 @@ export function useGKManagement() {
   });
 
   const notesQuery = useQuery<GKNote[]>({
-    queryKey: ['gkNotes'],
+    queryKey: ["gkNotes"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getGKNotes();
@@ -35,51 +35,51 @@ export function useGKManagement() {
 
   const addTopicMutation = useMutation({
     mutationFn: async (topic: GKTopic) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addGKTopic(topic);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gkTopics'] });
+      queryClient.invalidateQueries({ queryKey: ["gkTopics"] });
     },
   });
 
   const deleteTopicMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteGKTopic(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gkTopics'] });
+      queryClient.invalidateQueries({ queryKey: ["gkTopics"] });
     },
   });
 
   const addVideoMutation = useMutation({
     mutationFn: async (video: GKVideo) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addGKVideo(video);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gkVideos'] });
+      queryClient.invalidateQueries({ queryKey: ["gkVideos"] });
     },
   });
 
   const deleteVideoMutation = useMutation({
     mutationFn: async (index: number) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.deleteGKVideo(BigInt(index));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gkVideos'] });
+      queryClient.invalidateQueries({ queryKey: ["gkVideos"] });
     },
   });
 
   const addNoteMutation = useMutation({
     mutationFn: async (note: GKNote) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.addGKNote(note);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gkNotes'] });
+      queryClient.invalidateQueries({ queryKey: ["gkNotes"] });
     },
   });
 
