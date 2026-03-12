@@ -12,26 +12,6 @@ export const officeManagementContent: SubjectConfig = {
   ],
   topics: [
     {
-      title: "All in One - सम्पूर्ण कार्यालय व्यावस्थापन",
-      videos: [
-        {
-          id: "office-all-1",
-          title: "कार्यालय व्यावस्थापन - भाग १",
-          url: "https://drive.google.com/file/d/1FgTf_HqnsUyKGpC6pcqk1JroJ3nkAmAU/view?usp=drivesdk",
-        },
-        {
-          id: "office-all-2",
-          title: "कार्यालय व्यावस्थापन - भाग २",
-          url: "https://drive.google.com/file/d/1ZvbRxBM32WzpTIIvUHoa9ynulBlcGN3n/view?usp=drivesdk",
-        },
-        {
-          id: "office-all-3",
-          title: "कार्यालय व्यावस्थापन - भाग ३",
-          url: "https://drive.google.com/file/d/1xkvlhrvUedOJM6HzLTFk6Cz7Q0oAgD50/view?usp=drivesdk",
-        },
-      ],
-    },
-    {
       title: "1. कार्यालय र कर्मचारी",
       videos: [
         {

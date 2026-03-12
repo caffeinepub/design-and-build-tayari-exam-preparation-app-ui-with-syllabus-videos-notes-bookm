@@ -12,12 +12,21 @@ import {
 } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBookmarks } from "@/hooks/useBookmarks";
-import { useIsAdmin } from "@/hooks/useQueries";
+import { useInternetIdentity } from "@/hooks/useInternetIdentity";
 import { useSubjectBackend } from "@/hooks/useSubjectBackend";
 import type { SubjectConfig } from "@/types/content";
 import { filterVideosByKeyword } from "@/utils/videoSearch";
 import { useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, Loader2, Plus, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  Bookmark,
+  ExternalLink,
+  FileText,
+  Loader2,
+  LogIn,
+  Plus,
+  Search,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -114,7 +123,7 @@ function AddNoteForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 mt-3 space-y-3">
+      <Card className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 mt-3 space-y-3">
         <div className="space-y-1">
           <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
             नोटको शीर्षक
@@ -143,7 +152,7 @@ function AddNoteForm({
           type="submit"
           disabled={isLoading}
           data-ocid="subject.add_note.submit_button"
-          className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold border-0"
+          className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold border-0"
         >
           {isLoading ? (
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -163,6 +172,10 @@ export default function SubjectContent({ config }: SubjectContentProps) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
+  const [selectedNoteUrl, setSelectedNoteUrl] = useState<string | null>(null);
+
+  const { identity, login } = useInternetIdentity();
+  const isLoggedIn = !!identity;
 
   const {
     isVideoBookmarked,
@@ -171,7 +184,6 @@ export default function SubjectContent({ config }: SubjectContentProps) {
     toggleNoteBookmark,
   } = useBookmarks();
 
-  const { data: isAdmin } = useIsAdmin();
   const backendData = useSubjectBackend(config.id);
 
   const noteId =
@@ -179,7 +191,6 @@ export default function SubjectContent({ config }: SubjectContentProps) {
       ? `${config.id}-notes`
       : null;
 
-  // Combine static notes URLs with backend notes (using content field as URL)
   const staticNotesUrls =
     config.notesUrls && config.notesUrls.length > 0
       ? config.notesUrls
@@ -187,12 +198,16 @@ export default function SubjectContent({ config }: SubjectContentProps) {
         ? [config.notesUrl]
         : [];
 
-  const backendNotesUrls = (backendData.notes ?? []).map((n) => n.content);
-  const allNotesUrls = [...staticNotesUrls, ...backendNotesUrls];
+  const allStaticUrls =
+    config.notesUrl && config.notesUrls && config.notesUrls.length > 0
+      ? [config.notesUrl, ...config.notesUrls]
+      : staticNotesUrls;
+
+  const backendNotes = backendData.notes ?? [];
+  const backendNotesUrls = backendNotes.map((n) => n.content);
+  const allNotesUrls = [...allStaticUrls, ...backendNotesUrls];
 
   const filteredTopics = filterVideosByKeyword(config.topics, searchKeyword);
-
-  // Backend videos as additional topics
   const backendVideos = backendData.videos ?? [];
 
   const handleAddVideo = async (title: string, url: string) => {
@@ -217,7 +232,95 @@ export default function SubjectContent({ config }: SubjectContentProps) {
     }
   };
 
-  const VideoSection = () => (
+  const getNoteLabel = (url: string, index: number) => {
+    const backendNote = backendNotes.find((n) => n.content === url);
+    if (backendNote) return backendNote.title;
+    return `${config.title} - नोट ${index + 1}`;
+  };
+
+  // Add button for video section — visible to all logged-in users
+  const VideoAddButton = () => {
+    if (!isLoggedIn) {
+      return (
+        <div className="pt-2">
+          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
+            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
+              भिडियो थप्न Login गर्नुहोस्
+            </p>
+            <Button
+              size="sm"
+              onClick={() => login()}
+              data-ocid="subject.login.button"
+              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
+            >
+              Login
+            </Button>
+          </Card>
+        </div>
+      );
+    }
+    return (
+      <div className="pt-2">
+        <Button
+          onClick={() => setShowAddVideoForm((v) => !v)}
+          data-ocid="subject.add_video.button"
+          className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 border-0 w-full"
+        >
+          <Plus className="w-4 h-4 mr-2" />+ भिडियो थप्नुहोस्
+        </Button>
+        {showAddVideoForm && (
+          <AddVideoForm
+            onSubmit={handleAddVideo}
+            isLoading={backendData.isAddingVideo}
+          />
+        )}
+      </div>
+    );
+  };
+
+  // Add button for notes section — visible to all logged-in users
+  const NoteAddButton = () => {
+    if (!isLoggedIn) {
+      return (
+        <div className="pt-2">
+          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
+            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
+              नोट थप्न Login गर्नुहोस्
+            </p>
+            <Button
+              size="sm"
+              onClick={() => login()}
+              data-ocid="subject.login_note.button"
+              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
+            >
+              Login
+            </Button>
+          </Card>
+        </div>
+      );
+    }
+    return (
+      <div className="pt-2">
+        <Button
+          onClick={() => setShowAddNoteForm((v) => !v)}
+          data-ocid="subject.add_note.button"
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 border-0 w-full"
+        >
+          <Plus className="w-4 h-4 mr-2" />+ नोट/PDF थप्नुहोस्
+        </Button>
+        {showAddNoteForm && (
+          <AddNoteForm
+            onSubmit={handleAddNote}
+            isLoading={backendData.isAddingNote}
+          />
+        )}
+      </div>
+    );
+  };
+
+  const videoSection = (
     <div className="space-y-6">
       {/* Search Input */}
       <div className="relative">
@@ -256,7 +359,6 @@ export default function SubjectContent({ config }: SubjectContentProps) {
             />
           )}
 
-          {/* Backend-added videos */}
           {backendVideos.length > 0 && (
             <div className="mt-4">
               <h3 className="text-base font-semibold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
@@ -267,7 +369,11 @@ export default function SubjectContent({ config }: SubjectContentProps) {
                 {backendVideos.map((video, idx) => (
                   <Card
                     key={`backend-video-${video.title}-${idx}`}
-                    className={`p-3 cursor-pointer transition-all hover:shadow-md ${selectedVideo === video.youtubeUrl ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"}`}
+                    className={`p-3 cursor-pointer transition-all hover:shadow-md ${
+                      selectedVideo === video.youtubeUrl
+                        ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20"
+                        : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                    }`}
                     onClick={() => setSelectedVideo(video.youtubeUrl)}
                     data-ocid={`subject.item.${idx + 1}`}
                   >
@@ -282,45 +388,73 @@ export default function SubjectContent({ config }: SubjectContentProps) {
         </>
       )}
 
-      {/* Admin: Add Video Button */}
-      {isAdmin && (
-        <div className="pt-2">
-          <Button
-            onClick={() => setShowAddVideoForm((v) => !v)}
-            data-ocid="subject.add_video.button"
-            className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/40 border-0"
-          >
-            <Plus className="w-4 h-4 mr-2" />+ भिडियो थप्नुहोस्
-          </Button>
-          {showAddVideoForm && (
-            <AddVideoForm
-              onSubmit={handleAddVideo}
-              isLoading={backendData.isAddingVideo}
-            />
-          )}
-        </div>
-      )}
+      <VideoAddButton />
     </div>
   );
 
-  const NotesSection = () => (
+  const notesSection = (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        {noteId && config.notesUrl && (
+      {noteId && (
+        <div className="flex items-center justify-end">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => toggleNoteBookmark(noteId, config.title)}
           >
             <Bookmark
-              className={`w-4 h-4 ${isNoteBookmarked(noteId) ? "fill-current text-emerald-600" : ""}`}
+              className={`w-4 h-4 ${
+                isNoteBookmarked(noteId) ? "fill-current text-emerald-600" : ""
+              }`}
             />
           </Button>
-        )}
-      </div>
+        </div>
+      )}
 
       {allNotesUrls.length > 0 ? (
-        <DriveViewer urls={allNotesUrls} title={`${config.title} नोटहरू`} />
+        <div className="space-y-3">
+          <div className="space-y-2">
+            {allNotesUrls.map((url, idx) => (
+              <Card
+                key={url}
+                className={`p-3 cursor-pointer transition-all hover:shadow-md flex items-center gap-3 ${
+                  selectedNoteUrl === url
+                    ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
+                    : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                }`}
+                onClick={() =>
+                  setSelectedNoteUrl(selectedNoteUrl === url ? null : url)
+                }
+                data-ocid={`subject.item.${idx + 1}`}
+              >
+                <FileText className="w-4 h-4 text-blue-500 shrink-0" />
+                <p className="text-sm font-medium text-slate-700 dark:text-slate-300 flex-1 truncate">
+                  {getNoteLabel(url, idx)}
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="shrink-0 text-blue-600"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(url, "_blank");
+                  }}
+                >
+                  <ExternalLink className="w-3 h-3" />
+                </Button>
+              </Card>
+            ))}
+          </div>
+
+          {selectedNoteUrl && (
+            <DriveViewer
+              urls={[selectedNoteUrl]}
+              title={getNoteLabel(
+                selectedNoteUrl,
+                allNotesUrls.indexOf(selectedNoteUrl),
+              )}
+            />
+          )}
+        </div>
       ) : (
         <Card
           className="p-8 text-center text-slate-600 dark:text-slate-400"
@@ -330,24 +464,7 @@ export default function SubjectContent({ config }: SubjectContentProps) {
         </Card>
       )}
 
-      {/* Admin: Add Note Button */}
-      {isAdmin && (
-        <div className="pt-2">
-          <Button
-            onClick={() => setShowAddNoteForm((v) => !v)}
-            data-ocid="subject.add_note.button"
-            className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/40 border-0"
-          >
-            <Plus className="w-4 h-4 mr-2" />+ नोट/PDF थप्नुहोस्
-          </Button>
-          {showAddNoteForm && (
-            <AddNoteForm
-              onSubmit={handleAddNote}
-              isLoading={backendData.isAddingNote}
-            />
-          )}
-        </div>
-      )}
+      <NoteAddButton />
     </div>
   );
 
@@ -382,7 +499,7 @@ export default function SubjectContent({ config }: SubjectContentProps) {
                     भिडियोहरू
                   </h2>
                 </div>
-                <VideoSection />
+                {videoSection}
               </div>
             </ResizablePanel>
             <ResizableHandle />
@@ -393,7 +510,7 @@ export default function SubjectContent({ config }: SubjectContentProps) {
                     नोटहरू
                   </h2>
                 </div>
-                <NotesSection />
+                {notesSection}
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
@@ -411,10 +528,10 @@ export default function SubjectContent({ config }: SubjectContentProps) {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="videos" className="space-y-6 mt-6">
-              <VideoSection />
+              {videoSection}
             </TabsContent>
             <TabsContent value="notes" className="mt-6">
-              <NotesSection />
+              {notesSection}
             </TabsContent>
           </Tabs>
         </div>
