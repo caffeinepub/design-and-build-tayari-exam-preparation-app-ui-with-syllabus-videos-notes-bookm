@@ -34,138 +34,6 @@ interface SubjectContentProps {
   config: SubjectConfig;
 }
 
-function AddVideoForm({
-  onSubmit,
-  isLoading,
-}: {
-  onSubmit: (title: string, url: string) => Promise<void>;
-  isLoading: boolean;
-}) {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title.trim() || !url.trim()) {
-      toast.error("शीर्षक र YouTube URL भर्नुहोस्");
-      return;
-    }
-    await onSubmit(title.trim(), url.trim());
-    setTitle("");
-    setUrl("");
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Card className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 mt-3 space-y-3">
-        <div className="space-y-1">
-          <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            भिडियो शीर्षक
-          </Label>
-          <Input
-            placeholder="भिडियोको शीर्षक लेख्नुहोस्..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            data-ocid="subject.video_title.input"
-            className="bg-white dark:bg-slate-900"
-          />
-        </div>
-        <div className="space-y-1">
-          <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            YouTube URL
-          </Label>
-          <Input
-            placeholder="https://youtube.com/watch?v=..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            data-ocid="subject.video_url.input"
-            className="bg-white dark:bg-slate-900"
-          />
-        </div>
-        <Button
-          type="submit"
-          disabled={isLoading}
-          data-ocid="subject.add_video.submit_button"
-          className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold border-0"
-        >
-          {isLoading ? (
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-          ) : (
-            <Plus className="w-4 h-4 mr-2" />
-          )}
-          {isLoading ? "सेव गर्दैछ..." : "भिडियो थप्नुहोस्"}
-        </Button>
-      </Card>
-    </form>
-  );
-}
-
-function AddNoteForm({
-  onSubmit,
-  isLoading,
-}: {
-  onSubmit: (title: string, url: string) => Promise<void>;
-  isLoading: boolean;
-}) {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title.trim() || !url.trim()) {
-      toast.error("शीर्षक र Google Drive URL भर्नुहोस्");
-      return;
-    }
-    await onSubmit(title.trim(), url.trim());
-    setTitle("");
-    setUrl("");
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Card className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 mt-3 space-y-3">
-        <div className="space-y-1">
-          <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            नोटको शीर्षक
-          </Label>
-          <Input
-            placeholder="नोटको शीर्षक लेख्नुहोस्..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            data-ocid="subject.note_title.input"
-            className="bg-white dark:bg-slate-900"
-          />
-        </div>
-        <div className="space-y-1">
-          <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            Google Drive URL / PDF Link
-          </Label>
-          <Input
-            placeholder="https://drive.google.com/file/d/..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            data-ocid="subject.note_url.input"
-            className="bg-white dark:bg-slate-900"
-          />
-        </div>
-        <Button
-          type="submit"
-          disabled={isLoading}
-          data-ocid="subject.add_note.submit_button"
-          className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold border-0"
-        >
-          {isLoading ? (
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-          ) : (
-            <Plus className="w-4 h-4 mr-2" />
-          )}
-          {isLoading ? "सेव गर्दैछ..." : "नोट/PDF थप्नुहोस्"}
-        </Button>
-      </Card>
-    </form>
-  );
-}
-
 export default function SubjectContent({ config }: SubjectContentProps) {
   const navigate = useNavigate();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -173,6 +41,10 @@ export default function SubjectContent({ config }: SubjectContentProps) {
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
   const [showAddNoteForm, setShowAddNoteForm] = useState(false);
   const [selectedNoteUrl, setSelectedNoteUrl] = useState<string | null>(null);
+  const [videoTitle, setVideoTitle] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [noteTitle, setNoteTitle] = useState("");
+  const [noteUrl, setNoteUrl] = useState("");
 
   const { identity, login } = useInternetIdentity();
   const isLoggedIn = !!identity;
@@ -210,22 +82,42 @@ export default function SubjectContent({ config }: SubjectContentProps) {
   const filteredTopics = filterVideosByKeyword(config.topics, searchKeyword);
   const backendVideos = backendData.videos ?? [];
 
-  const handleAddVideo = async (title: string, url: string) => {
+  const handleAddVideo = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!videoTitle.trim() || !videoUrl.trim()) {
+      toast.error("शीर्षक र YouTube URL भर्नुहोस्");
+      return;
+    }
     try {
-      await backendData.addVideo({ title, youtubeUrl: url });
+      await backendData.addVideo({
+        title: videoTitle.trim(),
+        youtubeUrl: videoUrl.trim(),
+      });
       toast.success("भिडियो सफलतापूर्वक थपियो!");
       setShowAddVideoForm(false);
+      setVideoTitle("");
+      setVideoUrl("");
     } catch (err) {
       console.error(err);
       toast.error("भिडियो थप्न सकिएन। पुनः प्रयास गर्नुहोस्।");
     }
   };
 
-  const handleAddNote = async (title: string, url: string) => {
+  const handleAddNote = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!noteTitle.trim() || !noteUrl.trim()) {
+      toast.error("शीर्षक र Google Drive URL भर्नुहोस्");
+      return;
+    }
     try {
-      await backendData.addNote({ title, content: url });
+      await backendData.addNote({
+        title: noteTitle.trim(),
+        content: noteUrl.trim(),
+      });
       toast.success("नोट/PDF सफलतापूर्वक थपियो!");
       setShowAddNoteForm(false);
+      setNoteTitle("");
+      setNoteUrl("");
     } catch (err) {
       console.error(err);
       toast.error("नोट थप्न सकिएन। पुनः प्रयास गर्नुहोस्।");
@@ -236,88 +128,6 @@ export default function SubjectContent({ config }: SubjectContentProps) {
     const backendNote = backendNotes.find((n) => n.content === url);
     if (backendNote) return backendNote.title;
     return `${config.title} - नोट ${index + 1}`;
-  };
-
-  // Add button for video section — visible to all logged-in users
-  const VideoAddButton = () => {
-    if (!isLoggedIn) {
-      return (
-        <div className="pt-2">
-          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
-            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
-            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
-              भिडियो थप्न Login गर्नुहोस्
-            </p>
-            <Button
-              size="sm"
-              onClick={() => login()}
-              data-ocid="subject.login.button"
-              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
-            >
-              Login
-            </Button>
-          </Card>
-        </div>
-      );
-    }
-    return (
-      <div className="pt-2">
-        <Button
-          onClick={() => setShowAddVideoForm((v) => !v)}
-          data-ocid="subject.add_video.button"
-          className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 border-0 w-full"
-        >
-          <Plus className="w-4 h-4 mr-2" />+ भिडियो थप्नुहोस्
-        </Button>
-        {showAddVideoForm && (
-          <AddVideoForm
-            onSubmit={handleAddVideo}
-            isLoading={backendData.isAddingVideo}
-          />
-        )}
-      </div>
-    );
-  };
-
-  // Add button for notes section — visible to all logged-in users
-  const NoteAddButton = () => {
-    if (!isLoggedIn) {
-      return (
-        <div className="pt-2">
-          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
-            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
-            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
-              नोट थप्न Login गर्नुहोस्
-            </p>
-            <Button
-              size="sm"
-              onClick={() => login()}
-              data-ocid="subject.login_note.button"
-              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
-            >
-              Login
-            </Button>
-          </Card>
-        </div>
-      );
-    }
-    return (
-      <div className="pt-2">
-        <Button
-          onClick={() => setShowAddNoteForm((v) => !v)}
-          data-ocid="subject.add_note.button"
-          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 border-0 w-full"
-        >
-          <Plus className="w-4 h-4 mr-2" />+ नोट/PDF थप्नुहोस्
-        </Button>
-        {showAddNoteForm && (
-          <AddNoteForm
-            onSubmit={handleAddNote}
-            isLoading={backendData.isAddingNote}
-          />
-        )}
-      </div>
-    );
   };
 
   const videoSection = (
@@ -388,7 +198,79 @@ export default function SubjectContent({ config }: SubjectContentProps) {
         </>
       )}
 
-      <VideoAddButton />
+      {/* Video Add Button — always visible, login required to submit */}
+      <div className="pt-2">
+        {!isLoggedIn ? (
+          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
+            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
+              भिडियो थप्न Login गर्नुहोस्
+            </p>
+            <Button
+              size="sm"
+              onClick={() => login()}
+              data-ocid="subject.login.button"
+              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
+            >
+              Login
+            </Button>
+          </Card>
+        ) : (
+          <>
+            <Button
+              type="button"
+              onClick={() => setShowAddVideoForm((v) => !v)}
+              data-ocid="subject.add_video.button"
+              className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 border-0 w-full"
+            >
+              <Plus className="w-4 h-4 mr-2" />+ भिडियो थप्नुहोस्
+            </Button>
+            {showAddVideoForm && (
+              <form onSubmit={handleAddVideo}>
+                <Card className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 mt-3 space-y-3">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      भिडियो शीर्षक
+                    </Label>
+                    <Input
+                      placeholder="भिडियोको शीर्षक लेख्नुहोस्..."
+                      value={videoTitle}
+                      onChange={(e) => setVideoTitle(e.target.value)}
+                      data-ocid="subject.video_title.input"
+                      className="bg-white dark:bg-slate-900"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      YouTube URL
+                    </Label>
+                    <Input
+                      placeholder="https://youtube.com/watch?v=..."
+                      value={videoUrl}
+                      onChange={(e) => setVideoUrl(e.target.value)}
+                      data-ocid="subject.video_url.input"
+                      className="bg-white dark:bg-slate-900"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={backendData.isAddingVideo}
+                    data-ocid="subject.add_video.submit_button"
+                    className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold border-0"
+                  >
+                    {backendData.isAddingVideo ? (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <Plus className="w-4 h-4 mr-2" />
+                    )}
+                    {backendData.isAddingVideo ? "सेव गर्दैछ..." : "भिडियो थप्नुहोस्"}
+                  </Button>
+                </Card>
+              </form>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 
@@ -464,7 +346,79 @@ export default function SubjectContent({ config }: SubjectContentProps) {
         </Card>
       )}
 
-      <NoteAddButton />
+      {/* Note Add Button — always visible, login required to submit */}
+      <div className="pt-2">
+        {!isLoggedIn ? (
+          <Card className="p-3 flex items-center gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+            <LogIn className="w-4 h-4 text-amber-600 shrink-0" />
+            <p className="text-sm text-amber-700 dark:text-amber-400 flex-1">
+              नोट थप्न Login गर्नुहोस्
+            </p>
+            <Button
+              size="sm"
+              onClick={() => login()}
+              data-ocid="subject.login_note.button"
+              className="bg-amber-500 hover:bg-amber-600 text-white border-0 text-xs"
+            >
+              Login
+            </Button>
+          </Card>
+        ) : (
+          <>
+            <Button
+              type="button"
+              onClick={() => setShowAddNoteForm((v) => !v)}
+              data-ocid="subject.add_note.button"
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 border-0 w-full"
+            >
+              <Plus className="w-4 h-4 mr-2" />+ नोट/PDF थप्नुहोस्
+            </Button>
+            {showAddNoteForm && (
+              <form onSubmit={handleAddNote}>
+                <Card className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 mt-3 space-y-3">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      नोटको शीर्षक
+                    </Label>
+                    <Input
+                      placeholder="नोटको शीर्षक लेख्नुहोस्..."
+                      value={noteTitle}
+                      onChange={(e) => setNoteTitle(e.target.value)}
+                      data-ocid="subject.note_title.input"
+                      className="bg-white dark:bg-slate-900"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      Google Drive URL / PDF Link
+                    </Label>
+                    <Input
+                      placeholder="https://drive.google.com/file/d/..."
+                      value={noteUrl}
+                      onChange={(e) => setNoteUrl(e.target.value)}
+                      data-ocid="subject.note_url.input"
+                      className="bg-white dark:bg-slate-900"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={backendData.isAddingNote}
+                    data-ocid="subject.add_note.submit_button"
+                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold border-0"
+                  >
+                    {backendData.isAddingNote ? (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <Plus className="w-4 h-4 mr-2" />
+                    )}
+                    {backendData.isAddingNote ? "सेव गर्दैछ..." : "नोट/PDF थप्नुहोस्"}
+                  </Button>
+                </Card>
+              </form>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 
